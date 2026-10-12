@@ -35,11 +35,28 @@
           "value": ""
         },
         {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image_video",
+          "label": "Background video",
+          "multi": false
+        },
+        {
           "component": "richtext",
           "name": "text",
           "value": "",
           "label": "Text",
           "valueType": "string"
+        },
+        {
+          "component": "select",
+          "name": "classes",
+          "label": "Layout",
+          "options": [
+            { "name": "Full-screen introduction", "value": "full-screen" },
+            { "name": "Editorial banner", "value": "banner" },
+            { "name": "Image call to action", "value": "cover" }
+          ]
         }
       ]
     }

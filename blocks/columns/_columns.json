@@ -9,7 +9,8 @@
             "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
               "columns": "2",
-              "rows": "1"
+              "rows": "1",
+              "model": "columns"
             }
           }
         }
@@ -20,6 +21,15 @@
     {
       "id": "columns",
       "fields": [
+        {
+          "component": "select",
+          "name": "classes",
+          "label": "Layout",
+          "options": [
+            { "name": "Featured content", "value": "feature" },
+            { "name": "Key figures", "value": "figures" }
+          ]
+        },
         {
           "component": "text",
           "valueType": "number",

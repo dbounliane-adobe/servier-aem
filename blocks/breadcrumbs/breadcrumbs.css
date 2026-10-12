@@ -1,0 +1,23 @@
+.breadcrumbs {
+  padding: 24px 0;
+  font-size: var(--body-font-size-xs);
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumbs li:not(:last-child)::after {
+  content: '/';
+  margin-left: 16px;
+  color: var(--accent-color);
+}
+
+.breadcrumbs p {
+  margin: 0;
+}

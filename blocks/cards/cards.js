@@ -20,4 +20,7 @@ export default function decorate(block) {
     img.closest('picture').replaceWith(optimizedPic);
   });
   block.replaceChildren(ul);
+  if (block.classList.contains('carousel')) {
+    ul.tabIndex = 0;
+  }
 }

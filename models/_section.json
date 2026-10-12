@@ -33,6 +33,18 @@
             {
               "name": "Highlight",
               "value": "highlight"
+            },
+            {
+              "name": "Editorial panel",
+              "value": "editorial"
+            },
+            {
+              "name": "Article width",
+              "value": "narrow"
+            },
+            {
+              "name": "References",
+              "value": "references"
             }
           ]
         }
@@ -50,6 +62,8 @@
         "hero",
         "cards",
         "columns",
+        "callout",
+        "breadcrumbs",
         "fragment"
       ]
     }

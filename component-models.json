@@ -5,6 +5,28 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "language",
+        "label": "Language (BCP 47, e.g. fr or en)"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "template",
+        "label": "Page layout",
+        "options": [
+          {
+            "name": "Standard",
+            "value": "standard"
+          },
+          {
+            "name": "Editorial article",
+            "value": "article"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "jcr:title",
         "label": "Title"
       },
@@ -136,6 +158,72 @@
           {
             "name": "Highlight",
             "value": "highlight"
+          },
+          {
+            "name": "Editorial panel",
+            "value": "editorial"
+          },
+          {
+            "name": "Article width",
+            "value": "narrow"
+          },
+          {
+            "name": "References",
+            "value": "references"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "breadcrumbs",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Accessible navigation label"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "trail",
+        "label": "Ordered list of links; last item is the current page"
+      }
+    ]
+  },
+  {
+    "id": "callout",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading (use an appropriate heading level)"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Content"
+      }
+    ]
+  },
+  {
+    "id": "cards",
+    "fields": [
+      {
+        "component": "select",
+        "name": "classes",
+        "label": "Layout",
+        "options": [
+          {
+            "name": "News grid",
+            "value": "news"
+          },
+          {
+            "name": "Horizontal collection",
+            "value": "carousel"
           }
         ]
       }
@@ -152,6 +240,12 @@
         "multi": false
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image alternative text"
+      },
+      {
         "component": "richtext",
         "name": "text",
         "value": "",
@@ -163,6 +257,21 @@
   {
     "id": "columns",
     "fields": [
+      {
+        "component": "select",
+        "name": "classes",
+        "label": "Layout",
+        "options": [
+          {
+            "name": "Featured content",
+            "value": "feature"
+          },
+          {
+            "name": "Key figures",
+            "value": "figures"
+          }
+        ]
+      },
       {
         "component": "text",
         "valueType": "number",
@@ -207,11 +316,37 @@
         "value": ""
       },
       {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image_video",
+        "label": "Background video",
+        "multi": false
+      },
+      {
         "component": "richtext",
         "name": "text",
         "value": "",
         "label": "Text",
         "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "classes",
+        "label": "Layout",
+        "options": [
+          {
+            "name": "Full-screen introduction",
+            "value": "full-screen"
+          },
+          {
+            "name": "Editorial banner",
+            "value": "banner"
+          },
+          {
+            "name": "Image call to action",
+            "value": "cover"
+          }
+        ]
       }
     ]
   }

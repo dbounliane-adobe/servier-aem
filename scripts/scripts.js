@@ -9,6 +9,7 @@ import {
   loadSection,
   loadSections,
   loadCSS,
+  getMetadata,
 } from './aem.js';
 
 /**
@@ -127,7 +128,7 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  document.documentElement.lang = getMetadata('language') || document.documentElement.lang || 'fr';
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {

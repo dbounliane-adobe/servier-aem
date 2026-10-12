@@ -6,6 +6,22 @@
         {
           "component": "text",
           "valueType": "string",
+          "name": "language",
+          "label": "Language (BCP 47, e.g. fr or en)"
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "template",
+          "label": "Page layout",
+          "options": [
+            { "name": "Standard", "value": "standard" },
+            { "name": "Editorial article", "value": "article" }
+          ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
           "name": "jcr:title",
           "label": "Title"
         },
