@@ -15,7 +15,15 @@
       "hero",
       "cards",
       "columns",
-      "fragment"
+      "fragment",
+      "campaign-hero",
+      "section-intro",
+      "editorial-feature",
+      "topic-cards",
+      "key-figures",
+      "article-feed",
+      "article-header",
+      "scientific-teaser"
     ]
   },
   {
@@ -37,6 +45,18 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "key-figures",
+    "components": [
+      "key-figure"
+    ]
+  },
+  {
+    "id": "topic-cards",
+    "components": [
+      "topic-card"
     ]
   }
 ]

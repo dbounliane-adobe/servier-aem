@@ -6,6 +6,36 @@
         {
           "component": "text",
           "valueType": "string",
+          "name": "theme",
+          "label": "Theme (servier to enable the demo design)"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "language",
+          "label": "Language (fr, en...)"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "template",
+          "label": "Template (article for editorial pages)"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "category",
+          "label": "Article category"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "publication-date",
+          "label": "Publication date (YYYY-MM-DD)"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
           "name": "jcr:title",
           "label": "Title"
         },

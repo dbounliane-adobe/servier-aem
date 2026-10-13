@@ -9,6 +9,7 @@ import {
   loadSection,
   loadSections,
   loadCSS,
+  getMetadata,
 } from './aem.js';
 
 /**
@@ -127,8 +128,11 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  document.documentElement.lang = getMetadata('language') || document.documentElement.lang || 'en';
   decorateTemplateAndTheme();
+  if (document.body.classList.contains('servier')) {
+    await loadCSS(`${window.hlx.codeBasePath}/styles/servier.css`);
+  }
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);

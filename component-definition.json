@@ -83,6 +83,52 @@
       "id": "blocks",
       "components": [
         {
+          "title": "Article Feed",
+          "id": "article-feed",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Article Feed",
+                  "model": "article-feed",
+                  "key-value": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Article Header",
+          "id": "article-header",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Article Header",
+                  "model": "article-header"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Campaign Hero",
+          "id": "campaign-hero",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Campaign Hero",
+                  "model": "campaign-hero"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Cards",
           "id": "cards",
           "plugins": {
@@ -128,6 +174,21 @@
           }
         },
         {
+          "title": "Editorial Feature",
+          "id": "editorial-feature",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Editorial Feature",
+                  "model": "editorial-feature"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Fragment",
           "id": "fragment",
           "plugins": {
@@ -152,6 +213,97 @@
                 "template": {
                   "name": "Hero",
                   "model": "hero"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Key Figures",
+          "id": "key-figures",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Key Figures",
+                  "filter": "key-figures"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Key Figure",
+          "id": "key-figure",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Key Figure",
+                  "model": "key-figure"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Scientific Article Teaser",
+          "id": "scientific-teaser",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Scientific Teaser",
+                  "model": "scientific-teaser",
+                  "key-value": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Section Intro",
+          "id": "section-intro",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Section Intro",
+                  "model": "section-intro"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Topic Cards",
+          "id": "topic-cards",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Topic Cards",
+                  "filter": "topic-cards"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Topic Card",
+          "id": "topic-card",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Topic Card",
+                  "model": "topic-card"
                 }
               }
             }

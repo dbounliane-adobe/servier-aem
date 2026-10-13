@@ -1,0 +1,28 @@
+.scientific-teaser {
+  display: grid;
+  align-items: center;
+  gap: 32px;
+}
+
+.scientific-teaser .scientific-teaser-media img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.scientific-teaser h2 {
+  margin: 0 0 24px;
+}
+
+.scientific-teaser a.button {
+  margin-top: 24px;
+}
+
+@media (width >= 900px) {
+  .scientific-teaser:has(.scientific-teaser-media) {
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+  }
+}

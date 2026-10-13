@@ -5,6 +5,36 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "theme",
+        "label": "Theme (servier to enable the demo design)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "language",
+        "label": "Language (fr, en...)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "template",
+        "label": "Template (article for editorial pages)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "category",
+        "label": "Article category"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "publication-date",
+        "label": "Publication date (YYYY-MM-DD)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "jcr:title",
         "label": "Title"
       },
@@ -134,10 +164,196 @@
         "label": "Style",
         "options": [
           {
+            "name": "Full width",
+            "value": "full-width"
+          },
+          {
+            "name": "Soft background",
+            "value": "soft"
+          },
+          {
             "name": "Highlight",
             "value": "highlight"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "article-feed",
+    "fields": [
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "source",
+        "label": "Site index URL",
+        "value": "/query-index.json"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "prefix",
+        "label": "Article path prefix",
+        "value": "/newsroom/"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "category",
+        "label": "Restrict to a category (optional)",
+        "value": ""
+      },
+      {
+        "component": "number",
+        "valueType": "number",
+        "name": "limit",
+        "label": "Maximum visible articles",
+        "value": 3
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "all",
+        "label": "All categories label",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "empty",
+        "label": "Empty state message",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "error",
+        "label": "Error message",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "article-header",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_category",
+        "label": "Category"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading",
+        "label": "Article title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_headingType",
+        "label": "Heading level",
+        "value": "h1",
+        "hidden": true
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "content_summary",
+        "label": "Standfirst",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "meta_date",
+        "label": "Publication date (YYYY-MM-DD)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "meta_author",
+        "label": "Author / scientific reviewer"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "meta_reading",
+        "label": "Reading time label",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Cover image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image description",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "campaign-hero",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Background image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image description",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_headingType",
+        "label": "Heading level",
+        "value": "h1",
+        "hidden": true
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "content_description",
+        "label": "Subtitle",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "content_link",
+        "label": "CTA destination"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_linkText",
+        "label": "CTA label"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "video",
+        "label": "Background video (MP4/WebM, optional)",
+        "multi": false
       }
     ]
   },
@@ -180,6 +396,81 @@
     ]
   },
   {
+    "id": "editorial-feature",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image description",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_eyebrow",
+        "label": "Eyebrow",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_headingType",
+        "label": "Heading level",
+        "value": "h2",
+        "hidden": true
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "content_description",
+        "label": "Editorial text",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "content_link",
+        "label": "CTA destination"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_linkText",
+        "label": "CTA label"
+      },
+      {
+        "component": "select",
+        "name": "classes",
+        "label": "Image position",
+        "value": "",
+        "options": [
+          {
+            "name": "Left",
+            "value": ""
+          },
+          {
+            "name": "Right",
+            "value": "reverse"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "fragment",
     "fields": [
       {
@@ -212,6 +503,156 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "key-figure",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "value",
+        "label": "Value (e.g. 150+)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Description"
+      }
+    ]
+  },
+  {
+    "id": "scientific-teaser",
+    "fields": [
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "source",
+        "label": "Published CF article URL on this site"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "headline",
+        "label": "Local title override (optional)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "summary",
+        "label": "Local summary override (optional)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "cta",
+        "label": "CTA label",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "section-intro",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_eyebrow",
+        "label": "Eyebrow",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading",
+        "label": "Section title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_headingType",
+        "label": "Heading level",
+        "value": "h2",
+        "hidden": true
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "content_description",
+        "label": "Introduction",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "name": "classes",
+        "label": "Alignment",
+        "value": "",
+        "options": [
+          {
+            "name": "Left",
+            "value": ""
+          },
+          {
+            "name": "Centered",
+            "value": "centered"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "topic-card",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image description",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_heading",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_headingType",
+        "label": "Heading level",
+        "value": "h3",
+        "hidden": true
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "content_description",
+        "label": "Description",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "content_link",
+        "label": "Destination"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_linkText",
+        "label": "Link label"
       }
     ]
   }

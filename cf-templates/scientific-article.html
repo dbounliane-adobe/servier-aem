@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="{{properties.elements.language.value}}">
+  <head>
+    <title>{{properties.elements.headline.value}}</title>
+    <meta property="og:title" content="{{properties.elements.headline.value}}">
+    <meta name="description" content="{{properties.elements.summary.value}}">
+    <meta property="og:image" content="{{properties.elements.image.value}}">
+    <meta name="category" content="{{properties.elements.category.value}}">
+    <meta name="publication-date" content="{{properties.elements.publicationDate.value}}">
+    <meta name="author" content="{{properties.elements.author.value}}">
+    <meta name="language" content="{{properties.elements.language.value}}">
+    <meta name="theme" content="{{properties.elements.theme.value}}">
+    <meta name="template" content="article">
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div>
+        <div class="article-header">
+          <div><div>
+            {{#properties.elements.category.value}}
+            <p>{{properties.elements.category.value}}</p>
+            {{/properties.elements.category.value}}
+            <h1>{{properties.elements.headline.value}}</h1>
+            <p>{{properties.elements.summary.value}}</p>
+          </div></div>
+          <div><div>
+            {{#properties.elements.publicationDate.value}}
+            <p>{{properties.elements.publicationDate.value}}</p>
+            {{/properties.elements.publicationDate.value}}
+            {{#properties.elements.author.value}}
+            <p>{{properties.elements.author.value}}</p>
+            {{/properties.elements.author.value}}
+            {{#properties.elements.readingTime.value}}
+            <p>{{properties.elements.readingTime.value}}</p>
+            {{/properties.elements.readingTime.value}}
+          </div></div>
+          <div><div>
+            {{#properties.elements.image.value}}
+            <picture><img src="{{properties.elements.image.value}}" alt="{{properties.elements.imageAlt.value}}"></picture>
+            {{/properties.elements.image.value}}
+          </div></div>
+        </div>
+      </div>
+      <div>
+        {{{properties.elements.body.value}}}
+        {{#properties.elements.quote.value}}
+        <blockquote><p>{{properties.elements.quote.value}}</p></blockquote>
+        {{/properties.elements.quote.value}}
+        {{#properties.elements.sources.value}}
+        <h2>{{properties.elements.sourcesHeading.value}}</h2>
+        {{{properties.elements.sources.value}}}
+        {{/properties.elements.sources.value}}
+        {{#properties.elements.relatedLinks.value}}
+        <h2>{{properties.elements.relatedHeading.value}}</h2>
+        {{{properties.elements.relatedLinks.value}}}
+        {{/properties.elements.relatedLinks.value}}
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+.article-header {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.article-header h1 {
+  margin: 16px 0 24px;
+  font-size: clamp(36px, 4.5vw, 64px);
+}
+
+.article-header .article-header-meta > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 24px;
+  margin: 24px 0;
+  font-size: 16px;
+}
+
+.article-header .article-header-meta p {
+  margin: 0;
+}
+
+.article-header .article-header-content p:first-child {
+  color: var(--link-hover-color);
+  font-weight: 700;
+}
+
+.article-header .article-header-media img {
+  display: block;
+  width: 100%;
+  max-height: 560px;
+  object-fit: cover;
+  border-radius: 8px;
+}

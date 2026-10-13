@@ -1,0 +1,32 @@
+{
+  "total": 3,
+  "offset": 0,
+  "limit": 500,
+  "data": [
+    {
+      "path": "/drafts/science.html",
+      "title": "Comment lire une publication scientifique ?",
+      "description": "Les clés pour comprendre la méthode et les résultats d’un article.",
+      "image": "/drafts/media/science.svg",
+      "imageAlt": "Illustration abstraite d’un atome",
+      "category": "Décryptages",
+      "date": "2026-10-13"
+    },
+    {
+      "path": "/drafts/science.html?edition=clinique",
+      "title": "Explorer les étapes de la recherche clinique",
+      "description": "Une carte de démonstration dans une seconde catégorie.",
+      "image": "/drafts/media/science.svg",
+      "category": "Actualités",
+      "date": "2026-10-10"
+    },
+    {
+      "path": "/drafts/science.html?edition=innovation",
+      "title": "Partager la connaissance scientifique",
+      "description": "Un même modèle pour plusieurs narrations éditoriales.",
+      "image": "/drafts/media/science.svg",
+      "category": "Décryptages",
+      "date": "2026-10-08"
+    }
+  ]
+}

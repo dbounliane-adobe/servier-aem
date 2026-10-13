@@ -1,0 +1,87 @@
+body.servier {
+  --text-color: #232267;
+  --link-color: #232267;
+  --link-hover-color: #c83b2b;
+  --light-color: #f4f3f8;
+  --brand-accent: #e64b38;
+  --brand-muted: #aaa9c6;
+  --heading-font-family: var(--body-font-family);
+  --heading-font-size-xxl: clamp(40px, 5.5vw, 80px);
+  --heading-font-size-xl: clamp(32px, 4vw, 56px);
+  --body-font-size-m: 18px;
+  --nav-height: 80px;
+}
+
+.servier main > .section {
+  margin: 0;
+  padding: 64px 0;
+}
+
+.servier main > .section.full-width {
+  padding: 0;
+}
+
+.servier main > .section.full-width > div {
+  max-width: none;
+  padding: 0;
+}
+
+.servier main > .section.soft {
+  background: var(--light-color);
+}
+
+.servier a.button:any-link {
+  white-space: normal;
+  text-align: center;
+  padding: 16px 28px;
+  gap: 24px;
+}
+
+.servier a.button::after {
+  content: '\2192';
+}
+
+.servier a:focus-visible,
+.servier button:focus-visible {
+  outline: 3px solid var(--brand-accent);
+  outline-offset: 5px;
+}
+
+.servier header .nav-wrapper {
+  background: var(--text-color);
+  color: white;
+}
+
+.servier header .nav-hamburger button {
+  background: transparent;
+}
+
+.servier header .nav-sections .nav-drop > ul {
+  color: var(--text-color);
+}
+
+.servier footer {
+  background: var(--text-color);
+  color: white;
+}
+
+.servier footer a:any-link {
+  color: white;
+}
+
+.servier.article main > .section > .default-content-wrapper {
+  max-width: 760px;
+}
+
+.servier.article main blockquote {
+  border-left: 4px solid var(--brand-accent);
+  margin: 32px 0;
+  padding: 8px 24px;
+  font-size: 24px;
+}
+
+@media (width >= 900px) {
+  .servier main > .section {
+    padding: 88px 0;
+  }
+}

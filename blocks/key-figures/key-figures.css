@@ -1,0 +1,37 @@
+.key-figures dl {
+  display: grid;
+  gap: 32px;
+  margin: 0;
+  text-align: center;
+}
+
+.key-figures dl > div {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border-top: 2px solid var(--brand-accent, var(--link-color));
+}
+
+.key-figures dt {
+  font-size: 18px;
+}
+
+.key-figures dd {
+  order: -1;
+  margin: 0 0 16px;
+  color: var(--link-color);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 700;
+}
+
+@media (width >= 600px) {
+  .key-figures dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 900px) {
+  .key-figures dl {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

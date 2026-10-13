@@ -31,6 +31,14 @@
           "label": "Style",
           "options": [
             {
+              "name": "Full width",
+              "value": "full-width"
+            },
+            {
+              "name": "Soft background",
+              "value": "soft"
+            },
+            {
               "name": "Highlight",
               "value": "highlight"
             }
@@ -50,7 +58,15 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "campaign-hero",
+        "section-intro",
+        "editorial-feature",
+        "topic-cards",
+        "key-figures",
+        "article-feed",
+        "article-header",
+        "scientific-teaser"
       ]
     }
   ]
