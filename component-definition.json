@@ -83,7 +83,7 @@
       "id": "blocks",
       "components": [
         {
-          "title": "Article Feed",
+          "title": "Servier Article Feed",
           "id": "article-feed",
           "plugins": {
             "xwalk": {
@@ -99,7 +99,7 @@
           }
         },
         {
-          "title": "Article Header",
+          "title": "Servier Article Header",
           "id": "article-header",
           "plugins": {
             "xwalk": {
@@ -114,7 +114,7 @@
           }
         },
         {
-          "title": "Campaign Hero",
+          "title": "Servier Campaign Hero",
           "id": "campaign-hero",
           "plugins": {
             "xwalk": {
@@ -174,7 +174,7 @@
           }
         },
         {
-          "title": "Editorial Feature",
+          "title": "Servier Editorial Feature",
           "id": "editorial-feature",
           "plugins": {
             "xwalk": {
@@ -219,7 +219,7 @@
           }
         },
         {
-          "title": "Key Figures",
+          "title": "Servier Key Figures",
           "id": "key-figures",
           "plugins": {
             "xwalk": {
@@ -234,7 +234,7 @@
           }
         },
         {
-          "title": "Key Figure",
+          "title": "Servier Key Figure",
           "id": "key-figure",
           "plugins": {
             "xwalk": {
@@ -249,7 +249,7 @@
           }
         },
         {
-          "title": "Scientific Article Teaser",
+          "title": "Servier Scientific Article Teaser",
           "id": "scientific-teaser",
           "plugins": {
             "xwalk": {
@@ -265,7 +265,7 @@
           }
         },
         {
-          "title": "Section Intro",
+          "title": "Servier Section Intro",
           "id": "section-intro",
           "plugins": {
             "xwalk": {
@@ -280,7 +280,7 @@
           }
         },
         {
-          "title": "Topic Cards",
+          "title": "Servier Topic Cards",
           "id": "topic-cards",
           "plugins": {
             "xwalk": {
@@ -295,7 +295,7 @@
           }
         },
         {
-          "title": "Topic Card",
+          "title": "Servier Topic Card",
           "id": "topic-card",
           "plugins": {
             "xwalk": {

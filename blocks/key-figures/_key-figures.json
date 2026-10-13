@@ -1,7 +1,7 @@
 {
   "definitions": [
     {
-      "title": "Key Figures",
+      "title": "Servier Key Figures",
       "id": "key-figures",
       "plugins": { "xwalk": { "page": {
         "resourceType": "core/franklin/components/block/v1/block",
@@ -9,7 +9,7 @@
       } } }
     },
     {
-      "title": "Key Figure",
+      "title": "Servier Key Figure",
       "id": "key-figure",
       "plugins": { "xwalk": { "page": {
         "resourceType": "core/franklin/components/block/v1/block/item",

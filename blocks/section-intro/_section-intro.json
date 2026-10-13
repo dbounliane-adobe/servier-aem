@@ -1,7 +1,7 @@
 {
   "definitions": [
     {
-      "title": "Section Intro",
+      "title": "Servier Section Intro",
       "id": "section-intro",
       "plugins": { "xwalk": { "page": {
         "resourceType": "core/franklin/components/block/v1/block",

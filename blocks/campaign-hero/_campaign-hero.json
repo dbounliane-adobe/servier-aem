@@ -1,7 +1,7 @@
 {
   "definitions": [
     {
-      "title": "Campaign Hero",
+      "title": "Servier Campaign Hero",
       "id": "campaign-hero",
       "plugins": {
         "xwalk": {

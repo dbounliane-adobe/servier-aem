@@ -1,7 +1,7 @@
 {
   "definitions": [
     {
-      "title": "Article Feed",
+      "title": "Servier Article Feed",
       "id": "article-feed",
       "plugins": { "xwalk": { "page": {
         "resourceType": "core/franklin/components/block/v1/block",

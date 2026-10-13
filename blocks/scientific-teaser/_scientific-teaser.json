@@ -1,7 +1,7 @@
 {
   "definitions": [
     {
-      "title": "Scientific Article Teaser",
+      "title": "Servier Scientific Article Teaser",
       "id": "scientific-teaser",
       "plugins": { "xwalk": { "page": {
         "resourceType": "core/franklin/components/block/v1/block",

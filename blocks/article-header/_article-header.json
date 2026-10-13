@@ -1,7 +1,7 @@
 {
   "definitions": [
     {
-      "title": "Article Header",
+      "title": "Servier Article Header",
       "id": "article-header",
       "plugins": { "xwalk": { "page": {
         "resourceType": "core/franklin/components/block/v1/block",

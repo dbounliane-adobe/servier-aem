@@ -54,17 +54,19 @@ de Chrome headless. Node.js 22+ est nécessaire pour ce runner.
 Les définitions, modèles et filtres se trouvent dans `blocks/*/_*.json`.
 Les fichiers agrégés à la racine sont générés par `npm run build:json`.
 Les blocs existants Hero, Cards, Columns et Fragment sont conservés.
+Les nouveaux blocs et leurs items portent le préfixe **Servier** dans Universal
+Editor ; leurs identifiants techniques et noms de rendu restent inchangés.
 
 | Bloc | Champs / rôle |
 | --- | --- |
-| Campaign Hero | Image de fond + alt, titre H1, sous-titre riche, destination et libellé CTA, vidéo MP4/WebM facultative |
-| Section Intro | Surtitre, titre H2, introduction riche ; alignement gauche/centré |
-| Editorial Feature | Image + alt, surtitre, H2, texte riche, CTA ; image à gauche/droite |
-| Topic Cards | Conteneur d'items : image + alt, H3, description riche et CTA ; expertises, engagements, rubriques |
-| Key Figures | Conteneur d'items : valeur libre et libellé ; chiffres non limités à un type numérique |
-| Article Feed | Index du site, préfixe de chemin, catégorie facultative, limite ; filtres de catégories et dates |
-| Article Header | Catégorie, H1, chapô riche, date ISO, auteur/relecteur, durée de lecture, couverture + alt |
-| Scientific Teaser | URL d'un article CF publié sur ce site ; titre et résumé locaux facultatifs, libellé CTA |
+| Servier Campaign Hero | Image de fond + alt, titre H1, sous-titre riche, destination et libellé CTA, vidéo MP4/WebM facultative |
+| Servier Section Intro | Surtitre, titre H2, introduction riche ; alignement gauche/centré |
+| Servier Editorial Feature | Image + alt, surtitre, H2, texte riche, CTA ; image à gauche/droite |
+| Servier Topic Cards | Conteneur d'items : image + alt, H3, description riche et CTA ; expertises, engagements, rubriques |
+| Servier Key Figures | Conteneur d'items : valeur libre et libellé ; chiffres non limités à un type numérique |
+| Servier Article Feed | Index du site, préfixe de chemin, catégorie facultative, limite ; filtres de catégories et dates |
+| Servier Article Header | Catégorie, H1, chapô riche, date ISO, auteur/relecteur, durée de lecture, couverture + alt |
+| Servier Scientific Article Teaser | URL d'un article CF publié sur ce site ; titre et résumé locaux facultatifs, libellé CTA |
 
 Utiliser une section `Full width` pour le hero et `Soft background` pour une
 zone légèrement teintée. Un seul H1 par page. Le corps d'un article AEM Sites
@@ -140,7 +142,7 @@ provenant de formulaires ou de sources non fiables.
 **Réutilisation structurée :** éditer le CF dans l'éditeur de Content Fragments,
 le prévisualiser/publier vers EDS via l'overlay ci-dessous. Il devient une page
 HTML complète, sans requête GraphQL côté navigateur. Dans Universal Editor,
-ajouter un **Scientific Teaser** qui pointe vers son URL EDS. Le teaser lit le
+ajouter un **Servier Scientific Article Teaser** qui pointe vers son URL EDS. Le teaser lit le
 `.plain.html`, reprend titre/chapô/image, et permet de surcharger titre/chapô
 localement dans le panneau de propriétés UE. Les valeurs d'origine restent
 dans le CF. Après modification du CF, republier sa page ; les teasers reprennent
@@ -290,7 +292,7 @@ un index absent/invalide affiche une erreur et journalise le problème.
 2. Configurer mappings, overlay et json2html, puis prévisualiser/publier le CF
    vers `/newsroom/science/<slug>` selon les droits/outils de votre instance.
 3. Vérifier le HTML et `.plain.html` de cette page, puis son entrée dans l'index.
-4. Dans UE, créer l'accueil et un Scientific Teaser pointant vers cette URL.
+4. Dans UE, créer l'accueil et un Servier Scientific Article Teaser pointant vers cette URL.
 5. Prévisualiser, tester CTA, filtres, mobile, lecture/pause et surcharge locale.
 6. Répéter avec un second site : même code, contenu/navigation/index distincts.
 

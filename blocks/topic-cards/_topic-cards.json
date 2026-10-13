@@ -1,7 +1,7 @@
 {
   "definitions": [
     {
-      "title": "Topic Cards",
+      "title": "Servier Topic Cards",
       "id": "topic-cards",
       "plugins": { "xwalk": { "page": {
         "resourceType": "core/franklin/components/block/v1/block",
@@ -9,7 +9,7 @@
       } } }
     },
     {
-      "title": "Topic Card",
+      "title": "Servier Topic Card",
       "id": "topic-card",
       "plugins": { "xwalk": { "page": {
         "resourceType": "core/franklin/components/block/v1/block/item",

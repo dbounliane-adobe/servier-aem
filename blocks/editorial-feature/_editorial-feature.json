@@ -1,7 +1,7 @@
 {
   "definitions": [
     {
-      "title": "Editorial Feature",
+      "title": "Servier Editorial Feature",
       "id": "editorial-feature",
       "plugins": { "xwalk": { "page": {
         "resourceType": "core/franklin/components/block/v1/block",
