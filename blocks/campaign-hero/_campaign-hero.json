@@ -24,7 +24,9 @@
         { "component": "richtext", "valueType": "string", "name": "content_description", "label": "Subtitle", "value": "" },
         { "component": "aem-content", "valueType": "string", "name": "content_link", "label": "CTA destination" },
         { "component": "text", "valueType": "string", "name": "content_linkText", "label": "CTA label" },
-        { "component": "reference", "valueType": "string", "name": "video", "label": "Background video (MP4/WebM, optional)", "multi": false }
+        { "component": "reference", "valueType": "string", "name": "video", "label": "Background video (MP4/WebM, optional)", "multi": false },
+        { "component": "aem-content", "valueType": "string", "name": "search_action", "label": "Search results page (optional, leave empty for no search field)", "description": "URL the search form submits to with the query as ?s=… (e.g. https://servier.com/)" },
+        { "component": "text", "valueType": "string", "name": "search_placeholder", "label": "Search placeholder (optional)", "description": "Defaults to \"Rechercher…\" / \"Search…\" depending on the page language", "value": "" }
       ]
     }
   ],

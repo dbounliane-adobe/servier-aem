@@ -1,4 +1,4 @@
-/* campaign-hero: full-screen background video, indigo veil, H1 + intro bottom-left */
+/* campaign-hero: full-screen background video, indigo veil, H1 + intro + optional search bottom-left */
 .campaign-hero {
   position: relative;
   isolation: isolate;
@@ -83,6 +83,83 @@
   border-color: #fff;
 }
 
+/* optional search (source: form.search-form.relative.w-fit; label.mb-2 keeps 8px under the pill) */
+.campaign-hero .campaign-hero-search {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 8px;
+}
+
+.campaign-hero .campaign-hero-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* source input: bg-white text-xl lg:text-[28px] font-semibold rounded-[64px] py-[14px] pl-[30px] pr-20 */
+.campaign-hero .campaign-hero-search input[type="search"] {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 52px;
+  margin: 0;
+  padding: 14px 80px 14px 30px;
+  border: 0;
+  border-radius: 64px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  background-color: #fff;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  appearance: none;
+}
+
+.campaign-hero .campaign-hero-search input[type="search"]::placeholder {
+  color: var(--text-color);
+  opacity: 1;
+}
+
+.campaign-hero .campaign-hero-search input[type="search"]::-webkit-search-decoration {
+  appearance: none;
+}
+
+/* source focus ring (tailwind forms): 1px blue-600 box-shadow ring */
+.campaign-hero .campaign-hero-search input[type="search"]:focus {
+  box-shadow: 0 0 0 1px #2563eb;
+}
+
+/* source button: absolute right-6 top-1/2 -translate-y-1/2, 43px arrow icon */
+.campaign-hero .campaign-hero-search-submit {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-color);
+  line-height: 0;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.campaign-hero .campaign-hero-search-submit svg {
+  display: block;
+  width: 43px;
+  height: auto;
+}
+
 /* WCAG 2.2.2 pause control (not present on source): kept discreet, bottom-right */
 .campaign-hero .campaign-hero-toggle {
   position: absolute;
@@ -115,6 +192,11 @@
 
   .campaign-hero .campaign-hero-content p {
     font-size: 20px;
+  }
+
+  .campaign-hero .campaign-hero-search input[type="search"] {
+    height: 70px;
+    font-size: 28px;
   }
 }
 

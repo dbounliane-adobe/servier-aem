@@ -6,7 +6,11 @@
       "previewSite": "servier-aem",
       "contentHostUrl": "author-p199354-e2062419.adobeaemcloud.com",
       "baseUrl": "https://main--servier-aem--dbounliane-adobe.aem.page",
-      "libraryUrl": "https://main--sta-xwalk-boilerplate--aemysites.aem.page/tools/sidekick/library.json"
+      "libraryUrl": "https://main--sta-xwalk-boilerplate--aemysites.aem.page/tools/sidekick/library.json",
+      "aemSitePath": "/content/servier-aem",
+      "aemAssetsFolderPath": "/content/dam/servier-aem",
+      "aemSiteName": "servier-aem",
+      "aemSiteTitle": "servier-aem"
     }
   }
 }

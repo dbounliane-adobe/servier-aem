@@ -1,17 +1,20 @@
 /*
  * Header block — two-row header (primary bar + utility strip), hover dropdowns,
- * fullscreen search overlay and a smart-sticky primary bar.
+ * fullscreen search overlay and a smart-sticky primary bar. Below 900px the
+ * navigation lives in a fullscreen drawer opened by a hamburger, with in-place
+ * accordions (label navigates, chevron expands).
  *
  * All copy, links and images are authored in the nav fragment (nav.plain.html):
  *   section 1: brand link with logo image(s) (first = default, second = on light bg)
- *   section 2: main navigation list (nested list = dropdown)
+ *   section 2: optional paragraph (menu button label) + main navigation list
+ *              (nested list = dropdown)
  *   section 3: search — link (form action) wrapping the icon, then paragraphs:
  *              input placeholder, submit label, close label
  *   section 4: utility lists (first = languages, others = utility links)
  */
 
 const DESKTOP = window.matchMedia('(width >= 900px)');
-let searchCount = 0;
+let instanceCount = 0;
 
 /**
  * Fetches the nav fragment. Metadata-independent on purpose: /content first
@@ -56,8 +59,13 @@ function buildBrand(section) {
   return brand;
 }
 
+function setExpanded(toggle, expanded) {
+  toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+}
+
 /**
- * Builds the main navigation (top-level links + hover dropdowns).
+ * Builds the main navigation: top-level links, hover dropdowns (desktop) and
+ * chevron toggles for the mobile accordions.
  */
 function buildSections(section) {
   const nav = document.createElement('nav');
@@ -65,17 +73,28 @@ function buildSections(section) {
   const list = section?.querySelector('ul');
   if (!list) return nav;
   list.className = 'nav-list';
-  [...list.children].forEach((item) => {
+  [...list.children].forEach((item, i) => {
     item.className = 'nav-item';
     const link = item.querySelector(':scope > a');
     if (link) link.className = 'nav-link';
     const sub = item.querySelector(':scope > ul');
-    if (sub) {
-      item.classList.add('nav-drop');
-      sub.className = 'nav-submenu';
-      sub.querySelectorAll(':scope > li > a').forEach((a) => { a.className = 'nav-submenu-link'; });
-      if (link) link.setAttribute('aria-haspopup', 'true');
-    }
+    if (!sub) return;
+    item.classList.add('nav-drop');
+    sub.className = 'nav-submenu';
+    sub.id = `nav-submenu-${instanceCount}-${i}`;
+    sub.querySelectorAll(':scope > li > a').forEach((a) => { a.className = 'nav-submenu-link'; });
+    if (link) link.setAttribute('aria-haspopup', 'true');
+
+    const chevron = document.createElement('button');
+    chevron.type = 'button';
+    chevron.className = 'nav-chevron';
+    chevron.setAttribute('aria-controls', sub.id);
+    chevron.setAttribute('aria-label', textOf(link));
+    setExpanded(chevron, false);
+    chevron.addEventListener('click', () => {
+      setExpanded(chevron, chevron.getAttribute('aria-expanded') !== 'true');
+    });
+    sub.before(chevron);
   });
   nav.append(list);
   return nav;
@@ -86,7 +105,6 @@ function closeSearch(overlay, toggle) {
   overlay.setAttribute('aria-hidden', 'true');
   overlay.inert = true;
   toggle.setAttribute('aria-expanded', 'false');
-  document.body.classList.remove('nav-search-open');
 }
 
 /**
@@ -107,8 +125,7 @@ function buildSearch(section) {
   const paramName = [...action.searchParams.keys()][0] || 'q';
   action.search = '';
 
-  searchCount += 1;
-  const overlayId = `nav-search-${searchCount}`;
+  const overlayId = `nav-search-${instanceCount}`;
 
   const toggle = document.createElement('button');
   toggle.type = 'button';
@@ -170,7 +187,6 @@ function buildSearch(section) {
     overlay.classList.add('is-open');
     overlay.setAttribute('aria-hidden', 'false');
     toggle.setAttribute('aria-expanded', 'true');
-    document.body.classList.add('nav-search-open');
     window.requestAnimationFrame(() => input.focus());
   });
   close.addEventListener('click', () => {
@@ -187,7 +203,7 @@ function buildSearch(section) {
 }
 
 /**
- * Builds the utility strip (language links + utility links) from the fourth section.
+ * Builds the utility nav (language links + utility links) from the fourth section.
  */
 function buildUtility(section) {
   const nav = document.createElement('nav');
@@ -212,6 +228,24 @@ function buildUtility(section) {
 }
 
 /**
+ * Builds the hamburger button (three bars morphing into a cross).
+ */
+function buildHamburger(label, drawerId) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'nav-hamburger';
+  button.setAttribute('aria-controls', drawerId);
+  if (label) button.setAttribute('aria-label', label);
+  setExpanded(button, false);
+  const lines = document.createElement('span');
+  lines.className = 'nav-hamburger-lines';
+  lines.setAttribute('aria-hidden', 'true');
+  for (let i = 0; i < 3; i += 1) lines.append(document.createElement('span'));
+  button.append(lines);
+  return button;
+}
+
+/**
  * Smart-sticky primary bar: once the page is scrolled past the header, the bar
  * is pinned (hidden); scrolling up reveals it, scrolling down hides it again.
  */
@@ -220,6 +254,7 @@ function initSticky(wrapper) {
   let ticking = false;
   const update = () => {
     ticking = false;
+    if (wrapper.classList.contains('is-menu-open')) return;
     const y = window.scrollY;
     const threshold = wrapper.offsetHeight;
     if (y <= 0) {
@@ -256,8 +291,10 @@ export default async function decorate(block) {
   const fragment = await fetchNav();
   block.textContent = '';
   if (!fragment) return;
+  instanceCount += 1;
 
   const [brandSection, navSection, searchSection, utilitySection] = [...fragment.children];
+  const menuLabel = textOf(navSection?.querySelector(':scope > p'));
 
   const wrapper = document.createElement('div');
   wrapper.className = 'nav-wrapper';
@@ -266,16 +303,19 @@ export default async function decorate(block) {
   primary.className = 'nav-primary';
   const bar = document.createElement('div');
   bar.className = 'nav-bar';
-  const menu = document.createElement('div');
-  menu.className = 'nav-menu';
+  const main = document.createElement('div');
+  main.className = 'nav-main';
+  main.id = `nav-main-${instanceCount}`;
   const { tools, overlay } = buildSearch(searchSection);
-  menu.append(buildSections(navSection), tools);
-  bar.append(buildBrand(brandSection), menu);
+  main.append(buildSections(navSection), tools);
+  const hamburger = buildHamburger(menuLabel, main.id);
+  bar.append(buildBrand(brandSection), hamburger, main);
   primary.append(bar);
 
   const utility = document.createElement('div');
   utility.className = 'nav-utility';
-  utility.append(buildUtility(utilitySection));
+  const secondary = buildUtility(utilitySection);
+  utility.append(secondary);
 
   wrapper.append(primary, utility);
   if (overlay) wrapper.append(overlay);
@@ -287,12 +327,39 @@ export default async function decorate(block) {
     header?.classList.add('header-overlay');
   }
 
-  // close an open dropdown on Escape (keyboard users)
-  bar.addEventListener('keydown', (e) => {
+  const searchToggle = tools.querySelector('.nav-search-toggle');
+
+  const toggleMenu = (open) => {
+    const isOpen = open && !DESKTOP.matches;
+    wrapper.classList.toggle('is-menu-open', isOpen);
+    setExpanded(hamburger, isOpen);
+    main.inert = !isOpen && !DESKTOP.matches;
+    document.body.style.overflowY = isOpen ? 'hidden' : '';
+  };
+
+  // the utility nav sits in the drawer on mobile and in its own row on desktop
+  const placeUtility = () => {
+    if (DESKTOP.matches) utility.append(secondary);
+    else tools.before(secondary);
+  };
+
+  hamburger.addEventListener('click', () => {
+    toggleMenu(hamburger.getAttribute('aria-expanded') !== 'true');
+  });
+
+  wrapper.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
+    if (wrapper.classList.contains('is-menu-open')) {
+      toggleMenu(false);
+      hamburger.focus();
+      return;
+    }
+    // desktop: close an open dropdown for keyboard users
     const item = document.activeElement?.closest('.nav-drop');
-    if (item) item.querySelector('.nav-link')?.focus();
-    item?.classList.add('is-dismissed');
+    if (item) {
+      item.querySelector('.nav-link')?.focus();
+      item.classList.add('is-dismissed');
+    }
   });
   bar.addEventListener('focusout', (e) => {
     if (!e.relatedTarget?.closest('.nav-drop.is-dismissed')) {
@@ -303,10 +370,19 @@ export default async function decorate(block) {
     bar.querySelectorAll('.is-dismissed').forEach((el) => el.classList.remove('is-dismissed'));
   });
 
-  initSticky(wrapper);
-  DESKTOP.addEventListener('change', () => {
-    if (overlay?.classList.contains('is-open')) {
-      closeSearch(overlay, tools.querySelector('.nav-search-toggle'));
-    }
+  // the search overlay opened from the drawer replaces the drawer
+  searchToggle?.addEventListener('click', () => {
+    if (wrapper.classList.contains('is-menu-open')) toggleMenu(false);
   });
+
+  const onViewportChange = () => {
+    toggleMenu(false);
+    main.querySelectorAll('.nav-chevron').forEach((chevron) => setExpanded(chevron, false));
+    if (overlay?.classList.contains('is-open')) closeSearch(overlay, searchToggle);
+    placeUtility();
+  };
+  DESKTOP.addEventListener('change', onViewportChange);
+  onViewportChange();
+
+  initSticky(wrapper);
 }

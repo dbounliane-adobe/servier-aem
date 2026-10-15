@@ -124,12 +124,18 @@ function buildSection(section) {
   roles.linkLists.forEach((ul) => ul.classList.add('footer-links'));
   roles.iconLists.forEach((ul) => ul.classList.add('footer-social'));
   roles.texts.forEach((p) => p.classList.add('footer-legal'));
-  roles.media.forEach((p) => p.classList.add('footer-badge'));
+  roles.media.forEach((p) => p.classList.add('footer-badge', 'footer-badge-desktop'));
+  // small screens show the media under the menu; CSS shows exactly one copy per breakpoint
+  const mobileMedia = roles.media.map((p) => {
+    const copy = p.cloneNode(true);
+    copy.classList.replace('footer-badge-desktop', 'footer-badge-mobile');
+    return copy;
+  });
 
   const nav = roles.linkLists.length
     ? createElement('nav', 'footer-menu', roles.linkLists)
     : null;
-  const top = createElement('div', 'footer-top', [nav, ...roles.iconLists]);
+  const top = createElement('div', 'footer-top', [nav, ...mobileMedia, ...roles.iconLists]);
   const bottom = createElement('div', 'footer-bottom', [...roles.texts, ...roles.media]);
   const main = createElement('div', 'footer-main', [top, bottom]);
   const row = createElement('div', 'footer-row', [roles.brand, main]);

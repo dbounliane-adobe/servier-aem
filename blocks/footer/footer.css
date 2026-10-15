@@ -48,14 +48,18 @@ footer .footer .footer-row {
   gap: 32px;
 }
 
-/* brand */
+/* brand: flex so the logo link stretches to the column height, like the source */
+footer .footer .footer-brand {
+  display: flex;
+}
+
 footer .footer .footer-brand a {
   display: inline-block;
 }
 
 footer .footer .footer-brand img {
-  width: 100%;
-  max-width: 206px;
+  width: 206px;
+  max-width: 100%;
   height: auto;
 }
 
@@ -113,7 +117,17 @@ footer .footer .footer-legal {
   color: #9391c9;
 }
 
-footer .footer .footer-badge img {
+/* badge: source keeps two copies, one per layout (mobile under the menu, desktop next to copyright) */
+footer .footer .footer-badge-mobile img {
+  width: 248px;
+  height: auto;
+}
+
+footer .footer .footer-badge-desktop {
+  display: none;
+}
+
+footer .footer .footer-badge-desktop img {
   width: auto;
   height: 82px;
 }
@@ -148,13 +162,30 @@ footer .footer .footer-back-to-top svg {
   height: auto;
 }
 
-@media (width >= 600px) {
+/* breakpoint-exception: source theme "sm" (667px) splits the footer menu into 2 columns */
+@media (width >= 667px) {
   footer .footer .footer-links {
     column-count: 2;
   }
 }
 
-@media (width >= 900px) {
+/* breakpoint-exception: source (Tailwind md) swaps to the desktop badge next to the copyright at 768px */
+@media (width >= 768px) {
+  footer .footer .footer-badge-mobile {
+    display: none;
+  }
+
+  footer .footer .footer-badge-desktop {
+    display: block;
+  }
+
+  footer .footer .footer-social {
+    margin-bottom: 0;
+  }
+}
+
+/* breakpoint-exception: source (Tailwind lg) switches to the side-by-side desktop layout at 1024px */
+@media (width >= 1024px) {
   footer {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 369 341'%3E%3Cpath fill='%23323C8E' fill-rule='evenodd' d='M294.645 299.261v23.448c40.616 0 73.661-32.356 73.661-72.126h-23.947c0 26.841-22.303 48.678-49.714 48.678ZM294.645 204.115v23.448c40.616 0 73.661-32.356 73.661-72.126h-23.947c0 26.841-22.303 48.678-49.714 48.678ZM294.645 108.969v23.449c40.616 0 73.661-32.356 73.661-72.127h-23.947c0 26.842-22.303 48.678-49.714 48.678ZM294.645 13.824v23.448c40.616 0 73.661-32.356 73.661-72.126h-23.947c0 26.841-22.303 48.678-49.714 48.678ZM196.43 299.261v23.448c40.616 0 73.661-32.356 73.661-72.126h-23.947c0 26.841-22.303 48.678-49.714 48.678ZM196.43 204.115v23.448c40.616 0 73.661-32.356 73.661-72.126h-23.947c0 26.841-22.303 48.678-49.714 48.678ZM196.43 108.969v23.449c40.616 0 73.661-32.356 73.661-72.127h-23.947c0 26.842-22.303 48.678-49.714 48.678ZM196.43 13.824v23.448c40.616 0 73.661-32.356 73.661-72.126h-23.947c0 26.841-22.303 48.678-49.714 48.678ZM98.215 299.261v23.448c40.617 0 73.661-32.356 73.661-72.126h-23.947c0 26.841-22.303 48.678-49.714 48.678ZM98.215 204.115v23.448c40.617 0 73.661-32.356 73.661-72.126h-23.947c0 26.841-22.303 48.678-49.714 48.678ZM98.215 108.969v23.449c40.617 0 73.661-32.356 73.661-72.127h-23.947c0 26.842-22.303 48.678-49.714 48.678ZM98.215 13.824v23.448c40.617 0 73.661-32.356 73.661-72.126h-23.947c0 26.841-22.303 48.678-49.714 48.678ZM0 299.261v23.448c40.617 0 73.661-32.356 73.661-72.126H49.714c0 26.841-22.303 48.678-49.714 48.678ZM0 204.115v23.448c40.617 0 73.661-32.356 73.661-72.126H49.714c0 26.841-22.303 48.678-49.714 48.678ZM0 108.969v23.449c40.617 0 73.661-32.356 73.661-72.127H49.714c0 26.842-22.303 48.678-49.714 48.678ZM0 13.824v23.448c40.617 0 73.661-32.356 73.661-72.126H49.714C49.714-8.013 27.411 13.824 0 13.824Z' clip-rule='evenodd'/%3E%3C/svg%3E");
     background-repeat: repeat-y;
@@ -171,10 +202,6 @@ footer .footer .footer-back-to-top svg {
     flex-direction: row;
     gap: 128px;
     margin-bottom: 32px;
-  }
-
-  footer .footer .footer-social {
-    margin-bottom: 0;
   }
 
   footer .footer .footer-back-to-top {

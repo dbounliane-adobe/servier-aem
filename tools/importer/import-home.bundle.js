@@ -56,6 +56,25 @@ var CustomImportScript = (() => {
       posterImg = [...element.querySelectorAll("img")].find((img) => !img.closest("form, button") && !(img.getAttribute("src") || "").startsWith("data:")) || null;
     }
     if (posterImg) imageCell.push(hint("image"), posterImg);
+    const searchCell = [];
+    const searchForm = element.querySelector('form.search-form, form[role="search"]');
+    if (searchForm) {
+      const searchInput = searchForm.querySelector('input[name="s"], input[type="search"]');
+      const action = searchForm.getAttribute("action") || "";
+      if (action && searchInput) {
+        const actionLink = document2.createElement("a");
+        actionLink.href = action;
+        actionLink.textContent = action;
+        searchCell.push(hint("search_action"), actionLink);
+        const placeholder = (searchInput.getAttribute("placeholder") || "").trim();
+        if (placeholder) {
+          const placeholderP = document2.createElement("p");
+          placeholderP.textContent = placeholder;
+          searchCell.push(hint("search_placeholder"), placeholderP);
+        }
+      }
+      searchForm.remove();
+    }
     const contentRoot = element.querySelector(".prose") || element;
     const heading = contentRoot.querySelector("h1, h2");
     const description = [...contentRoot.querySelectorAll(":scope > p")].filter((p) => p.textContent.trim() && !p.closest("form"));
@@ -82,6 +101,7 @@ var CustomImportScript = (() => {
       [contentCell.length ? contentCell : ""],
       [videoCell.length ? videoCell : ""]
     ];
+    if (searchCell.length) cells.push([searchCell]);
     const block = WebImporter.Blocks.createBlock(document2, { name: "campaign-hero", cells });
     element.replaceWith(block);
   }
@@ -461,8 +481,8 @@ var CustomImportScript = (() => {
         "#email-alert-modal",
         // Elfsight portal root outside main: <div id="__EAAPS_PORTAL">
         "#__EAAPS_PORTAL",
-        // Hero search form inside campaign-hero: <form class="search-form relative w-fit">
-        ".home-header-front-page form.search-form",
+        // NOTE: the hero search form (.home-header-front-page form.search-form) is NOT removed here:
+        // the campaign-hero parser reads its action/placeholder into the search_ fields and drops it.
         // Slick slider prev/next buttons: <button class="prev ... slick-arrow">
         "button.slick-arrow",
         // Slick infinite-mode clones (runtime class added by slick on the live page; requested by orchestrator)
@@ -470,6 +490,12 @@ var CustomImportScript = (() => {
       ]);
     }
     if (hookName === TransformHook.afterTransform) {
+      element.querySelectorAll('a[class*="rounded-[50px]"]').forEach((a) => {
+        if (a.closest("strong, em")) return;
+        const strong = element.ownerDocument.createElement("strong");
+        a.replaceWith(strong);
+        strong.append(a);
+      });
       WebImporter.DOMUtils.remove(element, [
         // <header class="banner"> (contains nav, fullscreen search form #search-form)
         "header.banner",
