@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/aso-une-technologie-de-precision-qui-offre-de-nouvelles-perspectives-de-traitements/",
+  "path": "newsroom/dossiers/aso-une-technologie-de-precision-qui-offre-de-nouvelles-perspectives-de-traitements",
+  "timestamp": "2026-10-15T16:08:30.950Z",
+  "title": "Comment les ASOs ont révolutionné le traitement de certaines maladies rares ?",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

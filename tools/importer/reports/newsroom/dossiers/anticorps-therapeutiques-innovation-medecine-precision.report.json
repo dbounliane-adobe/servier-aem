@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/anticorps-therapeutiques-innovation-medecine-precision/",
+  "path": "newsroom/dossiers/anticorps-therapeutiques-innovation-medecine-precision",
+  "timestamp": "2026-10-15T16:07:45.721Z",
+  "title": "Anticorps thérapeutiques : Pilier de la médecine de précision",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

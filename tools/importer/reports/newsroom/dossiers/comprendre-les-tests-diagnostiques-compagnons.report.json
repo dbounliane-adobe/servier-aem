@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/comprendre-les-tests-diagnostiques-compagnons/",
+  "path": "newsroom/dossiers/comprendre-les-tests-diagnostiques-compagnons",
+  "timestamp": "2026-10-15T16:08:11.351Z",
+  "title": "Comprendre les tests de diagnostic compagnon",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

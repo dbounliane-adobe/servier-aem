@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/la-maladie-veineuse-le-systeme-circulatoire-affecte/",
+  "path": "newsroom/dossiers/la-maladie-veineuse-le-systeme-circulatoire-affecte",
+  "timestamp": "2026-10-15T16:06:27.350Z",
+  "title": "La maladie veineuse : le système circulatoire affecté",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

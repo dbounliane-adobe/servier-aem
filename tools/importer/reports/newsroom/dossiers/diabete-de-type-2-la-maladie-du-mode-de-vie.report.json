@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/diabete-de-type-2-la-maladie-du-mode-de-vie/",
+  "path": "newsroom/dossiers/diabete-de-type-2-la-maladie-du-mode-de-vie",
+  "timestamp": "2026-10-15T16:07:18.614Z",
+  "title": "Comprendre le diabète de type 2",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

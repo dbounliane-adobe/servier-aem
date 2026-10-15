@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/innovation-therapeutique-intelligence-artificielle/",
+  "path": "newsroom/dossiers/innovation-therapeutique-intelligence-artificielle",
+  "timestamp": "2026-10-15T16:09:16.722Z",
+  "title": "Innovation thérapeutique : cap sur l’intelligence artificielle !",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

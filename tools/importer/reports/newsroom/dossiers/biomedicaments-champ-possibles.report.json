@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/biomedicaments-champ-possibles/",
+  "path": "newsroom/dossiers/biomedicaments-champ-possibles",
+  "timestamp": "2026-10-15T16:08:04.486Z",
+  "title": "Biomédicaments : le champ des possibles",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/comprendre-la-leucemie-myeloide-aigue/",
+  "path": "newsroom/dossiers/comprendre-la-leucemie-myeloide-aigue",
+  "timestamp": "2026-10-15T16:06:40.153Z",
+  "title": "Comprendre la leucémie myéloïde aiguë",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

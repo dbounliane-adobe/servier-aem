@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/comprendre-le-syndrome-de-sjogren-maladie-auto-immune/",
+  "path": "newsroom/dossiers/comprendre-le-syndrome-de-sjogren-maladie-auto-immune",
+  "timestamp": "2026-10-15T16:09:34.982Z",
+  "title": "Comprendre le syndrome de Sjögren, maladie auto-immune",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

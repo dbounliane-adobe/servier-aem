@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/cancer-colorectal-un-depistage-encore-trop-tardif/",
+  "path": "newsroom/dossiers/cancer-colorectal-un-depistage-encore-trop-tardif",
+  "timestamp": "2026-10-15T16:06:53.400Z",
+  "title": "Cancer colorectal : un dépistage encore trop tardif",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

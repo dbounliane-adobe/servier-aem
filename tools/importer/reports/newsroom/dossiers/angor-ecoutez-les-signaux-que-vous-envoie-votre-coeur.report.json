@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/angor-ecoutez-les-signaux-que-vous-envoie-votre-coeur/",
+  "path": "newsroom/dossiers/angor-ecoutez-les-signaux-que-vous-envoie-votre-coeur",
+  "timestamp": "2026-10-15T16:08:56.983Z",
+  "title": "Angine de poitrine : Écoutez les signaux envoyés par votre cœur",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

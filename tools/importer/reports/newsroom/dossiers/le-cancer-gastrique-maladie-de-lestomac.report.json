@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/le-cancer-gastrique-maladie-de-lestomac/",
+  "path": "newsroom/dossiers/le-cancer-gastrique-maladie-de-lestomac",
+  "timestamp": "2026-10-15T16:07:25.172Z",
+  "title": "Le cancer gastrique, maladie de l’estomac",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

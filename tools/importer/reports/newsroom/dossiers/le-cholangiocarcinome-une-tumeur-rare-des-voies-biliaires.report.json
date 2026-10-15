@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/le-cholangiocarcinome-une-tumeur-rare-des-voies-biliaires/",
+  "path": "newsroom/dossiers/le-cholangiocarcinome-une-tumeur-rare-des-voies-biliaires",
+  "timestamp": "2026-10-15T16:06:58.892Z",
+  "title": "Le cholangiocarcinome, une tumeur rare des voies biliaires",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

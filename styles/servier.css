@@ -38,6 +38,30 @@
 }
 
 @font-face {
+  font-family: poppins;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/poppins-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: poppins;
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('../fonts/poppins-800.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: poppins;
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../fonts/poppins-300-italic.woff2') format('woff2');
+}
+
+@font-face {
   font-family: poppins-fallback;
   size-adjust: 112.5%;
   src: local('Arial');
@@ -73,7 +97,9 @@ body.servier {
   --content-width: 100%;
   --content-gutter: 24px;
   --section-gap: 100px;
-  --nav-height: 107px;
+
+  /* header box: 78px mobile bar, 107px two-row desktop header (blocks/header) */
+  --nav-height: 78px;
 
   font-weight: 300;
   line-height: 1.5;
@@ -82,6 +108,12 @@ body.servier {
 @media (width >= 640px) {
   body.servier {
     --content-width: 600px;
+  }
+}
+
+@media (width >= 900px) {
+  body.servier {
+    --nav-height: 107px;
   }
 }
 
@@ -215,18 +247,6 @@ body.servier {
   color: var(--text-color);
 }
 
-/* article template */
-.servier.article main > .section > .default-content-wrapper {
-  max-width: 760px;
-}
-
-.servier.article main blockquote {
-  border-left: 4px solid var(--brand-accent);
-  margin: 32px 0;
-  padding: 8px 24px;
-  font-size: 24px;
-}
-
 /* sections */
 .servier main > .section {
   margin: 0 0 var(--section-gap);
@@ -356,3 +376,271 @@ body.servier {
     padding: 0;
   }
 }
+
+
+
+/*
+ * Article/listing rules below are ordered by ascending specificity among themselves.
+ * They only ever compete with the homepage .highlight / .embed-social rules above
+ * across different body templates, so source order versus those is irrelevant.
+ */
+/* stylelint-disable no-descending-specificity */
+
+/*
+ * article template (newsroom dossiers): page layout + default content.
+ * Values from servier.com .single-wrapper (WP constrained groups):
+ * column = 100% with 24px gutters (< 768), 680px incl. 24px gutters (768),
+ * 860px (1024), 940px (1280); groups sit 44px apart; WP spacers are
+ * 50px / 30px / 100px above 768px and a flat 32px at or below it.
+ */
+body.servier.article {
+  --red-500: #d44233;
+  --red-100: #fee7e3;
+  --indigo-50: #ebebf9;
+  --indigo-900: #24226a;
+  --article-width: 100%;
+  --article-gutter: 24px;
+  --article-gap: 44px;
+  --article-box-padding: 44px;
+  --article-spacer: 32px;
+  --article-spacer-s: 32px;
+  --article-spacer-l: 32px;
+  --article-refs-line-height: 18px;
+  --article-back-gap: 16px;
+}
+
+@media (width >= 768px) {
+  body.servier.article {
+    --article-width: 680px;
+    --article-refs-line-height: 20px;
+    --article-back-gap: 40px;
+  }
+}
+
+@media (width > 768px) {
+  body.servier.article {
+    --article-spacer: 50px;
+    --article-spacer-s: 30px;
+    --article-spacer-l: 100px;
+  }
+}
+
+@media (width >= 1024px) {
+  body.servier.article {
+    --article-width: 860px;
+    --article-gutter: 0;
+  }
+}
+
+@media (width >= 1280px) {
+  body.servier.article {
+    --article-width: 940px;
+  }
+}
+
+/* default content typography */
+.servier.article main .default-content-wrapper > p,
+.servier.article main .default-content-wrapper > ul,
+.servier.article main .default-content-wrapper > ol {
+  margin: 0 0 16px;
+}
+
+.servier.article main .default-content-wrapper > ul,
+.servier.article main .default-content-wrapper > ol {
+  padding-left: 24px;
+}
+
+.servier.article main .default-content-wrapper strong,
+.servier.article main .default-content-wrapper b {
+  font-weight: 700;
+}
+
+.servier.article main .default-content-wrapper sup {
+  position: relative;
+  top: -6px;
+  font-size: 12px;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+.servier.article main .default-content-wrapper > h2 {
+  margin: 0 0 16px;
+  color: var(--red-500);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 30px;
+}
+
+/* centred figure (linked image) + caption link */
+.servier.article main .default-content-wrapper > p:has(> picture, > a > picture) {
+  margin-bottom: 0;
+}
+
+.servier.article main .default-content-wrapper > p > picture,
+.servier.article main .default-content-wrapper > p > a:has(> picture) {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.servier.article main .default-content-wrapper > p > a > picture {
+  display: block;
+}
+
+.servier.article main .default-content-wrapper > p picture img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* sections: 44px apart (the banner keeps its own spacing) */
+.servier.article main > .section:not(.hero-page-banner-container) {
+  margin: 0 0 var(--article-gap);
+}
+
+/* header: date → intro is a 50px spacer */
+.servier.article main > .section.article-header-container {
+  margin-bottom: var(--article-spacer);
+}
+
+/* 50px spacer closes the group preceding the cover */
+.servier.article main > .section:has(+ .hero-cover-container) {
+  margin-bottom: calc(var(--article-spacer) + var(--article-gap));
+}
+
+/* tinted boxes: same outer width as the column, 44px side padding, spacers top/bottom */
+.servier.article main > .section:is(.soft, .accent, .dark) {
+  box-sizing: border-box;
+  max-width: var(--article-width);
+  margin: 0 auto var(--article-gap);
+  border-radius: 6px;
+  padding: var(--article-spacer) var(--article-box-padding);
+}
+
+.servier.article main > .section.soft {
+  background-color: var(--indigo-50);
+}
+
+.servier.article main > .section.accent {
+  background-color: var(--red-100);
+}
+
+/* dark: 30px spacer, centred title, 30px spacer, figures (28px gap), 30px spacer */
+.servier.article main > .section.dark {
+  padding-top: var(--article-spacer-s);
+  padding-bottom: calc(28px + var(--article-spacer-s));
+  background-color: var(--indigo-900);
+  color: #fff;
+}
+
+/* references: 50px spacer, 2px separator, 20px + 100px spacer, 12px notes */
+.servier.article main > .section.references {
+  margin-bottom: 24px;
+  padding-top: var(--article-spacer);
+}
+
+/* source footer sits 128px below the article / the listing pagination */
+.servier.article main > .section:last-of-type,
+.servier.listing main > .section:last-of-type {
+  margin-bottom: 128px;
+}
+
+/* article column (banner and full-bleed cover keep their own widths) */
+.servier.article main > .section:not(.hero-page-banner-container, .hero-cover-container) > div {
+  box-sizing: border-box;
+  width: auto;
+  max-width: var(--article-width);
+  margin: 0 auto;
+  padding: 0 var(--article-gutter);
+}
+
+.servier.article main > .section:is(.soft, .accent, .dark) > div {
+  max-width: none;
+  padding: 0;
+}
+
+/* back link: 15px red label with a 16x15 left arrow, 16px (40px from 768) above the title */
+.servier.article main > .article-header-container > .default-content-wrapper > p {
+  margin: 0 0 var(--article-back-gap);
+  font-size: 15px;
+  line-height: 22.5px;
+}
+
+.servier.article main .default-content-wrapper sup a:any-link {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.servier.article main > .article-header-container > .default-content-wrapper > p > a::before {
+  content: '';
+  flex: 0 0 16px;
+  width: 16px;
+  height: 15px;
+  margin-right: 8px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 17'%3E%3Cpath d='M8.375 1 1 8.83l7.375 7.829M1 8.83h16.797' stroke='%23000' fill='none'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+
+.servier.article main .default-content-wrapper > p:has(> picture, > a > picture) + p:has(> a:only-child) {
+  max-width: 683px;
+  margin: 14px auto calc(14px + var(--article-spacer-s));
+  padding-bottom: 20px;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 17.5px;
+  text-align: center;
+}
+
+.servier.article main > .section.references > .default-content-wrapper::before {
+  content: '';
+  display: block;
+  height: 2px;
+  margin-bottom: calc(20px + var(--article-spacer-l));
+  background-color: var(--indigo-50);
+}
+
+.servier.article main > .section.dark a:any-link {
+  color: inherit;
+}
+
+/* titles inside the tinted boxes: 22px, box text colour */
+.servier.article main > .section:is(.soft, .accent, .dark) .default-content-wrapper > h2 {
+  color: inherit;
+  font-size: 22px;
+  line-height: 27.5px;
+}
+
+.servier.article main > .section.dark .default-content-wrapper > h2 {
+  margin-bottom: calc(16px + var(--article-spacer-s));
+  text-align: center;
+}
+
+.servier.article main > .section.references .default-content-wrapper > p {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-style: italic;
+  line-height: var(--article-refs-line-height);
+}
+
+.servier.article main > .article-header-container > .default-content-wrapper > p > a:any-link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--red-500);
+}
+
+/* plain group following the dark box opens with a 30px spacer */
+.servier.article main > .section.dark + .section:not(.soft, .accent, .dark) {
+  padding-top: var(--article-spacer-s);
+}
+
+.servier.article main > .section.references .default-content-wrapper a:any-link {
+  text-decoration: underline;
+}
+
+/* intro: first paragraph after the header, bold red */
+.servier.article main > .article-header-container + .section > .default-content-wrapper:first-child > p:first-child {
+  color: var(--red-500);
+}
+
+/* stylelint-enable no-descending-specificity */

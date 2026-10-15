@@ -1,0 +1,111 @@
+{
+  "definitions": [
+    {
+      "title": "Servier Table",
+      "id": "table-striped",
+      "plugins": { "xwalk": { "page": {
+        "resourceType": "core/franklin/components/block/v1/block",
+        "template": { "name": "Table", "model": "table-striped", "filter": "table-striped-2-columns" }
+      } } }
+    },
+    {
+      "title": "Servier Table Row",
+      "id": "table-striped-row",
+      "plugins": { "xwalk": { "page": {
+        "resourceType": "core/franklin/components/block/v1/block/item",
+        "template": { "name": "Row", "model": "table-striped-row", "column1text": "Column 1" }
+      } } }
+    },
+    {
+      "title": "Servier Table Row (2 columns)",
+      "id": "table-striped-col-2",
+      "plugins": { "xwalk": { "page": {
+        "resourceType": "core/franklin/components/block/v1/block/item",
+        "template": { "name": "Row", "model": "table-striped-col-2", "column1text": "Column 1", "column2text": "Column 2" }
+      } } }
+    },
+    {
+      "title": "Servier Table Row (3 columns)",
+      "id": "table-striped-col-3",
+      "plugins": { "xwalk": { "page": {
+        "resourceType": "core/franklin/components/block/v1/block/item",
+        "template": { "name": "Row", "model": "table-striped-col-3", "column1text": "Column 1", "column2text": "Column 2", "column3text": "Column 3" }
+      } } }
+    },
+    {
+      "title": "Servier Table Row (4 columns)",
+      "id": "table-striped-col-4",
+      "plugins": { "xwalk": { "page": {
+        "resourceType": "core/franklin/components/block/v1/block/item",
+        "template": { "name": "Row", "model": "table-striped-col-4", "column1text": "Column 1", "column2text": "Column 2", "column3text": "Column 3", "column4text": "Column 4" }
+      } } }
+    }
+  ],
+  "models": [
+    {
+      "id": "table-striped",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "value": "",
+          "label": "Options",
+          "valueType": "string",
+          "options": [
+            { "name": "No header row", "value": "no-header" },
+            { "name": "Bordered", "value": "bordered" }
+          ]
+        },
+        {
+          "component": "select",
+          "name": "filter",
+          "label": "Columns",
+          "valueType": "string",
+          "value": "table-striped-2-columns",
+          "options": [
+            { "name": "1 Column", "value": "table-striped" },
+            { "name": "2 Columns", "value": "table-striped-2-columns" },
+            { "name": "3 Columns", "value": "table-striped-3-columns" },
+            { "name": "4 Columns", "value": "table-striped-4-columns" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "table-striped-row",
+      "fields": [
+        { "component": "richtext", "valueType": "string", "name": "column1text", "label": "Column 1" }
+      ]
+    },
+    {
+      "id": "table-striped-col-2",
+      "fields": [
+        { "component": "richtext", "valueType": "string", "name": "column1text", "label": "Column 1" },
+        { "component": "richtext", "valueType": "string", "name": "column2text", "label": "Column 2" }
+      ]
+    },
+    {
+      "id": "table-striped-col-3",
+      "fields": [
+        { "component": "richtext", "valueType": "string", "name": "column1text", "label": "Column 1" },
+        { "component": "richtext", "valueType": "string", "name": "column2text", "label": "Column 2" },
+        { "component": "richtext", "valueType": "string", "name": "column3text", "label": "Column 3" }
+      ]
+    },
+    {
+      "id": "table-striped-col-4",
+      "fields": [
+        { "component": "richtext", "valueType": "string", "name": "column1text", "label": "Column 1" },
+        { "component": "richtext", "valueType": "string", "name": "column2text", "label": "Column 2" },
+        { "component": "richtext", "valueType": "string", "name": "column3text", "label": "Column 3" },
+        { "component": "richtext", "valueType": "string", "name": "column4text", "label": "Column 4" }
+      ]
+    }
+  ],
+  "filters": [
+    { "id": "table-striped", "components": ["table-striped-row"] },
+    { "id": "table-striped-2-columns", "components": ["table-striped-col-2"] },
+    { "id": "table-striped-3-columns", "components": ["table-striped-col-3"] },
+    { "id": "table-striped-4-columns", "components": ["table-striped-col-4"] }
+  ]
+}

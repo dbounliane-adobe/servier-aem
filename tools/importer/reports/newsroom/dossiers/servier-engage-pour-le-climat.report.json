@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/servier-engage-pour-le-climat/",
+  "path": "newsroom/dossiers/servier-engage-pour-le-climat",
+  "timestamp": "2026-10-15T16:09:29.049Z",
+  "title": "Servier, engagé pour le climat",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

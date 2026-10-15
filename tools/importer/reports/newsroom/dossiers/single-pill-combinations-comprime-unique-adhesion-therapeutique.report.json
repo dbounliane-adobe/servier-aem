@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/single-pill-combinations-comprime-unique-adhesion-therapeutique/",
+  "path": "newsroom/dossiers/single-pill-combinations-comprime-unique-adhesion-therapeutique",
+  "timestamp": "2026-10-15T16:06:46.344Z",
+  "title": "Les Single Pill Combinations pour favoriser l’adhésion thérapeutique",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

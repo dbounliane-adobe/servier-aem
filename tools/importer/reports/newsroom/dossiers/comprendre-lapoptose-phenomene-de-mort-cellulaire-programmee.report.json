@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/comprendre-lapoptose-phenomene-de-mort-cellulaire-programmee/",
+  "path": "newsroom/dossiers/comprendre-lapoptose-phenomene-de-mort-cellulaire-programmee",
+  "timestamp": "2026-10-15T16:10:22.047Z",
+  "title": "Comprendre l'apoptose : phénomène de mort cellulaire programmée",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

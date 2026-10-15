@@ -1,0 +1,22 @@
+{
+  "definitions": [
+    {
+      "title": "Servier Did You Know",
+      "id": "callout-did-you-know",
+      "plugins": { "xwalk": { "page": {
+        "resourceType": "core/franklin/components/block/v1/block",
+        "template": { "name": "Did You Know", "model": "callout-did-you-know", "title": "Le saviez-vous ?" }
+      } } }
+    }
+  ],
+  "models": [
+    {
+      "id": "callout-did-you-know",
+      "fields": [
+        { "component": "text", "valueType": "string", "name": "title", "label": "Label (e.g. Le saviez-vous ?)", "value": "" },
+        { "component": "richtext", "valueType": "string", "name": "text", "label": "Text", "value": "" }
+      ]
+    }
+  ],
+  "filters": []
+}

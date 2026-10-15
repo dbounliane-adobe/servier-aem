@@ -1,0 +1,38 @@
+{
+  "variantName": "table-striped",
+  "baseBlock": "table",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "imagePattern": "none",
+    "purpose": "data-table",
+    "structure": "header row (centred bold labels, ruled underneath) followed by body rows with alternating light-grey stripes; 2 equal columns on the source",
+    "isFullWidth": false,
+    "hasGrid": false,
+    "sourceNotes": {
+      "variantReason": "No local table block; based on the Block Collection xwalk Table, striping built in."
+    }
+  },
+  "contentPattern": {
+    "structure": "container with repeating row items (1-4 rich-text cells each); first row is the header row unless the no-header option is set. Source: header ['Activité évaluée par le NSAA', 'Ce que cela signifie au quotidien'] + 4 rows x 2 cells",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/newsroom/dossiers/dystrophie-musculaire-becker-maladie-evolutions-multiples/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-15T15:10:00.000Z"
+  },
+  "options": [
+    { "class": "no-header", "label": "No header row" },
+    { "class": "bordered", "label": "Bordered" }
+  ],
+  "memberVariantIds": []
+}

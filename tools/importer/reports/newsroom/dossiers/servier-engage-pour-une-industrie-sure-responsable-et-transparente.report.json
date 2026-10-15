@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/servier-engage-pour-une-industrie-sure-responsable-et-transparente/",
+  "path": "newsroom/dossiers/servier-engage-pour-une-industrie-sure-responsable-et-transparente",
+  "timestamp": "2026-10-15T16:09:51.880Z",
+  "title": "Servier engagé pour une industrie sûre, responsable et transparente",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

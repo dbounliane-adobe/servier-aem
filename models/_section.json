@@ -41,6 +41,18 @@
             {
               "name": "Highlight",
               "value": "highlight"
+            },
+            {
+              "name": "Accent (pale red box)",
+              "value": "accent"
+            },
+            {
+              "name": "Dark (indigo box)",
+              "value": "dark"
+            },
+            {
+              "name": "References (footnotes)",
+              "value": "references"
             }
           ]
         }
@@ -69,7 +81,13 @@
         "scientific-teaser",
         "embed-social",
         "carousel-stories",
-        "hero-cta"
+        "hero-cta",
+        "hero-page-banner",
+        "callout-did-you-know",
+        "table-striped",
+        "hero-cover",
+        "share-social",
+        "article-list"
       ]
     }
   ]

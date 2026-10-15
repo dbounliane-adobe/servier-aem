@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/lhypertension-arterielle-un-fleau-silencieux/",
+  "path": "newsroom/dossiers/lhypertension-arterielle-un-fleau-silencieux",
+  "timestamp": "2026-10-15T16:06:34.398Z",
+  "title": "Comprendre l’hypertension artérielle",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

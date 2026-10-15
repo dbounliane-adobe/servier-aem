@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/lespoir-des-car-t-medicaments-vivants-contre-le-cancer/",
+  "path": "newsroom/dossiers/lespoir-des-car-t-medicaments-vivants-contre-le-cancer",
+  "timestamp": "2026-10-15T16:10:10.783Z",
+  "title": "L’espoir des CAR-T, médicaments vivants contre le cancer",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

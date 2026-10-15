@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/gliome-tumeur-cerebrale-rare/",
+  "path": "newsroom/dossiers/gliome-tumeur-cerebrale-rare",
+  "timestamp": "2026-10-15T16:07:29.749Z",
+  "title": "Le gliome, une tumeur cérébrale rare et agressive",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

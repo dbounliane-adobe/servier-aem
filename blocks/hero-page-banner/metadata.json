@@ -1,0 +1,42 @@
+{
+  "variantName": "hero-page-banner",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "imagePattern": "inline-banner",
+    "purpose": "page-banner",
+    "structure": "contained banner photo; white title card overlapping its bottom-right two-thirds; breadcrumbs in the left third below the photo (stacked image, card, breadcrumbs on mobile)",
+    "position": "top",
+    "isFullWidth": false,
+    "hasGrid": true,
+    "sourceNotes": {
+      "variantReason": "campaign-hero 0.15, hero-cta 0.15 (light inline-photo banner with overlapping title card vs dark full-bleed heroes). New variant.",
+      "reuse": "Identical on every newsroom dossier and on the /newsroom/dossiers/ listing page; breadcrumbs are derived from the URL so the same authored content works on all of them."
+    }
+  },
+  "contentPattern": {
+    "structure": "row 1 banner image (+alt); row 2 rich text with the card heading (e.g. h2 'Retrouvez nos <strong>décryptages</strong>'); optional list of links in row 2 overrides the automatic breadcrumbs (Accueil > parent > current page title)",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/newsroom/dossiers/dystrophie-musculaire-becker-maladie-evolutions-multiples/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      },
+      {
+        "url": "https://servier.com/newsroom/dossiers/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-15T15:50:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/oril-industrie-le-centre-dexcellence-chimie-de-servier-depuis-60-ans/",
+  "path": "newsroom/dossiers/oril-industrie-le-centre-dexcellence-chimie-de-servier-depuis-60-ans",
+  "timestamp": "2026-10-15T16:09:57.529Z",
+  "title": "Oril Industrie, le centre d’excellence chimie de Servier depuis 60 ans !",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

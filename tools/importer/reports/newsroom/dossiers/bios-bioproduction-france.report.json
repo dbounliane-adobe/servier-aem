@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/bios-bioproduction-france/",
+  "path": "newsroom/dossiers/bios-bioproduction-france",
+  "timestamp": "2026-10-15T16:07:52.250Z",
+  "title": "Plus de progrès thérapeutique avec Bio-S, unité de bioproduction",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

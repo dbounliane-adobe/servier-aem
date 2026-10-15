@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/parkinson-2e-maladie-neuro-degenerative-la-plus-frequente-apres-alzheimer/",
+  "path": "newsroom/dossiers/parkinson-2e-maladie-neuro-degenerative-la-plus-frequente-apres-alzheimer",
+  "timestamp": "2026-10-15T16:08:23.673Z",
+  "title": "Mieux connaître la maladie de Parkinson",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

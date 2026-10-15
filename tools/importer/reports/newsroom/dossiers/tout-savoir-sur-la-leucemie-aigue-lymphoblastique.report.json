@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/tout-savoir-sur-la-leucemie-aigue-lymphoblastique/",
+  "path": "newsroom/dossiers/tout-savoir-sur-la-leucemie-aigue-lymphoblastique",
+  "timestamp": "2026-10-15T16:07:39.086Z",
+  "title": "Tout savoir sur la leucémie lymphoblastique aiguë",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

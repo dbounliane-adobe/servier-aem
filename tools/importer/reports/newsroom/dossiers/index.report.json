@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/",
+  "path": "newsroom/dossiers/index",
+  "timestamp": "2026-10-15T16:03:19.204Z",
+  "title": "Découvrez nos dossiers pour décrypter la pharma",
+  "template": "dossiers-listing",
+  "blocks": [
+    "hero-page-banner",
+    "article-list"
+  ]
+}

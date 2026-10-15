@@ -1,0 +1,33 @@
+{
+  "variantName": "article-list",
+  "baseBlock": "cards",
+  "canonicalModel": "configuration",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "dense",
+    "imagePattern": "multiple",
+    "purpose": "newsroom-dossiers-listing",
+    "structure": "filter bar (sub-category, year, month, tags, submit) with right-aligned subscribe link, 3-column grid of article cards (image + category label, date, title, tag, '+' link) and numbered pagination, all rendered from the query index",
+    "position": "middle",
+    "isFullWidth": false,
+    "hasGrid": true
+  },
+  "contentPattern": {
+    "structure": "key-value configuration: source index, path prefix, page size, enabled filters, filter UI labels, read-more label, empty/no-results/error messages, optional subscribe link + label",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/newsroom/dossiers/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-15T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}
