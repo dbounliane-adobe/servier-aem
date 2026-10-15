@@ -1,0 +1,9 @@
+{
+  "mappings": [
+    "/content/servier-aem/:/"
+  ],
+  "includes": [
+    "/content/servier-aem/",
+    "/content/dam/servier-aem/"
+  ]
+}
