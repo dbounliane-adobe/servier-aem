@@ -26,6 +26,24 @@ export async function loadArticles(source) {
   return records;
 }
 
+/**
+ * Optional sub-category tags: a JSON array string (index default) or a comma-separated list.
+ * @param {*} value raw index value
+ * @returns {string[]}
+ */
+function parseTags(value) {
+  if (Array.isArray(value)) return value.map(String).filter(Boolean);
+  const text = String(value || '').trim();
+  if (!text) return [];
+  if (text.startsWith('[')) {
+    try {
+      const parsed = JSON.parse(text);
+      if (Array.isArray(parsed)) return parsed.map(String).filter(Boolean);
+    } catch { /* fall through to comma list */ }
+  }
+  return text.split(',').map((tag) => tag.trim()).filter(Boolean);
+}
+
 function createCard(record) {
   const item = document.createElement('li');
   const article = document.createElement('article');
@@ -36,20 +54,29 @@ function createCard(record) {
   }
   const content = document.createElement('div');
   content.className = 'article-feed-content';
-  const category = document.createElement('p');
-  category.className = 'article-feed-category';
-  category.textContent = record.category || '';
+  if (record.category) {
+    const category = document.createElement('p');
+    category.className = 'article-feed-category';
+    category.textContent = record.category;
+    content.append(category);
+  }
+  const tags = parseTags(record.tags);
+  if (tags.length) {
+    const list = document.createElement('p');
+    list.className = 'article-feed-tags';
+    tags.forEach((tag) => {
+      const label = document.createElement('span');
+      label.textContent = tag;
+      list.append(label);
+    });
+    content.append(list);
+  }
   const heading = document.createElement('h3');
   const link = document.createElement('a');
   link.href = record.path;
   link.textContent = record.title;
   heading.append(link);
-  content.append(category, heading);
-  if (record.description) {
-    const summary = document.createElement('p');
-    summary.textContent = record.description;
-    content.append(summary);
-  }
+  content.append(heading);
   if (record.date) content.append(createDate(record.date));
   article.append(content);
   item.append(article);
@@ -88,7 +115,8 @@ export default async function decorate(block) {
         button.setAttribute('aria-pressed', String(button.dataset.category === category));
       });
     };
-    const categories = ['', ...new Set(articles.map((record) => record.category).filter(Boolean))];
+    const categories = ['', ...[...new Set(articles.map((record) => record.category).filter(Boolean))]
+      .sort((a, b) => a.localeCompare(b, document.documentElement.lang || 'fr'))];
     categories.forEach((category) => {
       const button = document.createElement('button');
       button.type = 'button';

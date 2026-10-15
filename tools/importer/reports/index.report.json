@@ -1,0 +1,20 @@
+{
+  "status": "success",
+  "url": "https://servier.com/",
+  "path": "index",
+  "timestamp": "2026-10-15T10:05:27.121Z",
+  "title": "Servier - Laboratoire pharmaceutique international indépendant",
+  "template": "home",
+  "blocks": [
+    "campaign-hero",
+    "editorial-feature",
+    "section-intro",
+    "section-intro",
+    "section-intro",
+    "article-feed",
+    "embed-social",
+    "topic-cards",
+    "carousel-stories",
+    "hero-cta"
+  ]
+}

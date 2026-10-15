@@ -1,41 +1,165 @@
+/*
+ * Editorial feature — image + bordered panel (servier.com "featured-content").
+ * Values extracted from the source computed styles; breakpoints follow the
+ * source (1024 / 1280) like styles/servier.css.
+ */
 .editorial-feature {
-  display: grid;
-  gap: 32px;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+  color: var(--text-color);
+}
+
+/* media */
+.editorial-feature .editorial-feature-media p,
+.editorial-feature .editorial-feature-media picture {
+  display: block;
+  margin: 0;
 }
 
 .editorial-feature .editorial-feature-media img {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: auto;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
+/* panel: the whole panel is clickable through the CTA (stretched link) */
 .editorial-feature .editorial-feature-content {
-  padding: 8px;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid var(--brand-border);
+  border-radius: 4px;
+  padding: 28px;
+  transition:
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.editorial-feature .editorial-feature-content p:first-child {
-  color: var(--link-hover-color);
-  font-weight: 700;
+/* indigo bar on the left edge, 75% of the panel height, vertically centered */
+.editorial-feature .editorial-feature-content::after {
+  content: '';
+  position: absolute;
+  top: 12.5%;
+  left: 0;
+  width: 5px;
+  height: 75%;
+  border-radius: 0 4px 4px 0;
+  background-color: var(--text-color);
 }
 
-.editorial-feature h2 {
-  margin: 16px 0;
+.editorial-feature .editorial-feature-content:hover {
+  background-color: rgb(235 235 249);
 }
 
-.editorial-feature a.button {
-  margin-top: 24px;
+.editorial-feature .editorial-feature-content:has(a:focus-visible) {
+  box-shadow: 0 0 0 2px var(--text-color);
 }
 
-@media (width >= 900px) {
+.editorial-feature .editorial-feature-content p {
+  margin: 0;
+}
+
+/* category label (eyebrow): white on red pill */
+.editorial-feature .editorial-feature-content > div > p:first-child:not(:has(a)) {
+  width: fit-content;
+  margin: 0 8px 24px 0;
+  border-radius: 4px;
+  padding: 4px 8px;
+  background-color: #ca2f15;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 21px;
+}
+
+.editorial-feature .editorial-feature-content h2 {
+  margin: 0 0 16px;
+  color: var(--text-color);
+}
+
+/* CTA: uppercase underlined link with arrow (not the global pill button) */
+.editorial-feature .editorial-feature-content a.button:any-link {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  border: 0;
+  border-bottom: 1px solid currentcolor;
+  border-radius: 0;
+  padding: 0 0 2px;
+  background-color: transparent;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 27px;
+  text-transform: uppercase;
+  white-space: normal;
+  overflow: visible;
+}
+
+.editorial-feature .editorial-feature-content a.button:hover,
+.editorial-feature .editorial-feature-content a.button:focus-visible {
+  border-color: currentcolor;
+  background-color: transparent;
+  color: var(--text-color);
+  box-shadow: none;
+}
+
+/* stretched link: covers the whole panel */
+.editorial-feature .editorial-feature-content a.button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.editorial-feature .editorial-feature-content a.button::after {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.editorial-feature .editorial-feature-content:hover a.button::after {
+  transform: rotate(90deg) translateY(-4px);
+}
+
+@media (width >= 1024px) {
   .editorial-feature {
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
+    flex-direction: row;
+  }
+
+  .editorial-feature .editorial-feature-media {
+    width: 60%;
+  }
+
+  .editorial-feature .editorial-feature-media > div,
+  .editorial-feature .editorial-feature-media p,
+  .editorial-feature .editorial-feature-media picture,
+  .editorial-feature .editorial-feature-media img {
+    height: 100%;
+  }
+
+  .editorial-feature .editorial-feature-content {
+    width: 40%;
+    padding: 40px;
   }
 
   .editorial-feature.reverse .editorial-feature-media {
     order: 1;
+  }
+}
+
+@media (width >= 1280px) {
+  .editorial-feature .editorial-feature-content {
+    padding: 40px 64px;
   }
 }

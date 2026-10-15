@@ -1,22 +1,26 @@
+/* campaign-hero: full-screen background video, indigo veil, H1 + intro bottom-left */
 .campaign-hero {
   position: relative;
   isolation: isolate;
   display: flex;
-  align-items: end;
-  min-height: 640px;
-  min-height: min(800px, 85svh);
+  align-items: flex-end;
+  min-height: 100vh;
   box-sizing: border-box;
-  padding: 80px 24px;
-  background: var(--text-color);
-  color: white;
+  overflow: hidden;
+
+  /* solid fallback keeps white text legible until the video plays (or if it fails) */
+  background-color: var(--text-color);
+  color: #fff;
 }
 
+/* source overlay: absolute inset-0, rgb(36 34 106 / 35%) over the video */
 .campaign-hero::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, rgb(22 22 63 / 80%), rgb(22 22 63 / 20%));
+  background-color: rgb(36 34 106 / 35%);
+  pointer-events: none;
 }
 
 .campaign-hero .campaign-hero-media,
@@ -24,61 +28,104 @@
   position: absolute;
   z-index: -2;
   inset: 0;
+  overflow: hidden;
+}
+
+.campaign-hero .campaign-hero-media > div,
+.campaign-hero .campaign-hero-media p,
+.campaign-hero .campaign-hero-media picture,
+.campaign-hero .campaign-hero-video > div {
+  display: block;
+  height: 100%;
+  margin: 0;
 }
 
 .campaign-hero .campaign-hero-media img,
 .campaign-hero .campaign-hero-video video {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 50%;
 }
 
-.campaign-hero .campaign-hero-video > div {
-  height: 100%;
-}
-
-.campaign-hero .campaign-hero-media > div,
-.campaign-hero .campaign-hero-media picture {
-  display: block;
-  height: 100%;
-}
-
+/* source: absolute left-0 bottom-24 px-6 max-w-[400px] */
 .campaign-hero .campaign-hero-content {
+  position: relative;
+  box-sizing: border-box;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 400px;
+  margin: 0 0 96px;
+  padding: 0 24px;
+  color: #fff;
+  font-size: var(--body-font-size-m);
+  line-height: 28px;
 }
 
-.campaign-hero .campaign-hero-content > div {
-  max-width: 760px;
+.campaign-hero .campaign-hero-content h1 {
+  margin: 0 0 16px;
+  color: #fff;
+  font-size: var(--heading-font-size-xxl);
+  font-weight: 600;
+  line-height: 1.111;
 }
 
-.campaign-hero h1 {
-  margin: 0 0 24px;
-  font-size: clamp(40px, 5.5vw, 80px);
+.campaign-hero .campaign-hero-content p {
+  margin: 1.25em 0;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.75;
 }
 
-.campaign-hero a.button:any-link {
+.campaign-hero .campaign-hero-content a.button:any-link {
   margin-top: 24px;
-  color: var(--text-color);
-  background: white;
-  border-color: white;
+  border-color: #fff;
 }
 
+/* WCAG 2.2.2 pause control (not present on source): kept discreet, bottom-right */
 .campaign-hero .campaign-hero-toggle {
   position: absolute;
   right: 24px;
-  bottom: 16px;
-  padding: 8px 16px;
-  border: 1px solid white;
-  border-radius: 24px;
-  color: white;
-  background: var(--text-color);
+  bottom: 24px;
+  padding: 4px 14px;
+  border: 1px solid rgb(255 255 255 / 60%);
+  border-radius: 50px;
+  background: rgb(36 34 106 / 35%);
+  color: #fff;
+  font-family: inherit;
+  font-size: var(--body-font-size-xs);
+  font-weight: 400;
+  line-height: 20px;
   cursor: pointer;
 }
 
-@media (width >= 900px) {
-  .campaign-hero {
-    padding: 100px 48px;
+.campaign-hero .campaign-hero-toggle:hover {
+  background: var(--text-color);
+}
+
+.campaign-hero .campaign-hero-toggle:disabled {
+  display: none;
+}
+
+@media (width >= 1024px) {
+  .campaign-hero .campaign-hero-content {
+    max-width: 800px;
+  }
+
+  .campaign-hero .campaign-hero-content p {
+    font-size: 20px;
+  }
+}
+
+@media (width >= 1280px) {
+  .campaign-hero .campaign-hero-content {
+    padding: 0 48px;
+  }
+}
+
+@media (width >= 1536px) {
+  .campaign-hero .campaign-hero-content {
+    padding: 0 80px;
   }
 }

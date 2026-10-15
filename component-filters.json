@@ -23,13 +23,22 @@
       "key-figures",
       "article-feed",
       "article-header",
-      "scientific-teaser"
+      "scientific-teaser",
+      "embed-social",
+      "carousel-stories",
+      "hero-cta"
     ]
   },
   {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "carousel-stories",
+    "components": [
+      "carousel-stories-item"
     ]
   },
   {

@@ -1,74 +1,221 @@
+/*
+ * Servier theme — loaded only on pages with `theme = servier` metadata.
+ * Values extracted from https://servier.com/ (theme servier-2022).
+ * Breakpoints follow the source site (640 / 768 / 1024 / 1280) so container
+ * widths match it pixel for pixel.
+ */
+
+@font-face {
+  font-family: poppins;
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../fonts/poppins-300.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: poppins;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/poppins-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/poppins-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/poppins-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: poppins-fallback;
+  size-adjust: 112.5%;
+  src: local('Arial');
+}
+
 body.servier {
-  --text-color: #232267;
-  --link-color: #232267;
-  --link-hover-color: #c83b2b;
-  --light-color: #f4f3f8;
-  --brand-accent: #e64b38;
+  /* colors */
+  --text-color: #24226a;
+  --link-color: #24226a;
+  --link-hover-color: #d44233;
+  --light-color: #fee7e3;
+  --dark-color: #24226a;
+  --brand-accent: #d44233;
+  --brand-blush: #fee7e3;
+  --brand-border: rgb(36 34 106 / 20%);
   --brand-muted: #aaa9c6;
+  --brand-focus: #6366f1;
+
+  /* fonts */
+  --body-font-family: poppins, poppins-fallback, sans-serif;
   --heading-font-family: var(--body-font-family);
-  --heading-font-size-xxl: clamp(40px, 5.5vw, 80px);
-  --heading-font-size-xl: clamp(32px, 4vw, 56px);
-  --body-font-size-m: 18px;
-  --nav-height: 80px;
+  --body-font-size-m: 16px;
+  --body-font-size-s: 14px;
+  --body-font-size-xs: 12px;
+  --heading-font-size-xxl: 42px;
+  --heading-font-size-xl: 26px;
+  --heading-font-size-l: 22px;
+  --heading-font-size-m: 20px;
+  --heading-font-size-s: 18px;
+  --heading-font-size-xs: 16px;
+
+  /* layout */
+  --content-width: 100%;
+  --content-gutter: 24px;
+  --section-gap: 100px;
+  --nav-height: 107px;
+
+  font-weight: 300;
+  line-height: 1.5;
 }
 
-.servier main > .section {
+@media (width >= 640px) {
+  body.servier {
+    --content-width: 600px;
+  }
+}
+
+@media (width >= 768px) {
+  body.servier {
+    --content-width: 680px;
+  }
+}
+
+@media (width >= 1024px) {
+  body.servier {
+    --content-width: 860px;
+    --heading-font-size-xxl: 75px;
+    --heading-font-size-xl: 30px;
+  }
+}
+
+@media (width >= 1280px) {
+  body.servier {
+    --content-width: 1130px;
+  }
+}
+
+/* typography */
+.servier h1,
+.servier h2,
+.servier h3,
+.servier h4,
+.servier h5,
+.servier h6 {
+  margin: 0 0 8px;
+  color: inherit;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.servier h1 {
+  font-weight: 600;
+  line-height: 1.111;
+}
+
+.servier h3 {
+  margin-bottom: 12px;
+}
+
+.servier p,
+.servier ul,
+.servier ol {
   margin: 0;
-  padding: 64px 0;
 }
 
-.servier main > .section.full-width {
-  padding: 0;
+.servier a:any-link {
+  color: var(--link-color);
+  text-decoration: none;
 }
 
-.servier main > .section.full-width > div {
-  max-width: none;
-  padding: 0;
-}
-
-.servier main > .section.soft {
-  background: var(--light-color);
-}
-
-.servier a.button:any-link {
-  white-space: normal;
-  text-align: center;
-  padding: 16px 28px;
-  gap: 24px;
-}
-
-.servier a.button::after {
-  content: '\2192';
+.servier a:hover {
+  color: var(--link-color);
+  text-decoration: none;
 }
 
 .servier a:focus-visible,
 .servier button:focus-visible {
-  outline: 3px solid var(--brand-accent);
-  outline-offset: 5px;
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 4px var(--brand-focus);
 }
 
-.servier header .nav-wrapper {
-  background: var(--text-color);
-  color: white;
+/* eyebrow (surtitle): coral 5x22 bar + 16px label */
+.servier .eyebrow,
+.servier main .embed-social-container .default-content-wrapper > p:first-child {
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
 }
 
-.servier header .nav-hamburger button {
-  background: transparent;
+.servier .eyebrow::before,
+.servier main .embed-social-container .default-content-wrapper > p:first-child::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 22px;
+  margin-right: 10px;
+  background-color: var(--brand-accent);
+  vertical-align: top;
 }
 
-.servier header .nav-sections .nav-drop > ul {
+/* buttons: white pill, 1px indigo border, arrow icon */
+.servier main .button-wrapper {
+  margin: 0;
+}
+
+.servier a.button:any-link,
+.servier button.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  border: 1px solid var(--text-color);
+  border-radius: 50px;
+  padding: 12px 28px;
+  background-color: #fff;
+  color: var(--text-color);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  white-space: normal;
+  text-align: left;
+  text-decoration: none;
+  transition: color 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.servier a.button::after {
+  content: '';
+  flex: 0 0 18px;
+  width: 18px;
+  height: 24px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3E%3Cpath stroke='%23000' stroke-linecap='round' d='M7.5 1v14.5m5-10L7.9.9c-.2-.2-.5-.2-.7 0L2.6 5.5'/%3E%3C/svg%3E") center / 18px auto no-repeat;
+  transform: rotate(90deg);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.servier a.button:hover::after {
+  transform: rotate(90deg) translateY(-4px);
+}
+
+.servier a.button:hover,
+.servier a.button:focus-visible {
+  border-color: var(--text-color);
+  background-color: #fff;
   color: var(--text-color);
 }
 
-.servier footer {
-  background: var(--text-color);
-  color: white;
-}
-
-.servier footer a:any-link {
-  color: white;
-}
-
+/* article template */
 .servier.article main > .section > .default-content-wrapper {
   max-width: 760px;
 }
@@ -80,8 +227,132 @@ body.servier {
   font-size: 24px;
 }
 
-@media (width >= 900px) {
-  .servier main > .section {
-    padding: 88px 0;
+/* sections */
+.servier main > .section {
+  margin: 0 0 var(--section-gap);
+  padding: 0;
+}
+
+.servier main > .section:last-of-type {
+  margin-bottom: 0;
+}
+
+.servier main > .section > div {
+  box-sizing: border-box;
+  width: auto;
+  max-width: none;
+  margin: 0 var(--content-gutter);
+  padding: 0;
+}
+
+@media (width >= 640px) {
+  .servier main > .section > div {
+    width: var(--content-width);
+    margin: 0 auto;
+  }
+}
+
+/* transparent header overlays a page-opening hero from first paint (no layout shift);
+   mirrors header.header-overlay set later by blocks/header/header.js */
+.servier header:has(~ main > div:first-child .campaign-hero) {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 50;
+}
+
+/* hero section sits under the transparent header, full bleed */
+.servier main > .section.campaign-hero-container {
+  margin-bottom: 64px;
+}
+
+.servier main > .section.campaign-hero-container > div,
+.servier main > .section.hero-cta-container > div {
+  width: auto;
+  margin: 0;
+}
+
+/* newsroom → social label are 30px apart on the source */
+.servier main > .section.article-feed-container {
+  margin-bottom: 30px;
+}
+
+.servier main > .section.article-feed-container > .default-content-wrapper {
+  margin-top: 32px;
+}
+
+.servier main > .section.embed-social-container > .default-content-wrapper {
+  margin-bottom: 20px;
+}
+
+/* highlight: full-bleed photo (first default-content image) + indigo gradient */
+.servier main > .section.highlight {
+  position: relative;
+  padding: 80px 0;
+  background-color: var(--text-color);
+  color: #fff;
+  overflow: hidden;
+}
+
+.servier main > .section.highlight > .default-content-wrapper:first-child {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  margin: 0;
+}
+
+.servier main > .section.highlight > .default-content-wrapper:first-child::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgb(36 34 106 / 35%) 34.3%, rgb(36 34 106 / 0%) 100%);
+  pointer-events: none;
+}
+
+.servier main > .section.highlight > .default-content-wrapper:first-child p,
+.servier main > .section.highlight > .default-content-wrapper:first-child picture {
+  display: block;
+  height: 100%;
+  margin: 0;
+}
+
+.servier main > .section.highlight > .default-content-wrapper:first-child img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* source uses px-5 (20px) only — no extra section gutter on mobile */
+.servier main > .section.highlight > div:not(.default-content-wrapper:first-child) {
+  position: relative;
+  z-index: 10;
+  margin: 0;
+  padding: 0 20px;
+}
+
+@media (width >= 640px) {
+  .servier main > .section.highlight > div:not(.default-content-wrapper:first-child) {
+    margin: 0 auto;
+  }
+}
+
+.servier main > .section.highlight a:any-link:not(.button) {
+  color: inherit;
+}
+
+@media (width >= 768px) {
+  .servier main > .section.campaign-hero-container {
+    margin-bottom: 96px;
+  }
+}
+
+@media (width >= 1024px) {
+  .servier main > .section.campaign-hero-container {
+    margin-bottom: 128px;
+  }
+
+  .servier main > .section.highlight > div:not(.default-content-wrapper:first-child) {
+    padding: 0;
   }
 }

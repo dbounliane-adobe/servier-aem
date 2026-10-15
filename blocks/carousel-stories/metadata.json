@@ -1,0 +1,41 @@
+{
+  "variantName": "carousel-stories",
+  "baseBlock": "carousel",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "moderate",
+    "imagePattern": "multiple",
+    "purpose": "carousel-patient-stories",
+    "structure": "per slide: h2 left + summary and link right; large image with next-slide thumbnails beside it; arrow nav top right, dot indicators below",
+    "position": "middle",
+    "isFullWidth": false,
+    "hasGrid": true,
+    "sourceNotes": {
+      "sectionStyle": "light",
+      "variantReason": "No local carousel; patient-story slider with text left/right split, large image + thumbnail strip, arrow nav.",
+      "structure": [
+        "media_image + media_imageAlt",
+        "content_text: h2, p, link 'Lire la suite'"
+      ]
+    }
+  },
+  "contentPattern": {
+    "structure": "image (+alt) cell, rich-text cell with h2, paragraph, Lire la suite link",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-15T09:27:31.756Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

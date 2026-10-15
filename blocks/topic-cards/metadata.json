@@ -1,0 +1,37 @@
+{
+  "variantName": "topic-cards",
+  "baseBlock": "topic-cards",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "mixed",
+    "density": "moderate",
+    "imagePattern": "noimg",
+    "purpose": "cards-topics",
+    "structure": "list of cards, each optional image + heading + description + link",
+    "position": "middle",
+    "isFullWidth": false,
+    "hasGrid": true,
+    "sourceNotes": {
+      "sectionStyle": "dark, background image with gradient overlay",
+      "variantReason": "Local thematic cards (heading, description, link, image optional); image-less white cards with colored left border is a styling extension of the same block."
+    }
+  },
+  "contentPattern": {
+    "structure": "optional image (+alt), heading, description, link (Découvrir)",
+    "buttonCount": 3,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-15T09:24:25.700Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

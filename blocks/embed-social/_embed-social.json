@@ -1,0 +1,22 @@
+{
+  "definitions": [
+    {
+      "title": "Servier Embed Social",
+      "id": "embed-social",
+      "plugins": { "xwalk": { "page": {
+        "resourceType": "core/franklin/components/block/v1/block",
+        "template": { "name": "Embed Social", "model": "embed-social" }
+      } } }
+    }
+  ],
+  "models": [
+    {
+      "id": "embed-social",
+      "fields": [
+        { "component": "text", "valueType": "string", "name": "source", "label": "Elfsight widget ID or social page URL", "description": "Elfsight app id (e.g. e4e1359f-219b-4daa-9fb3-42f3576a6f01) or an https URL; non-widget URLs render as a link" },
+        { "component": "text", "valueType": "string", "name": "title", "label": "Accessible title", "value": "" }
+      ]
+    }
+  ],
+  "filters": []
+}

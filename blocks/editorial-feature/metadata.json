@@ -1,0 +1,52 @@
+{
+  "variantName": "editorial-feature",
+  "baseBlock": "editorial-feature",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "moderate",
+    "imagePattern": "single",
+    "purpose": "editorial-highlight",
+    "structure": "image beside text panel with eyebrow + h2 + description + arrow link",
+    "position": "middle",
+    "isFullWidth": false,
+    "hasGrid": true,
+    "sourceNotes": {
+      "sectionStyle": "light",
+      "variantReason": "Local image/text highlight with eyebrow tag + heading + CTA; layout left image (default class).",
+      "structure": {
+        "image": "./images/05ac98b0c359be323ed0117496914001.png",
+        "imageAlt": "Rejoignez une aventure humaine.",
+        "content_eyebrow": "Page",
+        "content_heading": "Rejoignez une aventure humaine.",
+        "content_headingType": "h2",
+        "content_link": "https://servier.com/carrieres/",
+        "content_linkText": "En savoir plus",
+        "classes": ""
+      }
+    }
+  },
+  "contentPattern": {
+    "structure": "row 1 image (+alt); row 2 eyebrow, heading, description, link",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-15T09:24:25.700Z"
+  },
+  "options": [
+    {
+      "class": "reverse",
+      "label": "Image right"
+    }
+  ],
+  "memberVariantIds": []
+}

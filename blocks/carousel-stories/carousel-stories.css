@@ -1,0 +1,294 @@
+/*
+ * carousel-stories — values extracted from https://servier.com/ (.wp-block-slider-v2).
+ * Breakpoint 1024px matches the source (lg) and the Servier theme.
+ */
+.carousel-stories {
+  position: relative;
+  color: var(--text-color);
+}
+
+.carousel-stories .carousel-stories-stage {
+  position: relative;
+}
+
+/* prev / next arrows: below the text (above the images) on mobile, top right on desktop */
+.carousel-stories .carousel-stories-controls {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: calc(300px + 24px);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.carousel-stories .carousel-stories-controls button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  max-width: none;
+  margin: 0;
+  padding: 8px 20px;
+  border: 1px solid var(--text-color);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-color);
+  line-height: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.carousel-stories .carousel-stories-controls button:hover,
+.carousel-stories .carousel-stories-controls button:focus {
+  border-color: var(--text-color);
+  background: transparent;
+  color: var(--text-color);
+}
+
+.carousel-stories .carousel-stories-controls button[aria-disabled='true'] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.carousel-stories .carousel-stories-controls svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.carousel-stories .carousel-stories-prev svg {
+  transform: rotate(-90deg);
+}
+
+.carousel-stories .carousel-stories-next svg {
+  transform: rotate(90deg);
+}
+
+/* slides are stacked and cross-fade (source: slick fade, 500ms) */
+.carousel-stories .carousel-stories-slides {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.carousel-stories .carousel-stories-slide {
+  display: flex;
+  flex-direction: column;
+  grid-area: 1 / 1;
+  min-width: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 500ms, visibility 0s 500ms;
+}
+
+/* visible immediately when shown (so focus can move to it), hidden after the fade-out */
+.carousel-stories .carousel-stories-slide[aria-hidden='false'],
+.carousel-stories.carousel-stories-single .carousel-stories-slide {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 500ms, visibility 0s;
+}
+
+.carousel-stories .carousel-stories-slide:focus {
+  outline: none;
+}
+
+/* EDS wraps the authored picture in a <p> */
+.carousel-stories .carousel-stories-slide-image p {
+  display: block;
+  margin: 0;
+}
+
+/* text: heading then body (paragraph + "Lire la suite") */
+.carousel-stories .carousel-stories-slide-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-stories .carousel-stories-slide-heading h1,
+.carousel-stories .carousel-stories-slide-heading h2,
+.carousel-stories .carousel-stories-slide-heading h3,
+.carousel-stories .carousel-stories-slide-heading h4,
+.carousel-stories .carousel-stories-slide-heading h5,
+.carousel-stories .carousel-stories-slide-heading h6 {
+  margin: 0 0 28px;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 32.5px;
+}
+
+.carousel-stories .carousel-stories-slide-body p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.carousel-stories .carousel-stories-slide-body p + p {
+  margin-top: 16px;
+}
+
+/* "Lire la suite": uppercase underlined text link with arrow (EDS may decorate it as a.button) */
+main .carousel-stories .carousel-stories-slide-body a:any-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 0 2px;
+  border: 0;
+  border-bottom: 1px solid currentcolor;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 27px;
+  text-align: left;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: normal;
+}
+
+main .carousel-stories .carousel-stories-slide-body a:any-link:hover,
+main .carousel-stories .carousel-stories-slide-body a:any-link:focus-visible {
+  border-color: currentcolor;
+  background: transparent;
+  color: var(--text-color);
+}
+
+main .carousel-stories .carousel-stories-slide-body a::after {
+  content: '';
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3E%3Cpath stroke='%23000' stroke-linecap='round' d='M7.5 1v14.5m5-10L7.9.9c-.2-.2-.5-.2-.7 0L2.6 5.5'/%3E%3C/svg%3E") center / 18px 18px no-repeat;
+  transform: rotate(90deg);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+main .carousel-stories .carousel-stories-slide-body a:hover::after {
+  transform: translateX(4px) rotate(90deg);
+}
+
+/*
+ * images: all slides in their original order, the current one takes 50%,
+ * the others share the remaining 50%; 20px apart, 300px tall.
+ * Mobile: 24px text → arrows (36px) → 24px → images.
+ */
+.carousel-stories .carousel-stories-slide-media {
+  display: flex;
+  margin-top: auto;
+  padding-top: calc(24px + 36px + 24px);
+}
+
+.carousel-stories .carousel-stories-slide-media > * {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  width: calc(50% / (var(--carousel-stories-count, 3) - 1));
+  min-width: 0;
+  padding-right: 20px;
+}
+
+.carousel-stories .carousel-stories-slide-media > .carousel-stories-slide-image {
+  width: 50%;
+}
+
+.carousel-stories .carousel-stories-slide-media > :last-child {
+  padding-right: 0;
+}
+
+.carousel-stories.carousel-stories-single .carousel-stories-slide-media {
+  padding-top: 40px;
+}
+
+.carousel-stories.carousel-stories-single .carousel-stories-slide-media > .carousel-stories-slide-image {
+  width: 100%;
+}
+
+.carousel-stories .carousel-stories-slide-media picture {
+  display: block;
+  margin: 0;
+}
+
+.carousel-stories .carousel-stories-slide-media img {
+  display: block;
+  width: 100%;
+  height: 300px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.carousel-stories .carousel-stories-thumbnail {
+  display: block;
+  max-width: none;
+  height: auto;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  line-height: 0;
+  cursor: pointer;
+}
+
+.carousel-stories .carousel-stories-thumbnail:hover,
+.carousel-stories .carousel-stories-thumbnail:focus {
+  background: none;
+}
+
+.carousel-stories .carousel-stories-thumbnail:focus-visible {
+  box-shadow: none;
+}
+
+.carousel-stories .carousel-stories-thumbnail:focus-visible img {
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 4px var(--brand-focus);
+}
+
+@media (width >= 1024px) {
+  .carousel-stories .carousel-stories-controls {
+    position: static;
+    margin-bottom: 24px;
+  }
+
+  .carousel-stories .carousel-stories-controls button {
+    padding: 12px 28px;
+  }
+
+  .carousel-stories .carousel-stories-slide-content {
+    flex-direction: row;
+    gap: 56px;
+  }
+
+  .carousel-stories .carousel-stories-slide-heading {
+    flex: 0 1 40%;
+    min-width: 0;
+  }
+
+  .carousel-stories .carousel-stories-slide-body {
+    flex: 0 1 60%;
+    min-width: 0;
+  }
+
+  .carousel-stories .carousel-stories-slide-heading h1,
+  .carousel-stories .carousel-stories-slide-heading h2,
+  .carousel-stories .carousel-stories-slide-heading h3,
+  .carousel-stories .carousel-stories-slide-heading h4,
+  .carousel-stories .carousel-stories-slide-heading h5,
+  .carousel-stories .carousel-stories-slide-heading h6 {
+    font-size: 34px;
+    line-height: 42.5px;
+  }
+
+  /* 24px under the text + 16px above the images */
+  .carousel-stories .carousel-stories-slide-media {
+    padding-top: 40px;
+  }
+}

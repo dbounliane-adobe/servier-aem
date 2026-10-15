@@ -1,22 +1,112 @@
+/* Section intro: title, eyebrow (surtitle) and optional description.
+   Values extracted from servier.com (.wp-block-last-news-v2, banner prose, slider label). */
+
 .section-intro {
-  max-width: 900px;
-  margin-bottom: 40px;
+  margin-bottom: 0;
+  color: inherit;
 }
 
+/* source order is title, then eyebrow, then description */
+.section-intro .section-intro-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.section-intro .section-intro-content > * {
+  max-width: 100%;
+}
+
+.section-intro .section-intro-title {
+  order: -1;
+  max-width: 700px;
+  margin: 0 0 8px;
+  color: inherit;
+  font-weight: 400;
+}
+
+/* eyebrow: 16px label with a 5x22 coral bar */
 .section-intro .section-intro-eyebrow {
-  color: var(--link-hover-color);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  display: block;
+  margin: 0;
+  color: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
 }
 
-.section-intro h2 {
-  margin: 12px 0 24px;
+.section-intro .section-intro-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 22px;
+  margin-right: 10px;
+  background-color: var(--brand-accent);
+  vertical-align: middle;
 }
 
+.section-intro .section-intro-description {
+  margin: 0;
+  color: inherit;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 28px;
+}
+
+/* intro with description (e.g. therapeutic areas on the highlight photo) */
+.section-intro.section-intro-has-description {
+  max-width: 65ch;
+  margin-bottom: 64px;
+}
+
+.section-intro.section-intro-has-description .section-intro-title {
+  margin-bottom: 16px;
+  font-size: 26px;
+  line-height: 1.3333;
+}
+
+.section-intro.section-intro-has-description .section-intro-eyebrow {
+  line-height: 28px;
+}
+
+/* source: eyebrow margin-bottom 20px collapses with description margin-top 20px.
+   Flex margins do not collapse, so the 20px gap lives on the description only. */
+.section-intro .section-intro-title + .section-intro-description {
+  margin-top: 20px;
+}
+
+/* label-only intro (e.g. above the stories carousel) */
+.section-intro.section-intro-eyebrow-only {
+  margin-bottom: 24px;
+}
+
+.section-intro.section-intro-eyebrow-only .section-intro-eyebrow {
+  display: inline-block;
+}
+
+/* centered option */
 .section-intro.centered {
   margin-right: auto;
   margin-left: auto;
   text-align: center;
+}
+
+.section-intro.centered .section-intro-content {
+  align-items: center;
+}
+
+@media (width >= 1024px) {
+  .section-intro.section-intro-has-description .section-intro-title {
+    margin-bottom: 0;
+    font-size: 34px;
+  }
+
+  /* label sits over the top-left corner of the following block (absolute on the source) */
+  .section-intro.section-intro-eyebrow-only {
+    position: relative;
+    z-index: 1;
+    width: fit-content;
+    height: 0;
+    margin-bottom: 0;
+  }
 }

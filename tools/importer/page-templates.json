@@ -1,0 +1,161 @@
+{
+  "metadata": {
+    "projectType": "xwalk"
+  },
+  "templates": [
+    {
+      "name": "home",
+      "urls": [
+        "https://servier.com/"
+      ],
+      "representativeUrl": "https://servier.com/",
+      "description": "Servier homepage: full-screen video hero, featured editorial, latest news feed, social feed, therapeutic areas, patient stories carousel and closing CTA banner",
+      "urlPattern": "/",
+      "blocks": [
+        {
+          "name": "campaign-hero",
+          "instances": [
+            ".home-header-front-page"
+          ]
+        },
+        {
+          "name": "editorial-feature",
+          "instances": [
+            "#main > article.featured-content"
+          ]
+        },
+        {
+          "name": "section-intro",
+          "instances": [
+            ".wp-block-last-news-v2 > h2",
+            ".wp-block-banner-img-cta-multiple-v2 .wp-block-group > .prose",
+            ".wp-block-slider-v2 > span"
+          ]
+        },
+        {
+          "name": "article-feed",
+          "instances": [
+            ".wp-block-last-news-v2 > ul.news"
+          ]
+        },
+        {
+          "name": "embed-social",
+          "instances": [
+            "[class*=\"elfsight-app-\"]"
+          ]
+        },
+        {
+          "name": "topic-cards",
+          "instances": [
+            ".wp-block-banner-img-cta-multiple-v2 .items"
+          ]
+        },
+        {
+          "name": "carousel-stories",
+          "instances": [
+            ".wp-block-slider-v2 .slider-wrapper > .slider"
+          ]
+        },
+        {
+          "name": "hero-cta",
+          "instances": [
+            ".wp-block-banner-img-cta-v2"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "1",
+          "name": "hero",
+          "selector": [
+            ".home-header-front-page"
+          ],
+          "style": null,
+          "blocks": [
+            "campaign-hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "2",
+          "name": "featured-content",
+          "selector": [
+            "#main > article.featured-content"
+          ],
+          "style": null,
+          "blocks": [
+            "editorial-feature"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "3",
+          "name": "latest-news",
+          "selector": [
+            ".wp-block-last-news-v2"
+          ],
+          "style": null,
+          "blocks": [
+            "section-intro",
+            "article-feed"
+          ],
+          "defaultContent": [
+            ".wp-block-last-news-v2 > .mt-8"
+          ]
+        },
+        {
+          "id": "4",
+          "name": "social-feed",
+          "selector": [
+            "#main > .wp-block-group.alignwide.is-layout-flow"
+          ],
+          "style": null,
+          "blocks": [
+            "embed-social"
+          ],
+          "defaultContent": [
+            "#main > .wp-block-group.alignwide.is-layout-flow > p.is-style-surtitle-2"
+          ]
+        },
+        {
+          "id": "5",
+          "name": "therapeutic-areas",
+          "selector": [
+            ".wp-block-banner-img-cta-multiple-v2"
+          ],
+          "style": "highlight",
+          "blocks": [
+            "section-intro",
+            "topic-cards"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "6",
+          "name": "patient-stories",
+          "selector": [
+            ".wp-block-slider-v2"
+          ],
+          "style": null,
+          "blocks": [
+            "section-intro",
+            "carousel-stories"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "7",
+          "name": "join-us-cta",
+          "selector": [
+            ".wp-block-banner-img-cta-v2"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-cta"
+          ],
+          "defaultContent": []
+        }
+      ]
+    }
+  ]
+}

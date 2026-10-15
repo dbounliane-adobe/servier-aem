@@ -1,0 +1,56 @@
+/*
+ * The feed itself is styled by Elfsight (shadow DOM). This block only sizes and places it.
+ * Values measured on https://servier.com/ with the widget rendered.
+ */
+.embed-social {
+  /* lets the loading placeholder size itself from the block width (cqw) */
+  container-type: inline-size;
+  width: 100%;
+
+  /* source: 32px spacer + 24px empty paragraph above the feed; the section adds 20px */
+  padding-top: 36px;
+}
+
+.embed-social .embed-social-container {
+  width: 100%;
+}
+
+/*
+ * Reserve the rendered feed height while it loads (no layout shift).
+ * Elfsight post = column width + 189px (image is square), 20px gutters.
+ * Below 480px it stacks 3 posts in a single column.
+ */
+.embed-social.embed-social-loading .embed-social-container {
+  min-height: calc(300cqw + 607px);
+}
+
+.embed-social .embed-social-container > a {
+  display: inline-block;
+}
+
+/* Elfsight switches to 2 columns at 480px */
+@media (width >= 480px) {
+  .embed-social.embed-social-loading .embed-social-container {
+    min-height: calc(50cqw + 179px);
+  }
+}
+
+@media (width >= 768px) {
+  .embed-social {
+    padding-top: 24px;
+  }
+}
+
+/* Elfsight switches to 3 columns at 1024px */
+@media (width >= 1024px) {
+  .embed-social.embed-social-loading .embed-social-container {
+    min-height: calc((100cqw - 40px) / 3 + 189px);
+  }
+}
+
+/* Elfsight switches to 4 columns at 1440px */
+@media (width >= 1440px) {
+  .embed-social.embed-social-loading .embed-social-container {
+    min-height: calc((100cqw - 60px) / 4 + 189px);
+  }
+}

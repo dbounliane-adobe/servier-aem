@@ -1,0 +1,41 @@
+{
+  "variantName": "hero-cta",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "imagePattern": "background",
+    "purpose": "hero-closing-cta",
+    "structure": "centered h2 + paragraph + CTA over full-width background image with overlay",
+    "position": "bottom",
+    "isFullWidth": true,
+    "hasGrid": false,
+    "sourceNotes": {
+      "sectionStyle": "dark, background image with overlay, centered",
+      "variantReason": "campaign-hero scored 0.70 (<0.8): same dark bg-image scheme but different purpose (closing centered CTA banner vs page-top intro, no video, lazy image). New variant.",
+      "structure": [
+        "image (+imageAlt): ./images/5b737f28a7d59beb868f76141e310c5a.png",
+        "text: h2 'Nous rejoindre', p, link 'Contactez-nous' to /contactez-nous/"
+      ]
+    }
+  },
+  "contentPattern": {
+    "structure": "row 1 background image (+alt); row 2 rich text with h2, paragraph, CTA link",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-15T09:28:13.576Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

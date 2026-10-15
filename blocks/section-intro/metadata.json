@@ -1,0 +1,48 @@
+{
+  "variantName": "section-intro",
+  "baseBlock": "section-intro",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "mixed",
+    "density": "minimal",
+    "imagePattern": "noimg",
+    "purpose": "section-intro",
+    "structure": "eyebrow + h2 + intro paragraph",
+    "position": "middle",
+    "isFullWidth": false,
+    "hasGrid": false,
+    "sourceNotes": {
+      "sectionStyle": "dark, background image with gradient overlay",
+      "variantReason": "Local eyebrow + heading + description intro; white text over dark section is a section style concern.",
+      "structure": {
+        "content_eyebrow": "Trois aires thérapeutiques cibles",
+        "content_heading": "Nos solutions pour les patients",
+        "content_headingType": "h2",
+        "content_description": "L’implication des patients nous permet de concevoir les solutions thérapeutiques les plus adaptées dans chacune de nos trois aires thérapeutiques."
+      }
+    }
+  },
+  "contentPattern": {
+    "structure": "one cell: eyebrow, heading (h2), description",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-15T09:24:25.700Z"
+  },
+  "options": [
+    {
+      "class": "centered",
+      "label": "Centered"
+    }
+  ],
+  "memberVariantIds": []
+}

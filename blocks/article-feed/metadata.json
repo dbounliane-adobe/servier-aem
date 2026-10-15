@@ -1,0 +1,44 @@
+{
+  "variantName": "article-feed",
+  "baseBlock": "article-feed",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "dense",
+    "imagePattern": "multiple",
+    "purpose": "newsroom-listing",
+    "structure": "category filter + grid of article cards (image, category, h3, date) loaded from query index",
+    "position": "middle",
+    "isFullWidth": false,
+    "hasGrid": true,
+    "sourceNotes": {
+      "sectionStyle": "light",
+      "variantReason": "Local filterable newsroom listing (image, category, h3, date).",
+      "structure": {
+        "source": "/query-index.json (newsroom index)",
+        "prefix": "/newsroom/",
+        "category": "",
+        "limit": "(all)",
+        "all": "Toutes les catégories"
+      }
+    }
+  },
+  "contentPattern": {
+    "structure": "configuration cells: source index, path prefix, category, limit, all-categories label, empty/error messages",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-15T09:24:25.700Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

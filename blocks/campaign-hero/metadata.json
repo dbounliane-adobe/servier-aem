@@ -1,0 +1,42 @@
+{
+  "variantName": "campaign-hero",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "imagePattern": "background",
+    "purpose": "hero-campaign-video",
+    "structure": "poster image + h1 + description + CTA + optional background MP4 video with play/pause toggle",
+    "position": "top",
+    "isFullWidth": true,
+    "hasGrid": false,
+    "sourceNotes": {
+      "sectionStyle": "dark, background video",
+      "variantReason": "Local Servier hero with background-video field; dark full-bleed media, H1 + description + CTA - matches top hero.",
+      "structure": [
+        "image (+imageAlt): poster/fallback image",
+        "content: heading (h1), description, link/linkText",
+        "video: MP4 URL https://servier.com/wp-content/uploads/2025/11/servier-patients-oncologie.mp4"
+      ]
+    }
+  },
+  "contentPattern": {
+    "structure": "row 1 poster image (+alt); row 2 heading (h1), description, link; row 3 MP4 video URL",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-15T09:24:25.700Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}
