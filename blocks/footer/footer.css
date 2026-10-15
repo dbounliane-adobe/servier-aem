@@ -34,6 +34,11 @@ footer .footer img {
   display: block;
 }
 
+/* authored icons (:icon-name:) size like images, not like the global 24px .icon */
+footer .footer span.icon {
+  display: contents;
+}
+
 /* layout shell */
 footer .footer .footer-inner {
   box-sizing: border-box;

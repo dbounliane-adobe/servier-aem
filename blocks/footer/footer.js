@@ -3,18 +3,67 @@
  * Content-first: all copy, links and images come from the footer fragment
  * (content/footer.plain.html). This file only builds the layout shell and
  * interactive controls around that authored content.
+ *
+ * Also accepts the shapes produced by AEM / Universal Editor: the logo as an
+ * image component followed by a link (images cannot carry a link there), list
+ * item text wrapped in a paragraph, and icons (:icon-name: → /icons/icon-name.svg).
  */
 
+import { decorateIcons } from '../../scripts/aem.js';
+
 /**
- * Fetches the footer fragment. Metadata-independent on purpose:
- * /content/footer.plain.html (local aem up) first, then /footer.plain.html (DA/EDS).
+ * Footer fragment locations, tried in order. Metadata-independent on purpose:
+ * - AEM author / Universal Editor: pages live under /content/<site>/
+ * - local aem up: /content/footer.plain.html
+ * - DA / EDS preview + publish (AEM paths mapped to the site root): /footer.plain.html
+ * @returns {string[]}
+ */
+function footerPaths() {
+  const paths = [];
+  const { hostname, pathname } = window.location;
+  const siteRoot = pathname.match(/^\/content\/[^/]+\//);
+  if (siteRoot && hostname.includes('adobeaemcloud')) paths.push(`${siteRoot[0]}footer.plain.html`);
+  paths.push('/content/footer.plain.html', '/footer.plain.html');
+  return paths;
+}
+
+/**
+ * Fetches the footer fragment.
  * @returns {Promise<{html: string, base: string}|null>}
  */
 async function fetchFooterFragment() {
-  let resp = await fetch('/content/footer.plain.html');
-  if (!resp.ok) resp = await fetch('/footer.plain.html');
-  if (!resp.ok) return null;
+  let resp;
+  // eslint-disable-next-line no-restricted-syntax
+  for (const path of footerPaths()) {
+    // eslint-disable-next-line no-await-in-loop
+    resp = await fetch(path);
+    if (resp.ok) break;
+  }
+  if (!resp?.ok) return null;
   return { html: await resp.text(), base: resp.url };
+}
+
+const isRelative = (url) => !/^([a-z]+:|\/)/i.test(url);
+
+/**
+ * AEM: a paragraph holding only an image, directly followed by a paragraph
+ * holding only a (non in-page) link, is one image link — merge them.
+ * @param {Element} root fragment wrapper
+ */
+function mergeImageLinks(root) {
+  root.querySelectorAll(':scope > div > p').forEach((p) => {
+    const next = p.nextElementSibling;
+    const media = p.querySelector(':scope > picture, :scope > img, :scope > span.icon');
+    const link = next?.matches('p') ? next.querySelector(':scope > a') : null;
+    if (!media || p.textContent.trim() || !link || link.querySelector('img')) return;
+    if (next.children.length !== 1 || next.textContent.trim() !== link.textContent.trim()) return;
+    if ((link.getAttribute('href') || '').startsWith('#')) return;
+    const img = media.querySelector('img') || media;
+    if (img.tagName === 'IMG' && !img.alt) img.alt = link.textContent.trim();
+    link.textContent = '';
+    link.append(media);
+    p.replaceWith(next);
+  });
 }
 
 /**
@@ -28,9 +77,25 @@ function parseFragment(html, base) {
   root.innerHTML = html;
   root.querySelectorAll('img[src]').forEach((img) => {
     const src = img.getAttribute('src');
-    if (!/^([a-z]+:|\/)/i.test(src)) img.src = new URL(src, base).href;
+    if (isRelative(src)) img.src = new URL(src, base).href;
     img.loading = 'lazy';
   });
+  // <picture> sources (AEM media) are relative to the fragment too
+  root.querySelectorAll('source[srcset]').forEach((source) => {
+    source.srcset = source.getAttribute('srcset').split(',').map((candidate) => {
+      const [url, ...descriptor] = candidate.trim().split(/\s+/);
+      return [isRelative(url) ? new URL(url, base).href : url, ...descriptor].join(' ');
+    }).join(', ');
+  });
+  decorateIcons(root);
+  root.querySelectorAll('span.icon img').forEach((img) => {
+    img.removeAttribute('width');
+    img.removeAttribute('height');
+    img.alt = '';
+  });
+  // rich text wraps list item text in a paragraph (li > p > a)
+  root.querySelectorAll('li > p').forEach((p) => p.replaceWith(...p.childNodes));
+  mergeImageLinks(root);
   return root;
 }
 

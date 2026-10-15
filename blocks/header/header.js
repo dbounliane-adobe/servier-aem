@@ -5,32 +5,73 @@
  * accordions (label navigates, chevron expands).
  *
  * All copy, links and images are authored in the nav fragment (nav.plain.html):
- *   section 1: brand link with logo image(s) (first = default, second = on light bg)
+ *   section 1: brand link + logo image(s) (first = default, second = on light bg);
+ *              images may sit inside the link or next to it (AEM / Universal
+ *              Editor image components cannot carry a link)
  *   section 2: optional paragraph (menu button label) + main navigation list
  *              (nested list = dropdown)
- *   section 3: search — link (form action) wrapping the icon, then paragraphs:
- *              input placeholder, submit label, close label
+ *   section 3: search — link (form action) + icon image (inside or next to the
+ *              link), then paragraphs: input placeholder, submit label, close label
  *   section 4: utility lists (first = languages, others = utility links)
+ * Images may also be authored as icons (:icon-name: → /icons/icon-name.svg).
  */
+
+import { decorateIcons } from '../../scripts/aem.js';
 
 const DESKTOP = window.matchMedia('(width >= 900px)');
 let instanceCount = 0;
 
 /**
- * Fetches the nav fragment. Metadata-independent on purpose: /content first
- * (local aem up), then the site root (DA / EDS preview + publish).
+ * Nav fragment locations, tried in order. Metadata-independent on purpose:
+ * - AEM author / Universal Editor: pages live under /content/<site>/
+ * - local aem up: /content/nav.plain.html
+ * - DA / EDS preview + publish (AEM paths mapped to the site root): /nav.plain.html
+ * @returns {string[]}
+ */
+function navPaths() {
+  const paths = [];
+  const { hostname, pathname } = window.location;
+  const siteRoot = pathname.match(/^\/content\/[^/]+\//);
+  if (siteRoot && hostname.includes('adobeaemcloud')) paths.push(`${siteRoot[0]}nav.plain.html`);
+  paths.push('/content/nav.plain.html', '/nav.plain.html');
+  return paths;
+}
+
+/**
+ * Rich-text editors wrap list item text in a paragraph (li > p > a); unwrap it
+ * so list items hold their link directly, like the plain fragment.
+ */
+function unwrapListParagraphs(container) {
+  container.querySelectorAll('li > p').forEach((p) => p.replaceWith(...p.childNodes));
+}
+
+/**
+ * Fetches the nav fragment.
  * @returns {Promise<Element|null>} container holding the fragment sections
  */
 async function fetchNav() {
-  let resp = await fetch('/content/nav.plain.html');
-  if (!resp.ok) resp = await fetch('/nav.plain.html');
-  if (!resp.ok) return null;
+  let resp;
+  // eslint-disable-next-line no-restricted-syntax
+  for (const path of navPaths()) {
+    // eslint-disable-next-line no-await-in-loop
+    resp = await fetch(path);
+    if (resp.ok) break;
+  }
+  if (!resp?.ok) return null;
   const container = document.createElement('div');
   container.innerHTML = await resp.text();
   // relative image paths resolve against the fragment location, not the page
   container.querySelectorAll('img[src]').forEach((img) => {
     img.src = new URL(img.getAttribute('src'), resp.url).href;
   });
+  decorateIcons(container);
+  container.querySelectorAll('span.icon img').forEach((img) => {
+    img.removeAttribute('width');
+    img.removeAttribute('height');
+    // decorative: accessible names come from link titles / authored labels
+    img.alt = '';
+  });
+  unwrapListParagraphs(container);
   return container;
 }
 
@@ -45,10 +86,11 @@ function buildBrand(section) {
   const source = section?.querySelector('a');
   const brand = document.createElement('a');
   brand.className = 'nav-brand';
-  if (!source) return brand;
-  brand.href = source.getAttribute('href');
-  if (source.title) brand.setAttribute('aria-label', source.title);
-  const images = [...source.querySelectorAll('img')];
+  const images = section ? [...section.querySelectorAll('img')] : [];
+  if (!source && !images.length) return brand;
+  brand.href = source?.getAttribute('href') || '/';
+  const label = source?.title || (images.length ? textOf(source) : '');
+  if (label) brand.setAttribute('aria-label', label);
   images.forEach((img, i) => {
     img.classList.add('nav-logo', i === 0 ? 'nav-logo-default' : 'nav-logo-alt');
     img.loading = 'eager';
@@ -120,7 +162,7 @@ function buildSearch(section) {
   const [placeholder, submitLabel, closeLabel] = [...section.querySelectorAll('p')]
     .filter((p) => !p.querySelector('a, img'))
     .map(textOf);
-  const icon = link.querySelector('img');
+  const icon = link.querySelector('img') || section.querySelector('img');
   const action = new URL(link.getAttribute('href'), window.location.href);
   const paramName = [...action.searchParams.keys()][0] || 'q';
   action.search = '';
