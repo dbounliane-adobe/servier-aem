@@ -17,8 +17,8 @@ export default function transform(hookName, element, payload) {
       '#email-alert-modal',
       // Elfsight portal root outside main: <div id="__EAAPS_PORTAL">
       '#__EAAPS_PORTAL',
-      // Hero search form inside campaign-hero: <form class="search-form relative w-fit">
-      '.home-header-front-page form.search-form',
+      // NOTE: the hero search form (.home-header-front-page form.search-form) is NOT removed here:
+      // the campaign-hero parser reads its action/placeholder into the search_ fields and drops it.
       // Slick slider prev/next buttons: <button class="prev ... slick-arrow">
       'button.slick-arrow',
       // Slick infinite-mode clones (runtime class added by slick on the live page; requested by orchestrator)
@@ -27,6 +27,15 @@ export default function transform(hookName, element, payload) {
   }
 
   if (hookName === TransformHook.afterTransform) {
+    // Source pill CTAs (Tailwind `rounded-[50px]`, e.g. "Accédez à la newsroom") become
+    // EDS buttons: scripts.js decorateButtons only buttonizes links authored in bold.
+    element.querySelectorAll('a[class*="rounded-[50px]"]').forEach((a) => {
+      if (a.closest('strong, em')) return;
+      const strong = element.ownerDocument.createElement('strong');
+      a.replaceWith(strong);
+      strong.append(a);
+    });
+
     // Non-authorable site chrome (header/footer are migrated separately).
     WebImporter.DOMUtils.remove(element, [
       // <header class="banner"> (contains nav, fullscreen search form #search-form)
