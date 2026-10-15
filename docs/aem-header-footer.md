@@ -8,23 +8,34 @@ En local, `aem up` sert `content/nav.plain.html` et `content/footer.plain.html`.
 
 ## 1. Installer le contenu
 
+**Recommandé : `servier-aem-site-1.0.0.zip`** — page d'accueil + nav + footer et
+toutes leurs images, en une seule installation. Seuls le nœud de chaque page et son
+`jcr:content` sont remplacés ; les pages enfants (par ex. sous `index`) sont conservées.
+
 | Paquet (`tools/aem-packages/dist/`) | Chemins | Contenu |
 |---|---|---|
+| `servier-aem-index-1.0.0.zip` | `/content/servier-aem/index` | page d'accueil (7 sections, `theme = servier`, `language = fr`) — **remplace** l'accueil existant |
+| | `/content/dam/servier-aem/index/` | 6 images (feature, fonds, slides du carrousel) |
 | `servier-aem-header-nav-1.0.0.zip` | `/content/servier-aem/nav` | page de navigation (4 sections) — **remplace** la page `nav` existante |
 | | `/content/dam/servier-aem/header/` | `header-logo-servier.svg`, `header-logo-servier-dark.svg`, `header-icon-search.svg` |
 | `servier-aem-footer-1.0.0.zip` | `/content/servier-aem/footer` | page footer (1 section) — **remplace** la page `footer` existante |
 | | `/content/dam/servier-aem/footer/` | logo, 4 icônes réseaux sociaux, badge Kastor |
 
-1. Author → **CRX Package Manager** (`/crx/packmgr`) → *Upload Package* → *Install* (les deux paquets).
-2. Assets → `servier-aem/header` et `servier-aem/footer` : vérifier les SVG
+1. Author → **CRX Package Manager** (`/crx/packmgr`) → *Upload Package* → *Install*.
+2. Assets → `servier-aem/index`, `header`, `footer` : vérifier les images
    (si les miniatures manquent : *Reprocess Assets*).
-3. Publier les images, puis les pages `nav` et `footer`
-   (Universal Editor → *Publish*, ou Sites → *Quick Publish*).
-4. Page d'accueil → *Propriétés de la page* : `theme = servier`, `language = fr`, puis publier.
+3. Publier les images, puis les pages `nav`, `footer` et l'accueil
+   (Sites → sélectionner → *Quick Publish*, ou Universal Editor → *Publish*).
 
-Régénérer après modification de `content/nav.plain.html` ou `content/footer.plain.html` :
-conversion html2md + md2jcr vers `migration-work/jcr-content/<page>.xml`, puis
-`python3 tools/aem-packages/build-fragments.py [header|footer|all]`.
+La vidéo du hero et les liens externes pointent vers servier.com, comme en preview
+(une vidéo du DAM n'est pas servie par Edge Delivery : `…/content/dam/…mp4` → 404).
+
+Régénérer après modification de `content/<page>.plain.html` : conversion html2md +
+md2jcr vers `migration-work/jcr-content/<page>.xml` (images de l'accueil dans
+`migration-work/aem-assets/index/`), puis
+`python3 tools/aem-packages/build-fragments.py [index|header|footer|site|all]`.
+Les titres des composants UE étant préfixés « Servier », la conversion compare les
+blocs à leur identifiant (`hero-cta` → « Hero Cta »).
 
 ## 2. Structure de la page `nav` (à conserver)
 
