@@ -10,36 +10,15 @@
  */
 
 import { decorateIcons } from '../../scripts/aem.js';
-
-/**
- * Footer fragment locations, tried in order. Metadata-independent on purpose:
- * - AEM author / Universal Editor: pages live under /content/<site>/
- * - local aem up: /content/footer.plain.html
- * - DA / EDS preview + publish (AEM paths mapped to the site root): /footer.plain.html
- * @returns {string[]}
- */
-function footerPaths() {
-  const paths = [];
-  const { hostname, pathname } = window.location;
-  const siteRoot = pathname.match(/^\/content\/[^/]+\//);
-  if (siteRoot && hostname.includes('adobeaemcloud')) paths.push(`${siteRoot[0]}footer.plain.html`);
-  paths.push('/content/footer.plain.html', '/footer.plain.html');
-  return paths;
-}
+import { fetchSiteFragment } from '../../scripts/locale-fragments.js';
 
 /**
  * Fetches the footer fragment.
  * @returns {Promise<{html: string, base: string}|null>}
  */
 async function fetchFooterFragment() {
-  let resp;
-  // eslint-disable-next-line no-restricted-syntax
-  for (const path of footerPaths()) {
-    // eslint-disable-next-line no-await-in-loop
-    resp = await fetch(path);
-    if (resp.ok) break;
-  }
-  if (!resp?.ok) return null;
+  const resp = await fetchSiteFragment('footer');
+  if (!resp) return null;
   return { html: await resp.text(), base: resp.url };
 }
 

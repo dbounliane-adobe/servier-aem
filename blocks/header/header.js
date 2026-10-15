@@ -17,25 +17,10 @@
  */
 
 import { decorateIcons } from '../../scripts/aem.js';
+import { fetchSiteFragment } from '../../scripts/locale-fragments.js';
 
 const DESKTOP = window.matchMedia('(width >= 900px)');
 let instanceCount = 0;
-
-/**
- * Nav fragment locations, tried in order. Metadata-independent on purpose:
- * - AEM author / Universal Editor: pages live under /content/<site>/
- * - local aem up: /content/nav.plain.html
- * - DA / EDS preview + publish (AEM paths mapped to the site root): /nav.plain.html
- * @returns {string[]}
- */
-function navPaths() {
-  const paths = [];
-  const { hostname, pathname } = window.location;
-  const siteRoot = pathname.match(/^\/content\/[^/]+\//);
-  if (siteRoot && hostname.includes('adobeaemcloud')) paths.push(`${siteRoot[0]}nav.plain.html`);
-  paths.push('/content/nav.plain.html', '/nav.plain.html');
-  return paths;
-}
 
 /**
  * Rich-text editors wrap list item text in a paragraph (li > p > a); unwrap it
@@ -50,14 +35,8 @@ function unwrapListParagraphs(container) {
  * @returns {Promise<Element|null>} container holding the fragment sections
  */
 async function fetchNav() {
-  let resp;
-  // eslint-disable-next-line no-restricted-syntax
-  for (const path of navPaths()) {
-    // eslint-disable-next-line no-await-in-loop
-    resp = await fetch(path);
-    if (resp.ok) break;
-  }
-  if (!resp?.ok) return null;
+  const resp = await fetchSiteFragment('nav');
+  if (!resp) return null;
   const container = document.createElement('div');
   container.innerHTML = await resp.text();
   // relative image paths resolve against the fragment location, not the page
