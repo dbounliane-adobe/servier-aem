@@ -18,16 +18,16 @@ async function waitFor(condition) {
   }
 }
 
-function heroMarkup(author, title = 'Bienvenue chez Servier') {
+function heroMarkup(author, title = 'Bienvenue chez Servier', videoURL = '') {
   return `<div class="campaign-hero"${author ? ` data-aue-resource="${resource}"` : ''}>
     <div><div><picture><img src="/drafts/media/science.svg" alt="Recherche"></picture></div></div>
     <div><div><h1>${title}</h1><p>La science au service des patients.</p>
       <p><a href="#suite">En savoir plus</a></p></div></div>
-    <div><div></div></div>
+    <div><div>${videoURL ? `<a href="${videoURL}">Video</a>` : ''}</div></div>
   </div>`;
 }
 
-async function createPage(author) {
+async function createPage(author, videoURL = '', reducedMotion = false) {
   const frame = document.createElement('iframe');
   frame.title = author ? 'Universal Editor hero' : 'Public hero';
   frame.style.width = `${width}px`;
@@ -37,13 +37,44 @@ async function createPage(author) {
   frame.srcdoc = `<!DOCTYPE html><html lang="fr"><head>
     <meta name="theme" content="servier">
     <link rel="stylesheet" href="/styles/styles.css">
+    ${videoURL ? `<script>
+      window.videoPlayCalls = 0;
+      Object.defineProperty(HTMLMediaElement.prototype, 'src', {
+        configurable: true,
+        get() { return this.dataset.testSource || ''; },
+        set(value) { this.dataset.testSource = value; },
+      });
+      HTMLMediaElement.prototype.play = function () {
+        window.videoPlayCalls += 1;
+        Object.defineProperty(this, 'paused', { configurable: true, value: false });
+        this.dispatchEvent(new Event('play'));
+        return Promise.resolve();
+      };
+      HTMLMediaElement.prototype.pause = function () {
+        Object.defineProperty(this, 'paused', { configurable: true, value: true });
+        this.dispatchEvent(new Event('pause'));
+      };
+      const originalSetTimeout = window.setTimeout;
+      window.heroTimers = [];
+      window.setTimeout = (callback, delay, ...args) => {
+        if (delay === 3000) {
+          window.heroTimers.push(callback);
+          return 0;
+        }
+        return originalSetTimeout(callback, delay, ...args);
+      };
+      const originalMatchMedia = window.matchMedia.bind(window);
+      window.matchMedia = (query) => query === '(prefers-reduced-motion: reduce)'
+        ? { matches: ${reducedMotion}, addEventListener() {} }
+        : originalMatchMedia(query);
+    </script>` : ''}
     <script type="module">
       import '/scripts/scripts.js';
       ${author ? "await import('/scripts/editor-support.js');" : ''}
       document.documentElement.dataset.ready = 'true';
     </script>
     </head><body><header></header><main>
-      <div>${heroMarkup(author)}</div>
+      <div>${heroMarkup(author, undefined, videoURL)}</div>
       <div><h2 id="suite">La suite de la page</h2><p>Contenu sous le hero.</p></div>
     </main><footer></footer></body></html>`;
   await waitFor(() => frame.contentDocument?.documentElement.dataset.ready
@@ -77,6 +108,43 @@ async function resizeToContent(frame) {
 }
 
 async function run() {
+  const asset = 'https://delivery-p199354-e2062419.adobeaemcloud.com/adobe/assets/urn:aaid:aem:2e3152d0-1d24-44d4-9928-a46e706e397b';
+  const videoCases = [
+    [`${asset}/play`, `${asset}/original/as/video.mp4`],
+    [`${asset}/play/?token=example&expiryTime=123`, `${asset}/original/as/video.mp4?token=example&expiryTime=123`],
+    ['https://example.com/video.mp4?version=2', 'https://example.com/video.mp4?version=2'],
+    ['https://example.com/other/play', 'https://example.com/other/play'],
+  ];
+  await videoCases.reduce(async (previous, [input, expected]) => {
+    await previous;
+    const frame = await createPage(false, input);
+    try {
+      const video = frame.contentDocument.querySelector('.campaign-hero video');
+      const toggle = frame.contentDocument.querySelector('.campaign-hero-toggle');
+      assert(!video.getAttribute('src'), 'Video loading is deferred until playback.');
+      assert(video.muted && video.loop && video.playsInline, 'Background playback is muted, looping and inline.');
+      assert(frame.contentWindow.videoPlayCalls === 0, 'Autoplay waits for its timer.');
+      frame.contentWindow.heroTimers.forEach((callback) => callback());
+      assert(video.dataset.testSource === expected, `Video source resolves to ${expected}.`);
+      assert(frame.contentWindow.videoPlayCalls === 1, 'Autoplay starts playback.');
+      assert(toggle.getAttribute('aria-pressed') === 'true', 'Toggle reflects automatic playback.');
+      toggle.click();
+      assert(video.paused, 'Toggle pauses playback.');
+      toggle.click();
+      assert(frame.contentWindow.videoPlayCalls === 2, 'Toggle resumes playback.');
+    } finally {
+      frame.remove();
+    }
+  }, Promise.resolve());
+  const reduced = await createPage(false, `${asset}/play`, true);
+  try {
+    reduced.contentWindow.heroTimers.forEach((callback) => callback());
+    assert(reduced.contentWindow.videoPlayCalls === 0, 'Reduced motion prevents autoplay.');
+    reduced.contentDocument.querySelector('.campaign-hero-toggle').click();
+    assert(reduced.contentWindow.videoPlayCalls === 1, 'Reduced motion still permits manual playback.');
+  } finally {
+    reduced.remove();
+  }
   const author = await createPage(true);
   try {
     const hero = author.contentDocument.querySelector('.campaign-hero');

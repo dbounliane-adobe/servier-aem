@@ -98,6 +98,10 @@ export default function decorate(block) {
   if (!['http:', 'https:'].includes(source.protocol)) {
     throw new Error('Campaign hero requires an HTTP(S) video URL.');
   }
+  // AEM's /play endpoint serves an HTML player, not a video stream.
+  if (/^\/adobe\/assets\/urn:aaid:aem:[^/]+\/play\/?$/.test(source.pathname)) {
+    source.pathname = source.pathname.replace(/\/play\/?$/, '/original/as/video.mp4');
+  }
   const video = document.createElement('video');
   video.muted = true;
   video.loop = true;
