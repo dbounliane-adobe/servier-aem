@@ -78,7 +78,41 @@ async function testPages() {
   assert(frame.contentDocument.documentElement.lang === 'en', 'Other-site authored language remains unchanged.');
 }
 
+async function testFeedPrefixes() {
+  await withFetch(async () => Response.json({
+    data: [
+      { title: 'Dossier', path: '/newsroom/dossiers/article' },
+      { title: 'Actualité', path: '/newsroom/actualites/article' },
+      { title: 'Different folder', path: '/newsroom/dossiers-archives/article' },
+    ],
+  }), async () => {
+    const prefixes = [
+      '/newsroom/dossiers/',
+      '/newsroom/dossiers',
+      '<a href="/newsroom/dossiers/">Dossiers</a>',
+    ];
+    await prefixes.reduce(async (previous, prefix) => {
+      await previous;
+      const scoped = fixture('article-feed', `<div><div>prefix</div><div>${prefix}</div></div>`);
+      await feed(scoped);
+      assert(scoped.querySelectorAll('li').length === 1, 'Text and linked prefixes select only the requested folder.');
+      assert(scoped.querySelector('h3')?.textContent === 'Dossier', 'Feed retrieves the existing dossier.');
+      scoped.remove();
+    }, Promise.resolve());
+    const external = fixture('article-feed', '<div><div>prefix</div><div>https://example.org/newsroom/dossiers/</div></div>');
+    await feed(external);
+    assert(external.querySelector('[role="alert"]'), 'Other-site prefixes produce an explicit error.');
+    external.remove();
+  });
+}
+
 async function run() {
+  if (new URLSearchParams(window.location.search).get('suite') === 'article-feed') {
+    await testFeedPrefixes();
+    results.dataset.status = 'passed';
+    results.textContent = `${count} assertions passed`;
+    return;
+  }
   const expectedWidth = Number(new URLSearchParams(window.location.search).get('width'));
   assert(window.innerWidth === expectedWidth, `Viewport must be exactly ${expectedWidth}px, got ${window.innerWidth}px.`);
   await Promise.all(['campaign-hero', 'topic-cards', 'article-feed', 'scientific-teaser'].map((name) => loadCSS(`/blocks/${name}/${name}.css`)));
@@ -198,6 +232,7 @@ async function run() {
     await feed(invalid);
     assert(invalid.querySelector('[role="alert"]'), 'Malformed index has an explicit error state.');
   });
+  await testFeedPrefixes();
   await withFetch(async () => Response.json({ total: 1, data: [] }), async () => {
     let failed = false;
     try { await loadArticles('/query-index.json'); } catch { failed = true; }

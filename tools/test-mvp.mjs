@@ -47,7 +47,7 @@ try {
     const { stdout } = await execute(browser, [
       '--headless', '--disable-gpu', '--no-first-run', '--no-default-browser-check',
       `--user-data-dir=${profile}`, `--window-size=${width},1000`,
-      '--virtual-time-budget=20000', '--dump-dom', `${url}?width=${width}`,
+      '--virtual-time-budget=20000', '--dump-dom', `${url}${url.includes('?') ? '&' : '?'}width=${width}`,
     ], { timeout: 60000, maxBuffer: 4 * 1024 * 1024 });
     const result = stdout.match(/<pre id="results" data-status="([^"]+)">([\s\S]*?)<\/pre>/);
     assert.ok(result, 'Browser did not return test results.');

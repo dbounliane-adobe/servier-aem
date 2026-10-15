@@ -94,7 +94,9 @@ export default async function decorate(block) {
     const limit = Number(config.limit || 3);
     if (!Number.isInteger(limit) || limit < 1) throw new Error('Article limit must be a positive integer.');
     const records = await loadArticles(config.source || '/query-index.json');
-    const prefix = config.prefix || '/newsroom/';
+    const prefixURL = new URL(config.prefix || '/newsroom/', window.location.href);
+    if (prefixURL.origin !== window.location.origin) throw new Error('Article prefix must belong to this site.');
+    const prefix = `${prefixURL.pathname.replace(/\/+$/, '')}/`;
     const articles = records.filter((record) => {
       const url = new URL(record.path, window.location.href);
       return url.origin === window.location.origin && url.pathname.startsWith(prefix)
