@@ -13,6 +13,11 @@
   color: #fff;
 }
 
+/* Universal Editor fits its iframe to the page; vh would create a resize feedback loop. */
+.campaign-hero[data-aue-resource] {
+  min-height: min(100vw, 800px);
+}
+
 /* source overlay: absolute inset-0, rgb(36 34 106 / 35%) over the video */
 .campaign-hero::before {
   content: '';

@@ -40,7 +40,7 @@ await new Promise((done) => { server.listen(0, '127.0.0.1', done); });
 const profile = await mkdtemp(resolve(tmpdir(), 'eds-mvp-'));
 try {
   const { port } = server.address();
-  const url = `http://127.0.0.1:${port}/test/mvp.html`;
+  const url = `http://127.0.0.1:${port}${process.argv[2] || '/test/mvp.html'}`;
   // Separate processes exercise real layout at both breakpoints.
   await [390, 1440].reduce(async (previous, width) => {
     await previous;
