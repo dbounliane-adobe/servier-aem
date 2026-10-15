@@ -2,13 +2,13 @@ import { getMetadata } from './aem.js';
 
 /**
  * Locale convention: /{folder}/{language}/, optionally below an AEM author site root.
- * Language is a two-letter code with an optional two-letter region (e.g. fr-CA).
+ * Language is a two-letter code with an optional region (e.g. fr-CA or en_us).
  * Other paths keep root-level fragments.
  */
 export function getLocalePrefix(pathname = window.location.pathname) {
   const authorRoot = pathname.match(/^\/content\/[^/]+(?=\/|$)/)?.[0] || '';
   const sitePath = pathname.slice(authorRoot.length);
-  const locale = sitePath.match(/^\/[^/]+\/[a-z]{2}(?:-[a-z]{2})?(?=\/|$)/i)?.[0];
+  const locale = sitePath.match(/^\/[^/]+\/[a-z]{2}(?:[-_][a-z]{2})?(?=\/|$)/i)?.[0];
   return locale ? `${authorRoot}${locale}` : '';
 }
 

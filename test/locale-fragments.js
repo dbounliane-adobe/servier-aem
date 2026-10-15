@@ -13,6 +13,8 @@ async function run() {
   assert(getLocalePrefix('/master/fr/article') === '/master/fr', 'French locale.');
   assert(getLocalePrefix('/master/en') === '/master/en', 'Locale landing page.');
   assert(getLocalePrefix('/master/fr-CA/article') === '/master/fr-CA', 'Regional locale.');
+  assert(getLocalePrefix('/master/en_us/article') === '/master/en_us', 'AEM underscore locale.');
+  assert(getLocalePrefix('/content/site/master/en_us/article') === '/content/site/master/en_us', 'Author underscore locale.');
   assert(getLocalePrefix('/content/site/master/fr/article') === '/content/site/master/fr', 'Author locale.');
   assert(getLocalePrefix('/fr/fr/article') === '/fr/fr', 'Country and language may be identical.');
   assert(getLocalePrefix('/fr/en/article') === '/fr/en', 'Country and language may differ.');
@@ -51,7 +53,7 @@ async function run() {
       assert(requests.join() === `/master/fr/${name}.plain.html,/${name}.plain.html`, '404 falls back directly to root.');
       assert(block.textContent.includes('Servier'), 'Root fallback renders content.');
       missing = false;
-      await ['/fr/fr', '/fr/en', '/canada/fr-CA', '/content/site/fr/en'].reduce(async (prior, prefix) => {
+      await ['/fr/fr', '/fr/en', '/canada/fr-CA', '/content/site/fr/en', '/master/en_us', '/content/site/master/en_us'].reduce(async (prior, prefix) => {
         await prior;
         requests.length = 0;
         window.history.replaceState(null, '', `${prefix}/article`);
