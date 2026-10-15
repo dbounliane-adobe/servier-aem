@@ -1,0 +1,36 @@
+{
+  "variantName": "hero-cover",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "medium",
+    "imagePattern": "background",
+    "purpose": "cover-banner",
+    "structure": "full-bleed background photo under a 70% indigo overlay; left-aligned H2, paragraphs and two buttons side by side, inner content aligned to the article column",
+    "position": "in-article",
+    "isFullWidth": true,
+    "hasGrid": false,
+    "sourceNotes": {
+      "variantReason": "hero-cta is centred with a 40% overlay and a single CTA at page bottom; this is a left-aligned in-article cover with a 70% overlay and multiple CTAs. New variant."
+    }
+  },
+  "contentPattern": {
+    "structure": "row 1 background image (+alt); row 2 rich text with h2, paragraphs and bold links (rendered as buttons, consecutive ones grouped side by side)",
+    "buttonCount": 2,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/newsroom/dossiers/dystrophie-musculaire-becker-maladie-evolutions-multiples/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-15T15:10:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

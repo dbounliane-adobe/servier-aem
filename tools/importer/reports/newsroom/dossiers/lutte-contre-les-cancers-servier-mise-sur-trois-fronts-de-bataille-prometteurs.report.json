@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/lutte-contre-les-cancers-servier-mise-sur-trois-fronts-de-bataille-prometteurs/",
+  "path": "newsroom/dossiers/lutte-contre-les-cancers-servier-mise-sur-trois-fronts-de-bataille-prometteurs",
+  "timestamp": "2026-10-15T16:10:17.177Z",
+  "title": "Lutte contre les cancers : Servier mise sur trois fronts de bataille prometteurs",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

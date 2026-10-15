@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/cancer-du-pancreas-un-diagnostic-trop-tardif/",
+  "path": "newsroom/dossiers/cancer-du-pancreas-un-diagnostic-trop-tardif",
+  "timestamp": "2026-10-15T16:07:12.365Z",
+  "title": "Cancer du pancréas : un diagnostic trop tardif",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

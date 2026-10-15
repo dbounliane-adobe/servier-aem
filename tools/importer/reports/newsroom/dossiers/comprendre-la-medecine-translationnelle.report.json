@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/comprendre-la-medecine-translationnelle/",
+  "path": "newsroom/dossiers/comprendre-la-medecine-translationnelle",
+  "timestamp": "2026-10-15T16:09:45.948Z",
+  "title": "Comprendre la médecine translationnelle",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

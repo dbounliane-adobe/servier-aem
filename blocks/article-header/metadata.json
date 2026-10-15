@@ -1,0 +1,33 @@
+{
+  "variantName": "article-header",
+  "baseBlock": "article-header",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "imagePattern": "optional-cover",
+    "purpose": "article-title",
+    "structure": "H1 article title followed by the publication date; optional category, standfirst, author, reading time and cover image",
+    "position": "top-of-article",
+    "isFullWidth": false,
+    "hasGrid": false
+  },
+  "contentPattern": {
+    "structure": "row 1 content (category, heading H1, standfirst); row 2 meta (ISO date rendered as <time>, author, reading time); row 3 media (cover image + alt). On newsroom dossiers only heading + date are filled.",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/newsroom/dossiers/dystrophie-musculaire-becker-maladie-evolutions-multiples/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-15T15:10:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

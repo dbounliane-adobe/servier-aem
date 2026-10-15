@@ -156,6 +156,269 @@
           "defaultContent": []
         }
       ]
+    },
+    {
+      "name": "article",
+      "urls": [
+        "https://servier.com/newsroom/dossiers/dystrophie-musculaire-becker-maladie-evolutions-multiples/"
+      ],
+      "representativeUrl": "https://servier.com/newsroom/dossiers/dystrophie-musculaire-becker-maladie-evolutions-multiples/",
+      "description": "Newsroom dossier article: return link, H1, date, long-form editorial body (coloured callouts, did-you-know, figure, table, cover banner, sources), share links",
+      "blocks": [
+        {
+          "name": "hero-page-banner",
+          "instances": [
+            "#main > .page-header--classic"
+          ]
+        },
+        {
+          "name": "article-header",
+          "instances": [
+            ".single-wrapper > article > header.wp-block-group > h1"
+          ]
+        },
+        {
+          "name": "callout-did-you-know",
+          "instances": [
+            ".single--content .wp-block-did-you-know"
+          ]
+        },
+        {
+          "name": "key-figures",
+          "instances": [
+            ".single--content .wp-block-columns:has(> .wp-block-column > .wp-block-numbers):not(:has(> .wp-block-column > :not(.wp-block-numbers)))"
+          ]
+        },
+        {
+          "name": "table-striped",
+          "instances": [
+            ".single--content figure.wp-block-table"
+          ]
+        },
+        {
+          "name": "hero-cover",
+          "instances": [
+            ".single--content > .wp-block-cover"
+          ]
+        },
+        {
+          "name": "share-social",
+          "instances": [
+            ".single-wrapper > article > footer.wp-block-group"
+          ]
+        }
+      ],
+      "urlPattern": "/newsroom/dossiers/*",
+      "sections": [
+        {
+          "id": "1",
+          "name": "page-banner",
+          "selector": [
+            "#main > .page-header--classic"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-page-banner"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "2",
+          "name": "article-header",
+          "selector": [
+            ".single-wrapper > article > header.wp-block-group"
+          ],
+          "style": null,
+          "blocks": [
+            "article-header"
+          ],
+          "defaultContent": [
+            ".single-wrapper > article > header.wp-block-group > a.btn__return"
+          ]
+        },
+        {
+          "id": "3",
+          "name": "lead-and-first-chapter",
+          "selector": [
+            ".single--content > .wp-block-group:first-child"
+          ],
+          "style": null,
+          "blocks": [
+            "callout-did-you-know"
+          ],
+          "defaultContent": [
+            ".single--content > .wp-block-group:first-child > p",
+            ".single--content > .wp-block-group:first-child > h2"
+          ]
+        },
+        {
+          "id": "4",
+          "name": "key-facts-box",
+          "selector": [
+            ".single--content > .wp-block-group.has-indigo-50-background-color"
+          ],
+          "style": "soft",
+          "blocks": [],
+          "defaultContent": [
+            ".single--content > .wp-block-group.has-indigo-50-background-color > h2",
+            ".single--content > .wp-block-group.has-indigo-50-background-color > p"
+          ]
+        },
+        {
+          "id": "5",
+          "name": "chapters-with-infographic",
+          "selector": [
+            ".single--content > .wp-block-group:not(:first-child):has(> figure.wp-block-image)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".single--content > .wp-block-group:not(:first-child):has(> figure.wp-block-image) > h2",
+            ".single--content > .wp-block-group:not(:first-child):has(> figure.wp-block-image) > p",
+            ".single--content > .wp-block-group:not(:first-child):has(> figure.wp-block-image) > figure.wp-block-image"
+          ]
+        },
+        {
+          "id": "6",
+          "name": "focus-box",
+          "selector": [
+            ".single--content > .wp-block-group.has-red-100-background-color"
+          ],
+          "style": "accent",
+          "blocks": [],
+          "defaultContent": [
+            ".single--content > .wp-block-group.has-red-100-background-color > h2",
+            ".single--content > .wp-block-group.has-red-100-background-color > p"
+          ]
+        },
+        {
+          "id": "7",
+          "name": "chapter-after-focus",
+          "selector": [
+            ".single--content > .wp-block-group.has-red-100-background-color + .wp-block-group"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".single--content > .wp-block-group.has-red-100-background-color + .wp-block-group > p",
+            ".single--content > .wp-block-group.has-red-100-background-color + .wp-block-group > h2"
+          ]
+        },
+        {
+          "id": "8",
+          "name": "key-figures-box",
+          "selector": [
+            ".single--content > .wp-block-group.has-indigo-900-background-color"
+          ],
+          "style": "dark",
+          "blocks": [
+            "key-figures"
+          ],
+          "defaultContent": [
+            ".single--content > .wp-block-group.has-indigo-900-background-color > h2"
+          ]
+        },
+        {
+          "id": "9",
+          "name": "table-chapter",
+          "selector": [
+            ".single--content > .wp-block-group:not(:first-child):has(> figure.wp-block-table)"
+          ],
+          "style": null,
+          "blocks": [
+            "table-striped"
+          ],
+          "defaultContent": [
+            ".single--content > .wp-block-group:not(:first-child):has(> figure.wp-block-table) > p"
+          ]
+        },
+        {
+          "id": "10",
+          "name": "cover",
+          "selector": [
+            ".single--content > .wp-block-cover"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-cover"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "11",
+          "name": "references",
+          "selector": [
+            ".single--content > .article-references",
+            ".single--content > .wp-block-group:has(> hr.wp-block-separator)"
+          ],
+          "style": "references",
+          "blocks": [],
+          "defaultContent": [
+            ".single--content > .wp-block-group:has(> hr.wp-block-separator) > p"
+          ]
+        },
+        {
+          "id": "12",
+          "name": "share",
+          "selector": [
+            ".single-wrapper > article > footer.wp-block-group"
+          ],
+          "style": null,
+          "blocks": [
+            "share-social"
+          ],
+          "defaultContent": []
+        }
+      ]
+    },
+    {
+      "name": "dossiers-listing",
+      "urls": [
+        "https://servier.com/newsroom/dossiers/"
+      ],
+      "representativeUrl": "https://servier.com/newsroom/dossiers/",
+      "description": "Newsroom dossiers listing: page banner, filters (sub-category, year, month), 9-card article grid, pagination",
+      "blocks": [
+        {
+          "name": "hero-page-banner",
+          "instances": [
+            "#main > .page-header--classic"
+          ]
+        },
+        {
+          "name": "article-list",
+          "instances": [
+            "#main > .container.mx-auto:not(.page-header--classic)"
+          ]
+        }
+      ],
+      "urlPattern": "/newsroom/dossiers/",
+      "sections": [
+        {
+          "id": "1",
+          "name": "page-banner",
+          "selector": [
+            "#main > .page-header--classic"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-page-banner"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "2",
+          "name": "article-list",
+          "selector": [
+            "#main > .container.mx-auto:not(.page-header--classic)"
+          ],
+          "style": null,
+          "blocks": [
+            "article-list"
+          ],
+          "defaultContent": []
+        }
+      ]
     }
   ]
 }

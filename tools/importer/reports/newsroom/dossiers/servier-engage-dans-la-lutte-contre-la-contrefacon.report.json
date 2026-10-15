@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/servier-engage-dans-la-lutte-contre-la-contrefacon/",
+  "path": "newsroom/dossiers/servier-engage-dans-la-lutte-contre-la-contrefacon",
+  "timestamp": "2026-10-15T16:08:17.343Z",
+  "title": "Servier, engagé dans la lutte contre la contrefaçon",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

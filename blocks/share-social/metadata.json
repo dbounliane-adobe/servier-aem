@@ -1,0 +1,38 @@
+{
+  "variantName": "share-social",
+  "baseBlock": "share",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "imagePattern": "icons",
+    "purpose": "social-share",
+    "structure": "small label ('Partager sur :') above a row of 41px square icon buttons: Facebook, X, LinkedIn, copy link (with 'Lien copié !' feedback)",
+    "position": "end-of-article",
+    "isFullWidth": false,
+    "hasGrid": false,
+    "sourceNotes": {
+      "variantReason": "No local/Block Collection share block. Share URLs are computed from the current page URL/title; copy-link is interactive. Author only sets the label."
+    }
+  },
+  "contentPattern": {
+    "structure": "one row: label text. Network links (Facebook, X, LinkedIn, copy link; optional email) are generated in JS from the canonical URL / og:title.",
+    "buttonCount": 4,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/newsroom/dossiers/dystrophie-musculaire-becker-maladie-evolutions-multiples/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-15T15:10:00.000Z"
+  },
+  "options": [
+    { "class": "email", "label": "Add email link" }
+  ],
+  "memberVariantIds": []
+}

@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/syndrome-x-fragile-maladie-rare-neurodeveloppement/",
+  "path": "newsroom/dossiers/syndrome-x-fragile-maladie-rare-neurodeveloppement",
+  "timestamp": "2026-10-15T16:05:51.735Z",
+  "title": "Syndrome de l’X fragile : comprendre cette maladie rare",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

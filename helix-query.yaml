@@ -1,11 +1,17 @@
 version: 1
 
+# Site query index (also set in the site's config service: content/query.yaml).
+# Feeds the blog cards: blocks/article-feed (homepage) and blocks/article-list
+# (/newsroom/dossiers/). Card title = the page H1 (as on servier.com); the SEO
+# title stays in <title>/og:title.
 indices:
   pages:
     include:
       - '/**'
     exclude:
       - '/**.json'
+      - '/nav'
+      - '/footer'
     target: /query-index.json
     properties:
       lastModified:
@@ -15,8 +21,8 @@ indices:
         select: head > meta[name="robots"]
         value: attribute(el, "content")
       title:
-        select: head > meta[property="og:title"]
-        value: attribute(el, "content")
+        select: main h1
+        value: textContent(el)
       description:
         select: head > meta[name="description"]
         value: attribute(el, "content")
@@ -31,4 +37,10 @@ indices:
         value: attribute(el, "content")
       category:
         select: head > meta[name="category"]
+        value: attribute(el, "content")
+      tags:
+        select: head > meta[name="keywords"]
+        value: attribute(el, "content")
+      template:
+        select: head > meta[name="template"]
         value: attribute(el, "content")

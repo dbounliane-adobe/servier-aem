@@ -1,0 +1,205 @@
+/* cover banner breaks out of the section's content width (full-bleed) */
+main > .section.hero-cover-container > .hero-cover-wrapper {
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-cover {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 430px;
+  padding: 24px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+}
+
+/* indigo tint over the photo, 70% */
+.hero-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--text-color, #24226a);
+  opacity: 0.7;
+}
+
+/* without a photo, keep white text legible on the brand indigo */
+.hero-cover.hero-cover-no-image {
+  background-color: var(--text-color, #24226a);
+}
+
+.hero-cover.hero-cover-no-image::before {
+  display: none;
+}
+
+.hero-cover .hero-cover-media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.hero-cover .hero-cover-media p {
+  margin: 0;
+}
+
+.hero-cover .hero-cover-media img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 53% 18%;
+}
+
+/* inner container: 940px measure, 32px top spacer */
+.hero-cover .hero-cover-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 940px;
+  padding-top: 32px;
+  text-align: left;
+}
+
+.hero-cover .hero-cover-content h1,
+.hero-cover .hero-cover-content h2,
+.hero-cover .hero-cover-content h3 {
+  margin: 0 0 16px;
+  color: inherit;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 30px;
+}
+
+.hero-cover .hero-cover-content p {
+  margin: 0 0 16px;
+  color: inherit;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+}
+
+/* buttons: one column each (max 520px), stacked on mobile */
+.hero-cover .hero-cover-actions {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 32px;
+  margin-bottom: 56px;
+}
+
+.hero-cover .hero-cover-actions p {
+  flex: 0 1 100%;
+  max-width: 520px;
+  margin: 0;
+}
+
+.hero-cover .hero-cover-content > div > :last-child {
+  margin-bottom: 0;
+}
+
+.hero-cover .hero-cover-content > div > .hero-cover-actions:last-child {
+  margin-bottom: 56px;
+}
+
+/* red rectangular CTA (overrides the global white pill theme button) */
+main .hero-cover a.button:any-link {
+  position: relative;
+  z-index: 0;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 6px;
+  padding: 16px 20px;
+  background-color: var(--brand-accent, #d44233);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 22.5px;
+  white-space: normal;
+  text-align: center;
+  text-decoration: none;
+  transition: none;
+}
+
+/* indigo ellipse that grows from the centre on hover */
+main .hero-cover a.button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 50%;
+  background-color: var(--text-color, #24226a);
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.1, 0, 0.3, 1);
+}
+
+main .hero-cover a.button:hover::before,
+main .hero-cover a.button:focus-visible::before {
+  transform: scale(1.2, 4);
+}
+
+main .hero-cover a.button:hover,
+main .hero-cover a.button:focus-visible {
+  background-color: var(--brand-accent, #d44233);
+  color: #fff;
+}
+
+/* white arrow after the label */
+main .hero-cover a.button::after {
+  content: '';
+  display: inline-block;
+  flex: none;
+  width: 17px;
+  height: 16px;
+
+  /* vertical margins keep the arrow line at full line-height, even without a strut */
+  margin: 3px 0 3px 28px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='17'%3E%3Cpath d='m10.012.568 7.375 7.83-7.375 7.83m7.375-7.83H.59' stroke='%23FFF' stroke-width='.84' fill='none'/%3E%3C/svg%3E") center / cover no-repeat;
+  vertical-align: middle;
+  mask: none;
+  transform: none;
+  transition: none;
+}
+
+main .hero-cover a.button:hover::after {
+  transform: none;
+}
+
+@media (width >= 900px) {
+  .hero-cover {
+    padding: 44px;
+  }
+
+  .hero-cover .hero-cover-content {
+    padding-top: 30px;
+  }
+
+  .hero-cover .hero-cover-actions p {
+    flex: 0 1 calc((100% - 32px) / 2);
+  }
+
+  main .hero-cover a.button:any-link {
+    margin-bottom: 16px;
+    padding: 16px 28px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  main .hero-cover a.button::after {
+    margin-block: 4px;
+  }
+}

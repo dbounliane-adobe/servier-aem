@@ -45,6 +45,13 @@
         "label": "Description"
       },
       {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Card / social image (og:image, blog cards)",
+        "multi": false
+      },
+      {
         "component": "text",
         "valueType": "string",
         "name": "keywords",
@@ -174,6 +181,18 @@
           {
             "name": "Highlight",
             "value": "highlight"
+          },
+          {
+            "name": "Accent (pale red box)",
+            "value": "accent"
+          },
+          {
+            "name": "Dark (indigo box)",
+            "value": "dark"
+          },
+          {
+            "name": "References (footnotes)",
+            "value": "references"
           }
         ]
       }
@@ -294,6 +313,155 @@
         "valueType": "string",
         "name": "imageAlt",
         "label": "Image description",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "article-list",
+    "fields": [
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "source",
+        "label": "Site index URL",
+        "value": "/query-index.json"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "prefix",
+        "label": "Article path prefix",
+        "value": "/newsroom/dossiers/"
+      },
+      {
+        "component": "number",
+        "valueType": "number",
+        "name": "pageSize",
+        "label": "Articles per page",
+        "value": 9
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "filters",
+        "label": "Filters (comma-separated: category, tags, year, month)",
+        "value": "category,tags,year,month"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "filterLabel",
+        "label": "Filter bar label",
+        "value": "Filtrer"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "categoryLabel",
+        "label": "Sub-category filter label",
+        "value": "Sous-catégorie"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "yearLabel",
+        "label": "Year filter label",
+        "value": "Année"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "monthLabel",
+        "label": "Month filter label",
+        "value": "Mois"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tagsLabel",
+        "label": "Tags filter label",
+        "value": "Étiquettes"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "submitLabel",
+        "label": "Filter button label",
+        "value": "Filtrer"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "resetLabel",
+        "label": "Reset button label",
+        "value": "Réinitialiser"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "readMore",
+        "label": "Read more label (screen readers)",
+        "value": "Lire la suite"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "results",
+        "label": "Results count message ({count} = number)",
+        "value": "{count} article(s)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "empty",
+        "label": "Empty state message",
+        "value": "Aucun article publié pour le moment."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "noResults",
+        "label": "No matching results message",
+        "value": "Aucun article ne correspond à vos critères."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "error",
+        "label": "Error message",
+        "value": "Les articles sont indisponibles pour le moment."
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "subscribe",
+        "label": "Subscribe link (optional)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subscribeLabel",
+        "label": "Subscribe link label",
+        "value": "Je m'abonne"
+      }
+    ]
+  },
+  {
+    "id": "callout-did-you-know",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Label (e.g. Le saviez-vous ?)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text",
         "value": ""
       }
     ]
@@ -541,6 +709,32 @@
     ]
   },
   {
+    "id": "hero-cover",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Background image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image description",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text (title, paragraphs, bold links as buttons)",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "hero-cta",
     "fields": [
       {
@@ -562,6 +756,32 @@
         "valueType": "string",
         "name": "text",
         "label": "Text (title, paragraph, call to action)",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "hero-page-banner",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Banner image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image description",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Title card (heading; optional list of links overrides the automatic breadcrumbs)",
         "value": ""
       }
     ]
@@ -687,6 +907,158 @@
             "value": "centered"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "share-social",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "value": "",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Add email link",
+            "value": "email"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label (e.g. Partager sur :)",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "table-striped",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "value": "",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "No header row",
+            "value": "no-header"
+          },
+          {
+            "name": "Bordered",
+            "value": "bordered"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "filter",
+        "label": "Columns",
+        "valueType": "string",
+        "value": "table-striped-2-columns",
+        "options": [
+          {
+            "name": "1 Column",
+            "value": "table-striped"
+          },
+          {
+            "name": "2 Columns",
+            "value": "table-striped-2-columns"
+          },
+          {
+            "name": "3 Columns",
+            "value": "table-striped-3-columns"
+          },
+          {
+            "name": "4 Columns",
+            "value": "table-striped-4-columns"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table-striped-row",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "column1text",
+        "label": "Column 1"
+      }
+    ]
+  },
+  {
+    "id": "table-striped-col-2",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "column1text",
+        "label": "Column 1"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "column2text",
+        "label": "Column 2"
+      }
+    ]
+  },
+  {
+    "id": "table-striped-col-3",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "column1text",
+        "label": "Column 1"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "column2text",
+        "label": "Column 2"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "column3text",
+        "label": "Column 3"
+      }
+    ]
+  },
+  {
+    "id": "table-striped-col-4",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "column1text",
+        "label": "Column 1"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "column2text",
+        "label": "Column 2"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "column3text",
+        "label": "Column 3"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "column4text",
+        "label": "Column 4"
       }
     ]
   },

@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/choses-savoir-autorisation-mise-marche-amm-medicament/",
+  "path": "newsroom/dossiers/choses-savoir-autorisation-mise-marche-amm-medicament",
+  "timestamp": "2026-10-15T16:08:37.572Z",
+  "title": "6 choses à savoir sur l’autorisation de mise sur le marché (AMM)",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

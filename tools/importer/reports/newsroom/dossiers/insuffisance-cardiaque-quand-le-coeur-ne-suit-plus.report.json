@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/insuffisance-cardiaque-quand-le-coeur-ne-suit-plus/",
+  "path": "newsroom/dossiers/insuffisance-cardiaque-quand-le-coeur-ne-suit-plus",
+  "timestamp": "2026-10-15T16:07:58.698Z",
+  "title": "Insuffisance cardiaque : quand le cœur ne suit plus",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

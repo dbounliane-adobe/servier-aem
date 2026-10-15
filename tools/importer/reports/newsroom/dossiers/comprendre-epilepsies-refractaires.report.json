@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/comprendre-epilepsies-refractaires/",
+  "path": "newsroom/dossiers/comprendre-epilepsies-refractaires",
+  "timestamp": "2026-10-15T16:07:05.696Z",
+  "title": "Comprendre les épilepsies réfractaires",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

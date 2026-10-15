@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/importance-etudes-vie-reelle/",
+  "path": "newsroom/dossiers/importance-etudes-vie-reelle",
+  "timestamp": "2026-10-15T16:09:04.574Z",
+  "title": "Décryptage : L’importance des études en vie réelle",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

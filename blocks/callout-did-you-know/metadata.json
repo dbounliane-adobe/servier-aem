@@ -1,0 +1,35 @@
+{
+  "variantName": "callout-did-you-know",
+  "baseBlock": "callout",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "imagePattern": "decorative-icon",
+    "purpose": "callout",
+    "structure": "shadowed label card (lightbulb icon above the label) on the left, rich text on the right; stacked on mobile",
+    "isFullWidth": false,
+    "hasGrid": false,
+    "sourceNotes": {
+      "variantReason": "No local or Block Collection callout matches; label is authored so other callout titles stay possible, icon is decorative (added by JS)."
+    }
+  },
+  "contentPattern": {
+    "structure": "row 1 label text ('Le saviez-vous ?'); row 2 rich text (paragraphs with footnote superscripts). A single row with two cells [label | text] is also accepted.",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/newsroom/dossiers/dystrophie-musculaire-becker-maladie-evolutions-multiples/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-15T15:10:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

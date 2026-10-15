@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/cancer-les-anticorps-anti-pd1-pdl1-de-nouvelles-cles-pour-limmunotherapie/",
+  "path": "newsroom/dossiers/cancer-les-anticorps-anti-pd1-pdl1-de-nouvelles-cles-pour-limmunotherapie",
+  "timestamp": "2026-10-15T16:09:40.447Z",
+  "title": "Cancer : les anticorps anti-PD1 / PDL1, de nouvelles clés pour l’immunothérapie",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

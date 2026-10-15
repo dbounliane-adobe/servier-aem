@@ -1,0 +1,103 @@
+/* "Le saviez-vous ?" callout: white label card (lightbulb + label) beside rich text */
+.callout-did-you-know {
+  --callout-did-you-know-accent: #fdc400;
+
+  margin: 44px 0;
+  color: var(--text-color);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+}
+
+/* label card: shrinks to its content, capped at 280px */
+.callout-did-you-know .callout-did-you-know-label {
+  position: relative;
+  box-sizing: border-box;
+  max-width: 280px;
+  margin-bottom: 32px;
+  padding: 36px;
+  border-radius: 6px;
+  background-color: var(--background-color, #fff);
+  box-shadow: 0 8px 64px 0 rgb(0 0 0 / 6%);
+  text-align: center;
+}
+
+/* yellow bar under the card, offset from the left edge */
+.callout-did-you-know .callout-did-you-know-label::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -5px;
+  width: 95%;
+  height: 5px;
+  border-radius: 0 0 6px 6px;
+  background-color: var(--callout-did-you-know-accent);
+}
+
+.callout-did-you-know .callout-did-you-know-icon {
+  display: block;
+  color: var(--callout-did-you-know-accent);
+  line-height: 0;
+}
+
+.callout-did-you-know .callout-did-you-know-icon svg {
+  display: block;
+  width: 43px;
+  height: 45px;
+  margin: 0 auto 12px;
+}
+
+.callout-did-you-know .callout-did-you-know-title,
+.callout-did-you-know .callout-did-you-know-title > * {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 36px;
+}
+
+.callout-did-you-know .callout-did-you-know-text {
+  min-width: 0;
+  max-width: 625px;
+}
+
+.callout-did-you-know .callout-did-you-know-text p,
+.callout-did-you-know .callout-did-you-know-text ul,
+.callout-did-you-know .callout-did-you-know-text ol {
+  margin: 0 0 16px;
+}
+
+.callout-did-you-know .callout-did-you-know-text sup {
+  position: relative;
+  top: -6px;
+  font-size: 12px;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+.callout-did-you-know .callout-did-you-know-text a:any-link {
+  color: inherit;
+}
+
+/* desktop: card left, text right, vertically centred */
+@media (width >= 1024px) {
+  .callout-did-you-know {
+    display: flex;
+    align-items: center;
+  }
+
+  .callout-did-you-know .callout-did-you-know-label {
+    flex: 0 0 auto;
+  }
+
+  /* source text column carries a leading empty paragraph (16px) inside the flex item */
+  .callout-did-you-know .callout-did-you-know-text {
+    flex: 0 1 auto;
+    margin-left: 40px;
+    padding-top: 16px;
+  }
+
+  .callout-did-you-know.callout-did-you-know-no-label .callout-did-you-know-text {
+    margin-left: 0;
+  }
+}

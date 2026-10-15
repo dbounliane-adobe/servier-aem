@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/therapies-ciblees-traitements-cancer/",
+  "path": "newsroom/dossiers/therapies-ciblees-traitements-cancer",
+  "timestamp": "2026-10-15T16:08:43.492Z",
+  "title": "Les thérapies ciblées, des traitements contre le cancer",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/travailler-avec-patients-mieux-soigner/",
+  "path": "newsroom/dossiers/travailler-avec-patients-mieux-soigner",
+  "timestamp": "2026-10-15T16:09:10.902Z",
+  "title": "Travailler avec les patients pour mieux les soigner",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

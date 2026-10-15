@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/les-nouveaux-modes-de-travail/",
+  "path": "newsroom/dossiers/les-nouveaux-modes-de-travail",
+  "timestamp": "2026-10-15T16:09:23.309Z",
+  "title": "Les nouveaux modes de travail",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

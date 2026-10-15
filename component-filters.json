@@ -26,7 +26,13 @@
       "scientific-teaser",
       "embed-social",
       "carousel-stories",
-      "hero-cta"
+      "hero-cta",
+      "hero-page-banner",
+      "callout-did-you-know",
+      "table-striped",
+      "hero-cover",
+      "share-social",
+      "article-list"
     ]
   },
   {
@@ -60,6 +66,30 @@
     "id": "key-figures",
     "components": [
       "key-figure"
+    ]
+  },
+  {
+    "id": "table-striped",
+    "components": [
+      "table-striped-row"
+    ]
+  },
+  {
+    "id": "table-striped-2-columns",
+    "components": [
+      "table-striped-col-2"
+    ]
+  },
+  {
+    "id": "table-striped-3-columns",
+    "components": [
+      "table-striped-col-3"
+    ]
+  },
+  {
+    "id": "table-striped-4-columns",
+    "components": [
+      "table-striped-col-4"
     ]
   },
   {

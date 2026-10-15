@@ -46,6 +46,13 @@
           "label": "Description"
         },
         {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Card / social image (og:image, blog cards)",
+          "multi": false
+        },
+        {
           "component": "text",
           "valueType": "string",
           "name": "keywords",

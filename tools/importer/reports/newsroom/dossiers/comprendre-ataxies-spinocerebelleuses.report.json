@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/comprendre-ataxies-spinocerebelleuses/",
+  "path": "newsroom/dossiers/comprendre-ataxies-spinocerebelleuses",
+  "timestamp": "2026-10-15T16:05:57.966Z",
+  "title": "Comprendre les ataxies spinocérébelleuses ",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

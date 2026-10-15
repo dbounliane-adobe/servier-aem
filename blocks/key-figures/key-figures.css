@@ -1,37 +1,68 @@
+/* key-figures: value + label figures; colours inherit from the section (e.g. "dark") */
 .key-figures dl {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 32px;
-  margin: 0;
+  box-sizing: border-box;
+
+  /* source content width: 940px group minus 2 x 44px padding */
+  max-width: 852px;
+  margin: 0 auto;
+  color: inherit;
   text-align: center;
 }
 
 .key-figures dl > div {
   display: flex;
+  flex: 1 1 100%;
   flex-direction: column;
-  padding: 24px;
-  border-top: 2px solid var(--brand-accent, var(--link-color));
+  min-width: 0;
+  max-width: 520px;
+  overflow-wrap: break-word;
 }
 
-.key-figures dt {
-  font-size: 18px;
+.key-figures dt,
+.key-figures dd {
+  margin: 0;
+  color: inherit;
+  font-weight: 400;
 }
 
+.key-figures dt p,
+.key-figures dd p {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+
+/* value */
 .key-figures dd {
   order: -1;
-  margin: 0 0 16px;
-  color: var(--link-color);
-  font-size: clamp(40px, 5vw, 64px);
-  font-weight: 700;
+  font-size: 50px;
+  line-height: 0.9;
 }
 
-@media (width >= 600px) {
+/* label */
+.key-figures dt {
+  margin: 12px 0 16px;
+  font-size: 16px;
+  line-height: 1.375;
+}
+
+@media (width >= 768px) {
   .key-figures dl {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: space-between;
   }
 }
 
 @media (width >= 900px) {
   .key-figures dl {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    flex-wrap: nowrap;
+    text-align: left;
+  }
+
+  .key-figures dl > div {
+    flex-basis: 0;
   }
 }

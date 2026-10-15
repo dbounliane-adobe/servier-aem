@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/comprendre-les-etudes-cliniques/",
+  "path": "newsroom/dossiers/comprendre-les-etudes-cliniques",
+  "timestamp": "2026-10-15T16:06:04.769Z",
+  "title": "Comprendre les études cliniques",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

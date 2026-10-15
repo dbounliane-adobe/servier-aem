@@ -1,0 +1,50 @@
+{
+  "definitions": [
+    {
+      "title": "Servier Article List",
+      "id": "article-list",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Article List",
+              "model": "article-list",
+              "key-value": true,
+              "source": "/query-index.json",
+              "prefix": "/newsroom/dossiers/",
+              "pageSize": 9,
+              "filters": "category,tags,year,month"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "article-list",
+      "fields": [
+        { "component": "aem-content", "valueType": "string", "name": "source", "label": "Site index URL", "value": "/query-index.json" },
+        { "component": "text", "valueType": "string", "name": "prefix", "label": "Article path prefix", "value": "/newsroom/dossiers/" },
+        { "component": "number", "valueType": "number", "name": "pageSize", "label": "Articles per page", "value": 9 },
+        { "component": "text", "valueType": "string", "name": "filters", "label": "Filters (comma-separated: category, tags, year, month)", "value": "category,tags,year,month" },
+        { "component": "text", "valueType": "string", "name": "filterLabel", "label": "Filter bar label", "value": "Filtrer" },
+        { "component": "text", "valueType": "string", "name": "categoryLabel", "label": "Sub-category filter label", "value": "Sous-catégorie" },
+        { "component": "text", "valueType": "string", "name": "yearLabel", "label": "Year filter label", "value": "Année" },
+        { "component": "text", "valueType": "string", "name": "monthLabel", "label": "Month filter label", "value": "Mois" },
+        { "component": "text", "valueType": "string", "name": "tagsLabel", "label": "Tags filter label", "value": "Étiquettes" },
+        { "component": "text", "valueType": "string", "name": "submitLabel", "label": "Filter button label", "value": "Filtrer" },
+        { "component": "text", "valueType": "string", "name": "resetLabel", "label": "Reset button label", "value": "Réinitialiser" },
+        { "component": "text", "valueType": "string", "name": "readMore", "label": "Read more label (screen readers)", "value": "Lire la suite" },
+        { "component": "text", "valueType": "string", "name": "results", "label": "Results count message ({count} = number)", "value": "{count} article(s)" },
+        { "component": "text", "valueType": "string", "name": "empty", "label": "Empty state message", "value": "Aucun article publié pour le moment." },
+        { "component": "text", "valueType": "string", "name": "noResults", "label": "No matching results message", "value": "Aucun article ne correspond à vos critères." },
+        { "component": "text", "valueType": "string", "name": "error", "label": "Error message", "value": "Les articles sont indisponibles pour le moment." },
+        { "component": "aem-content", "valueType": "string", "name": "subscribe", "label": "Subscribe link (optional)" },
+        { "component": "text", "valueType": "string", "name": "subscribeLabel", "label": "Subscribe link label", "value": "Je m'abonne" }
+      ]
+    }
+  ],
+  "filters": []
+}

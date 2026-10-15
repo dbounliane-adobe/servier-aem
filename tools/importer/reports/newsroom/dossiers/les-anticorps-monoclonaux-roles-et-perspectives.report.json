@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/les-anticorps-monoclonaux-roles-et-perspectives/",
+  "path": "newsroom/dossiers/les-anticorps-monoclonaux-roles-et-perspectives",
+  "timestamp": "2026-10-15T16:10:04.502Z",
+  "title": "Les anticorps monoclonaux, rôles et perspectives",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

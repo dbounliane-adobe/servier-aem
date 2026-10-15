@@ -1,0 +1,216 @@
+/* page banner: photo, overlapping title card, breadcrumbs
+   values extracted from servier.com .page-header--classic */
+
+/* source container: 100% - 40px gutters, 640px (md), 980px (lg), 1130px (xl) */
+body main > .section > div.hero-page-banner-wrapper {
+  width: auto;
+  margin: 0 20px;
+}
+
+/* on the source the next content starts right at the banner box, which already
+   includes the 64px left below the card by its upward offset */
+body main > .section.hero-page-banner-container {
+  margin-bottom: 0;
+}
+
+.hero-page-banner {
+  display: grid;
+  grid-template-areas:
+    'media'
+    'card'
+    'crumbs';
+  grid-template-columns: 100%;
+  margin-top: 24px;
+  color: var(--text-color);
+}
+
+/* photo */
+.hero-page-banner .hero-page-banner-media {
+  grid-area: media;
+  overflow: hidden;
+  border-radius: 6px;
+  background-color: #ebebf9;
+}
+
+.hero-page-banner .hero-page-banner-media > div,
+.hero-page-banner .hero-page-banner-media p,
+.hero-page-banner .hero-page-banner-media picture {
+  display: block;
+  margin: 0;
+}
+
+.hero-page-banner .hero-page-banner-media img {
+  display: block;
+  width: 100%;
+  height: 196px;
+  border-radius: 6px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* title card: shifted 64px up over the photo (relative offset, as on the source) */
+.hero-page-banner .hero-page-banner-card,
+.hero-page-banner .hero-page-banner-breadcrumbs {
+  position: relative;
+  top: -64px;
+}
+
+.hero-page-banner .hero-page-banner-card {
+  grid-area: card;
+  z-index: 10;
+  box-sizing: border-box;
+  margin-left: calc(100% / 6);
+  padding: 24px;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 8px 46px 0 rgb(0 0 0 / 4%);
+}
+
+/* yellow bar under the card */
+.hero-page-banner .hero-page-banner-card::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 5%;
+  right: 0;
+  height: 5px;
+  border-radius: 0 0 6px 6px;
+  background-color: #fdc400;
+}
+
+.hero-page-banner .hero-page-banner-card h1,
+.hero-page-banner .hero-page-banner-card h2 {
+  max-width: 700px;
+  margin: 0;
+  color: inherit;
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.hero-page-banner .hero-page-banner-card > div > :last-child {
+  margin-bottom: 0;
+}
+
+/* highlighted word: lavender band behind the lower part of the text */
+.hero-page-banner .hero-page-banner-card strong,
+.hero-page-banner .hero-page-banner-card .hero-page-banner-highlight {
+  display: inline-block;
+  position: relative;
+  font-weight: inherit;
+}
+
+.hero-page-banner .hero-page-banner-card h2 strong,
+.hero-page-banner .hero-page-banner-card h2 .hero-page-banner-highlight {
+  font-weight: 700;
+}
+
+.hero-page-banner .hero-page-banner-card strong::after,
+.hero-page-banner .hero-page-banner-card .hero-page-banner-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -4px;
+  right: -4px;
+  z-index: -10;
+  height: 11px;
+  background-color: #ebebf9;
+}
+
+/* breadcrumbs */
+.hero-page-banner .hero-page-banner-breadcrumbs {
+  grid-area: crumbs;
+  box-sizing: border-box;
+  padding: 32px 16px 0 0;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 18px;
+}
+
+.hero-page-banner .hero-page-banner-breadcrumbs ol {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-page-banner .hero-page-banner-breadcrumbs li {
+  display: inline;
+}
+
+.hero-page-banner .hero-page-banner-breadcrumbs li + li::before {
+  content: ' > ' / '';
+  font-weight: 300;
+}
+
+.hero-page-banner .hero-page-banner-breadcrumbs a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hero-page-banner .hero-page-banner-breadcrumbs li[aria-current='page'] {
+  font-weight: 700;
+}
+
+@media (width >= 768px) {
+  body main > .section > div.hero-page-banner-wrapper {
+    width: 640px;
+    margin: 0 auto;
+  }
+
+  .hero-page-banner .hero-page-banner-card h1,
+  .hero-page-banner .hero-page-banner-card h2 {
+    font-size: 32px;
+  }
+}
+
+/* desktop: breadcrumbs left third under the photo, card right two-thirds overlapping it */
+@media (width >= 1024px) {
+  body main > .section > div.hero-page-banner-wrapper {
+    width: 980px;
+  }
+
+  .hero-page-banner {
+    grid-template-areas:
+      'media media'
+      'crumbs card';
+    grid-template-columns: 1fr 2fr;
+    margin-top: 48px;
+  }
+
+  .hero-page-banner .hero-page-banner-media img {
+    height: 392px;
+  }
+
+  .hero-page-banner .hero-page-banner-card {
+    margin-left: 0;
+    padding: 36px 144px 44px 40px;
+  }
+
+  .hero-page-banner .hero-page-banner-card h1,
+  .hero-page-banner .hero-page-banner-card h2 {
+    font-size: 35px;
+  }
+
+  .hero-page-banner .hero-page-banner-card strong::after,
+  .hero-page-banner .hero-page-banner-card .hero-page-banner-highlight::after {
+    height: 21px;
+  }
+
+  .hero-page-banner .hero-page-banner-breadcrumbs {
+    padding-top: 80px;
+  }
+}
+
+@media (width >= 1280px) {
+  body main > .section > div.hero-page-banner-wrapper {
+    width: 1130px;
+  }
+}
+
+/* no photo: nothing to overlap */
+.hero-page-banner.hero-page-banner-no-image .hero-page-banner-card,
+.hero-page-banner.hero-page-banner-no-image .hero-page-banner-breadcrumbs {
+  top: 0;
+}

@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/dystrophie-musculaire-becker-maladie-evolutions-multiples/",
+  "path": "newsroom/dossiers/dystrophie-musculaire-becker-maladie-evolutions-multiples",
+  "timestamp": "2026-10-15T16:10:32.996Z",
+  "title": "Comprendre la dystrophie musculaire de Becker",
+  "template": "article",
+  "blocks": [
+    "hero-page-banner",
+    "article-header",
+    "callout-did-you-know",
+    "key-figures",
+    "table-striped",
+    "hero-cover",
+    "share-social"
+  ]
+}

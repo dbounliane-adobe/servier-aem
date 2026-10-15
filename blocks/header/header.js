@@ -301,9 +301,13 @@ function initSticky(wrapper) {
     const threshold = wrapper.offsetHeight;
     if (y <= 0) {
       wrapper.classList.remove('is-sticky', 'is-sticky-visible');
-    } else if (y > threshold) {
-      wrapper.classList.add('is-sticky');
-      wrapper.classList.toggle('is-sticky-visible', y < lastY);
+    } else {
+      if (y > threshold) wrapper.classList.add('is-sticky');
+      // once pinned, scrolling up reveals the bar even within the header zone
+      // (short pages would otherwise show an empty header slot)
+      if (wrapper.classList.contains('is-sticky')) {
+        wrapper.classList.toggle('is-sticky-visible', y < lastY);
+      }
     }
     lastY = y;
   };
@@ -322,7 +326,9 @@ function initSticky(wrapper) {
  */
 function hasHeroFirst() {
   const first = document.querySelector('main > .section');
-  return !!first?.querySelector('[class*="hero"]');
+  // full-screen heroes only (homepage campaign hero, boilerplate hero) — not the
+  // newsroom page banner (hero-page-banner), which sits below a solid header
+  return !!first?.querySelector('.campaign-hero, .hero');
 }
 
 /**

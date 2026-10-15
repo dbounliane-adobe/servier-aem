@@ -1,0 +1,129 @@
+/* share links: "Partager sur :" label above a row of 41px square icon buttons */
+
+/* source: the share footer sits 24px (mt-6) under the article body, not a full section gap */
+main > .section:has(+ .section.share-social-container) {
+  margin-bottom: 24px;
+}
+
+.share-social {
+  color: var(--text-color);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+}
+
+/* label: 14px/21px medium; 2px top offset + 16px gap reproduce the source inline-block line box */
+.share-social .share-social-label {
+  margin: 0 0 16px;
+  padding-top: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+}
+
+.share-social .share-social-label > * {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.share-social .share-social-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.share-social .share-social-list li {
+  position: relative;
+  margin: 0;
+}
+
+.share-social .share-social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 41px;
+  height: 41px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background-color: rgb(235 235 249);
+  color: var(--text-color);
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.share-social .share-social-button:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.share-social .share-social-button:hover,
+.share-social .share-social-button:focus-visible {
+  background-color: #fff;
+  color: var(--text-color);
+}
+
+.share-social .share-social-button svg {
+  display: block;
+  flex: none;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.share-social .share-social-button:hover svg,
+.share-social .share-social-button:focus-visible svg {
+  transform: scale(1.1);
+}
+
+/* "Lien copié !" feedback: 12px/18px, centred 24px under the copy button */
+.share-social .share-social-feedback {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  translate: -50% 0;
+  color: var(--text-color);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.share-social .share-social-copy.is-copied .share-social-feedback {
+  opacity: 1;
+  transform: none;
+}
+
+/* source article column: 680px box with 24px inner padding (632px content) */
+@media (width >= 768px) and (width < 1024px) {
+  .share-social {
+    padding-inline: 24px;
+  }
+}
+
+/* source article column: 940px centred */
+@media (width >= 1280px) {
+  .share-social {
+    max-width: 940px;
+    margin-inline: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .share-social .share-social-button,
+  .share-social .share-social-button svg,
+  .share-social .share-social-feedback {
+    transition: none;
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "variantName": "key-figures",
+  "baseBlock": "key-figures",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "colorScheme": "inherits-section",
+    "density": "minimal",
+    "imagePattern": "none",
+    "purpose": "key-figures",
+    "structure": "row of figures, each a large value above a short description (3 columns on desktop)",
+    "isFullWidth": false,
+    "hasGrid": true,
+    "variantReason": "Existing key-figures block (unused on homepage); dark look on the article page comes from the section style \"dark\"."
+  },
+  "contentPattern": {
+    "structure": "container with repeating key-figure items; each item row has 2 cells: value (e.g. 1,6), label (description)",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/newsroom/dossiers/dystrophie-musculaire-becker-maladie-evolutions-multiples/",
+        "instanceId": null,
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-15T15:10:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

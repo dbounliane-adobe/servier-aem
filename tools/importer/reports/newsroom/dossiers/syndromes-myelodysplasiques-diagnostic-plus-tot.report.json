@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/syndromes-myelodysplasiques-diagnostic-plus-tot/",
+  "path": "newsroom/dossiers/syndromes-myelodysplasiques-diagnostic-plus-tot",
+  "timestamp": "2026-10-15T16:08:50.600Z",
+  "title": "Syndromes myélodysplasiques : poser le bon diagnostic au plus tôt",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

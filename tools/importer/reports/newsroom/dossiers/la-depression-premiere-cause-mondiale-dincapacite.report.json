@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/newsroom/dossiers/la-depression-premiere-cause-mondiale-dincapacite/",
+  "path": "newsroom/dossiers/la-depression-premiere-cause-mondiale-dincapacite",
+  "timestamp": "2026-10-15T16:07:34.200Z",
+  "title": "Mieux comprendre la dépression",
+  "template": "article-card",
+  "blocks": [
+    "hero-page-banner",
+    "article-header"
+  ]
+}

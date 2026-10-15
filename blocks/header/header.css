@@ -110,6 +110,11 @@ header.header-overlay {
   cursor: pointer;
 }
 
+/* solid header at rest: black bars (indigo once the drawer opens or the bar is pinned) */
+.header .nav-wrapper:not(.is-overlay, .is-menu-open, .is-sticky) .nav-hamburger {
+  color: #000;
+}
+
 .header .nav-hamburger-lines {
   display: flex;
   flex-direction: column;
@@ -570,6 +575,11 @@ header.header-overlay {
     transition: none;
   }
 
+  /* solid header (no hero): indigo rule under the nav */
+  .header .nav-wrapper:not(.is-overlay) .nav-main {
+    border-bottom-color: var(--nav-ink);
+  }
+
   /* main navigation */
   .header .nav-sections {
     display: flex;
@@ -682,11 +692,13 @@ header.header-overlay {
     padding: 0;
   }
 
-  .header .nav-search-toggle {
+  /* over a hero: white circle + indigo icon; solid header keeps the indigo
+     circle + white icon from the base rules */
+  .header .nav-wrapper.is-overlay .nav-search-toggle:not(:hover, :focus-visible) {
     background-color: #fff;
   }
 
-  .header .nav-search-toggle img {
+  .header .nav-wrapper.is-overlay .nav-search-toggle img {
     filter: none;
   }
 
@@ -702,6 +714,11 @@ header.header-overlay {
     margin: 0;
     padding: 0 24px;
     background-color: rgb(255 255 255 / 40%);
+  }
+
+  /* solid header (no hero): lavender strip as on the source */
+  .header .nav-wrapper:not(.is-overlay) .nav-secondary {
+    background-color: rgb(235 235 249);
   }
 
   .header .nav-wrapper .nav-secondary::before {
