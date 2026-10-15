@@ -26,7 +26,7 @@
       "id": "article-list",
       "fields": [
         { "component": "aem-content", "valueType": "string", "name": "source", "label": "Site index URL", "value": "/query-index.json" },
-        { "component": "text", "valueType": "string", "name": "prefix", "label": "Article path prefix", "value": "/newsroom/dossiers/" },
+        { "component": "aem-content", "valueType": "string", "name": "prefix", "label": "Article path prefix", "value": "/newsroom/dossiers/" },
         { "component": "number", "valueType": "number", "name": "pageSize", "label": "Articles per page", "value": 9 },
         { "component": "text", "valueType": "string", "name": "filters", "label": "Filters (comma-separated: category, tags, year, month)", "value": "category,tags,year,month" },
         { "component": "text", "valueType": "string", "name": "filterLabel", "label": "Filter bar label", "value": "Filtrer" },

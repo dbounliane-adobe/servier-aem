@@ -14,7 +14,7 @@
       "id": "article-feed",
       "fields": [
         { "component": "aem-content", "valueType": "string", "name": "source", "label": "Site index URL", "value": "/query-index.json" },
-        { "component": "text", "valueType": "string", "name": "prefix", "label": "Article path prefix", "value": "/newsroom/" },
+        { "component": "aem-content", "valueType": "string", "name": "prefix", "label": "Article path prefix", "value": "/newsroom/" },
         { "component": "text", "valueType": "string", "name": "category", "label": "Restrict to a category (optional)", "value": "" },
         { "component": "number", "valueType": "number", "name": "limit", "label": "Maximum visible articles", "value": 3 },
         { "component": "text", "valueType": "string", "name": "all", "label": "All categories label", "value": "" },

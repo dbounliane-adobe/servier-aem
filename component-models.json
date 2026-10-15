@@ -209,7 +209,7 @@
         "value": "/query-index.json"
       },
       {
-        "component": "text",
+        "component": "aem-content",
         "valueType": "string",
         "name": "prefix",
         "label": "Article path prefix",
@@ -328,7 +328,7 @@
         "value": "/query-index.json"
       },
       {
-        "component": "text",
+        "component": "aem-content",
         "valueType": "string",
         "name": "prefix",
         "label": "Article path prefix",
