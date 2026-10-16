@@ -6,9 +6,12 @@
         "component": "select",
         "valueType": "string",
         "name": "theme",
-        "label": "Theme",
-        "value": "servier",
+        "label": "Theme (empty = site theme from the metadata sheet)",
         "options": [
+          {
+            "name": "Hériter du site",
+            "value": ""
+          },
           {
             "name": "Servier (global)",
             "value": "servier"
