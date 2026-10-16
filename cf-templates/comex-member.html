@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>Comité Exécutif – {{properties.elements.firstname.value}} {{properties.elements.lastname.value}}</title>
+    <meta property="og:title" content="Comité Exécutif – {{properties.elements.firstname.value}} {{properties.elements.lastname.value}}">
+    <meta name="description" content="{{properties.elements.position.value}}">
+    <meta property="og:image" content="{{properties.elements.photo.value}}">
+    <meta name="firstname" content="{{properties.elements.firstname.value}}">
+    <meta name="lastname" content="{{properties.elements.lastname.value}}">
+    <meta name="position" content="{{properties.elements.position.value}}">
+    <meta name="linkedin" content="{{properties.elements.linkedin.value}}">
+    <meta name="template" content="comex-member">
+    <meta name="theme" content="servier">
+    <meta name="language" content="fr">
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div>
+        <div class="hero-page-banner">
+          <div><div>
+            <picture><img src="/content/dam/servier-aem/comex/servier-banniere-officielle-logo.jpg" alt="Bannière officielle de Servier"></picture>
+          </div></div>
+          <div><div>
+            <h1>Comité <strong>Exécutif</strong></h1>
+            <ul>
+              <li><a href="/">Accueil</a></li>
+              <li><a href="/groupe/">Groupe Servier</a></li>
+              <li><a href="/groupe/comex/">Comité Exécutif</a></li>
+              <li>Comité Exécutif – {{properties.elements.firstname.value}} {{properties.elements.lastname.value}}</li>
+            </ul>
+          </div></div>
+        </div>
+      </div>
+      <div>
+        <div class="comex-profile">
+          <div><div>photo</div><div>
+            {{#properties.elements.photo.value}}
+            <picture><img src="{{properties.elements.photo.value}}" alt=""></picture>
+            {{/properties.elements.photo.value}}
+          </div></div>
+          <div><div>firstname</div><div>{{properties.elements.firstname.value}}</div></div>
+          <div><div>lastname</div><div>{{properties.elements.lastname.value}}</div></div>
+          <div><div>position</div><div>{{properties.elements.position.value}}</div></div>
+          <div><div>linkedin</div><div>
+            {{#properties.elements.linkedin.value}}
+            <a href="{{properties.elements.linkedin.value}}">{{properties.elements.linkedin.value}}</a>
+            {{/properties.elements.linkedin.value}}
+          </div></div>
+          <div><div>biography</div><div>{{{properties.elements.biography.value}}}</div></div>
+        </div>
+        <div class="section-metadata">
+          <div><div>style</div><div>soft</div></div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>

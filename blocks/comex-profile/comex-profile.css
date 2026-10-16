@@ -1,0 +1,101 @@
+/*
+ * COMEX member profile ("fiche membre").
+ * Values extracted from servier.com/groupe/comex/comite-executif-* (computed styles at 375/768/1024/1440).
+ * Background + vertical padding come from the section style "soft" (styles/servier.css), not from here.
+ */
+.comex-profile {
+  max-width: 940px;
+  margin-inline: auto;
+}
+
+.comex-profile p {
+  margin: 0 0 16px;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+/* photo + summary: stacked below 782px (photo, then name/position/lead), 32px apart */
+.comex-profile .comex-profile-intro {
+  display: grid;
+  gap: 32px;
+  margin-bottom: 28px;
+}
+
+.comex-profile .comex-profile-photo,
+.comex-profile .comex-profile-summary {
+  min-width: 0;
+  max-width: 520px;
+}
+
+.comex-profile .comex-profile-photo picture,
+.comex-profile .comex-profile-photo img {
+  display: block;
+  width: 100%;
+}
+
+.comex-profile .comex-profile-photo img {
+  height: auto;
+  aspect-ratio: 454 / 524;
+  object-fit: cover;
+}
+
+.comex-profile .comex-profile-photo-empty {
+  display: none;
+}
+
+.comex-profile .comex-profile-name {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 35px;
+}
+
+.comex-profile .comex-profile-position {
+  color: var(--brand-accent);
+  font-weight: 300;
+}
+
+.comex-profile .comex-profile-position strong {
+  font-weight: 700;
+}
+
+/* LinkedIn tile: 48x48 image in an inline-block link (55px line box like the source) */
+.comex-profile .comex-profile-linkedin {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.comex-profile .comex-profile-linkedin a {
+  display: inline-block;
+}
+
+.comex-profile .comex-profile-linkedin img {
+  display: block;
+  width: 48px;
+  height: 48px;
+}
+
+@media (width >= 768px) {
+  .comex-profile .comex-profile-name {
+    font-size: 35px;
+    line-height: 43.75px;
+  }
+}
+
+@media (width >= 782px) {
+  .comex-profile .comex-profile-intro {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .comex-profile .comex-profile-summary {
+    align-self: end;
+  }
+}
+
+@media (width >= 1024px) {
+  .comex-profile p {
+    font-size: 18px;
+    line-height: 32px;
+  }
+}

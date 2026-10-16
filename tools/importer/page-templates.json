@@ -419,6 +419,150 @@
           "defaultContent": []
         }
       ]
+    },
+    {
+      "name": "comex",
+      "urls": [
+        "https://servier.com/groupe/comex/"
+      ],
+      "representativeUrl": "https://servier.com/groupe/comex/",
+      "urlPattern": "/groupe/comex/",
+      "description": "COMEX listing: page banner, intro (eyebrow + 2 columns), member grid fed by the comex Content Fragments, governance CTA",
+      "blocks": [
+        {
+          "name": "hero-page-banner",
+          "instances": [
+            "#main > .page-header--classic"
+          ]
+        },
+        {
+          "name": "columns",
+          "instances": [
+            ".content-page > .wp-block-group.alignwide > .wp-block-columns.has-logo"
+          ]
+        },
+        {
+          "name": "comex-members",
+          "instances": [
+            ".content-page > .wp-block-group.has-indigo-50-background-color"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "1",
+          "name": "page-banner",
+          "selector": [
+            "#main > .page-header--classic"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-page-banner"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "2",
+          "name": "intro",
+          "selector": [
+            ".content-page > .wp-block-group.alignwide"
+          ],
+          "style": null,
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": [
+            ".content-page > .wp-block-group.alignwide > p.is-style-surtitle"
+          ]
+        },
+        {
+          "id": "3",
+          "name": "members",
+          "selector": [
+            ".content-page > .wp-block-group.has-indigo-50-background-color"
+          ],
+          "style": "soft",
+          "blocks": [
+            "comex-members"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "4",
+          "name": "governance-cta",
+          "selector": [
+            ".content-page > .wp-block-group.is-layout-constrained:not(.alignfull):not(.alignwide)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".content-page > .wp-block-group.is-layout-constrained:not(.alignfull):not(.alignwide) > h2",
+            ".content-page > .wp-block-group.is-layout-constrained:not(.alignfull):not(.alignwide) .wp-block-buttons"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "comex-member",
+      "urls": [
+        "https://servier.com/groupe/comex/comite-executif-olivier-laureau/",
+        "https://servier.com/groupe/comex/comite-executif-dr-claude-bertrand/",
+        "https://servier.com/groupe/comex/comite-executif-damien-catoir/",
+        "https://servier.com/groupe/comex/comite-executif-virginie-dominguez/",
+        "https://servier.com/groupe/comex/hani-friedman-bouganim/",
+        "https://servier.com/groupe/comex/comite-executif-dr-philippe-gonnard/",
+        "https://servier.com/groupe/comex/comite-executif-david-hindley/",
+        "https://servier.com/groupe/comex/comite-executif-arnaud-lallouette/",
+        "https://servier.com/groupe/comex/david-k-lee/",
+        "https://servier.com/groupe/comex/comite-executif-pascal-lemaire/",
+        "https://servier.com/groupe/comex/comite-executif-charlotte-marmousez-tartar/",
+        "https://servier.com/groupe/comex/comite-executif-stephane-mascarau/"
+      ],
+      "representativeUrl": "https://servier.com/groupe/comex/comite-executif-olivier-laureau/",
+      "urlPattern": "/groupe/comex/*",
+      "description": "COMEX member fiche (LOCAL PREVIEW ONLY — in production the page is rendered from the CF by the overlay template cf-templates/comex-member.html)",
+      "blocks": [
+        {
+          "name": "hero-page-banner",
+          "instances": [
+            "#main > .page-header--classic"
+          ]
+        },
+        {
+          "name": "comex-profile",
+          "instances": [
+            ".content-page > .wp-block-group.has-indigo-50-background-color",
+            ".content-page > .wp-block-group.alignfull > .wp-block-group.has-indigo-50-background-color"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "1",
+          "name": "page-banner",
+          "selector": [
+            "#main > .page-header--classic"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-page-banner"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "2",
+          "name": "profile",
+          "selector": [
+            ".content-page > .wp-block-group.has-indigo-50-background-color",
+            ".content-page > .wp-block-group.alignfull > .wp-block-group.has-indigo-50-background-color"
+          ],
+          "style": "soft",
+          "blocks": [
+            "comex-profile"
+          ],
+          "defaultContent": []
+        }
+      ]
     }
   ]
 }

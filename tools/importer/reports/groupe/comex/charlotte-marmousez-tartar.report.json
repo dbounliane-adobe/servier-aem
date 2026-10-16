@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/groupe/comex/comite-executif-charlotte-marmousez-tartar/",
+  "path": "groupe/comex/charlotte-marmousez-tartar",
+  "timestamp": "2026-10-16T10:17:49.795Z",
+  "title": "Comité Exécutif - Charlotte Marmousez-Tartar - Servier",
+  "template": "comex-member",
+  "blocks": [
+    "hero-page-banner",
+    "comex-profile"
+  ]
+}

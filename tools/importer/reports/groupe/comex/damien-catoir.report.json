@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/groupe/comex/comite-executif-damien-catoir/",
+  "path": "groupe/comex/damien-catoir",
+  "timestamp": "2026-10-16T10:17:04.499Z",
+  "title": "Comité Exécutif - Damien Catoir - Servier",
+  "template": "comex-member",
+  "blocks": [
+    "hero-page-banner",
+    "comex-profile"
+  ]
+}

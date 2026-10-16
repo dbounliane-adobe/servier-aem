@@ -1,0 +1,19 @@
+{
+  "paths": {
+    "mappings": [
+      "/content/servier-aem/:/",
+      "/content/dam/servier-aem/comex/:/groupe/comex/"
+    ],
+    "includes": [
+      "/content/servier-aem/",
+      "/content/dam/servier-aem/comex/"
+    ]
+  },
+  "xwalk": {
+    "content-fragment-overlay": {
+      "/content/dam/servier-aem/comex/**": {
+        "includes": ["/conf/servier-aem/settings/dam/cfm/models/comex"]
+      }
+    }
+  }
+}

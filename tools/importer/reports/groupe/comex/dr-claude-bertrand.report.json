@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/groupe/comex/comite-executif-dr-claude-bertrand/",
+  "path": "groupe/comex/dr-claude-bertrand",
+  "timestamp": "2026-10-16T10:16:59.535Z",
+  "title": "Comité Exécutif - Dr Claude Bertrand - Servier",
+  "template": "comex-member",
+  "blocks": [
+    "hero-page-banner",
+    "comex-profile"
+  ]
+}

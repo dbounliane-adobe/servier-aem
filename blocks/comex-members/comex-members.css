@@ -1,0 +1,153 @@
+/*
+ * COMEX members grid. Values from servier.com/groupe/comex/ (WP columns of
+ * member groups): 1 column (cards max 520px) below 782px, 3 columns with a
+ * 32px gutter from 782px, 28px between rows. Card: 520/600 photo, name,
+ * position, then a row with the small outline "En savoir plus" button and a
+ * 43px LinkedIn square pushed to the right edge. Background / vertical padding
+ * belong to the "soft" section style, not to this block.
+ */
+.comex-members .comex-members-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+}
+
+.comex-members .comex-members-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 520px;
+}
+
+.comex-members .comex-members-photo picture,
+.comex-members .comex-members-photo img {
+  display: block;
+  width: 100%;
+}
+
+.comex-members .comex-members-photo img {
+  height: auto;
+  aspect-ratio: 520 / 600;
+  object-fit: cover;
+}
+
+.comex-members .comex-members-name {
+  margin: 32px 0 0;
+  color: var(--text-color);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.comex-members .comex-members-position {
+  margin: 0 0 8px;
+  color: var(--text-color);
+  font-size: var(--body-font-size-xs);
+  font-weight: 300;
+  line-height: 18px;
+}
+
+/* button left, LinkedIn square right (WP is-not-stacked-on-mobile columns) */
+.comex-members .comex-members-actions {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 50px;
+  margin: 32px 0 28px;
+}
+
+/* small outline button: coral 1px border, 6px radius, arrow after the label */
+.comex-members a.comex-members-more:any-link {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  border: 1px solid var(--brand-accent);
+  border-radius: 6px;
+  padding: 10px 16px;
+  background-color: transparent;
+  color: var(--brand-accent);
+  font-size: var(--body-font-size-s);
+  font-weight: 400;
+  line-height: 21px;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  transition: transform 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.comex-members a.comex-members-more::after {
+  content: '';
+  display: inline-block;
+  position: relative;
+  width: 13px;
+  height: 12px;
+  margin-left: 8px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='17'%3E%3Cpath d='m10.012.568 7.375 7.83-7.375 7.83m7.375-7.83H.59' stroke='%23000' stroke-width='.84' fill='none'/%3E%3C/svg%3E") center / 13px auto no-repeat;
+  vertical-align: middle;
+}
+
+.comex-members a.comex-members-more:hover,
+.comex-members a.comex-members-more:focus-visible,
+.comex-members a.comex-members-more:active {
+  color: var(--brand-accent);
+  transform: scale(1.05);
+}
+
+.comex-members a.comex-members-linkedin:any-link {
+  display: block;
+  flex: 0 0 43px;
+  width: 43px;
+  height: 43px;
+  background: url('./linkedin.svg') center / 100% 100% no-repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .comex-members a.comex-members-more:any-link {
+    transition: none;
+  }
+}
+
+@media (width >= 768px) {
+  .comex-members .comex-members-position {
+    line-height: 20px;
+  }
+}
+
+@media (width >= 782px) {
+  .comex-members .comex-members-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px 32px;
+  }
+
+  .comex-members .comex-members-item {
+    max-width: none;
+  }
+
+  .comex-members .comex-members-name {
+    margin-top: 20px;
+  }
+
+  .comex-members .comex-members-actions {
+    margin-top: 10px;
+  }
+}
+
+@media (width >= 1024px) {
+  .comex-members .comex-members-name {
+    font-size: var(--heading-font-size-s);
+    line-height: 32px;
+  }
+
+  .comex-members a.comex-members-more:any-link {
+    margin-bottom: 16px;
+  }
+
+  .comex-members a.comex-members-more::after {
+    margin-left: 28px;
+  }
+}

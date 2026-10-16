@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/groupe/comex/comite-executif-stephane-mascarau/",
+  "path": "groupe/comex/stephane-mascarau",
+  "timestamp": "2026-10-16T10:17:55.433Z",
+  "title": "Comité Exécutif - Stéphane Mascarau - Servier",
+  "template": "comex-member",
+  "blocks": [
+    "hero-page-banner",
+    "comex-profile"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "variantName": "comex-profile",
+  "baseBlock": "comex-profile",
+  "canonicalModel": "key-value",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "imagePattern": "portrait-left",
+    "purpose": "person-profile",
+    "structure": "portrait photo left (454x524 at 1440) with name H2, bold position and first biography paragraph bottom-aligned on the right; remaining biography paragraphs full width below; LinkedIn icon link last (stacked on mobile)",
+    "position": "middle",
+    "isFullWidth": false,
+    "hasGrid": true
+  },
+  "contentPattern": {
+    "structure": "key-value rows: photo, firstname, lastname, position, linkedin (link), biography (rich text). Rendered from COMEX Content Fragments by cf-templates/comex-member.html; parsed by comex-members from the member page .plain.html",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/groupe/comex/comite-executif-olivier-laureau/",
+        "instanceId": null,
+        "screenshot": null
+      }
+    ],
+    "reuseCount": 12,
+    "lastUsed": "2026-10-16T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

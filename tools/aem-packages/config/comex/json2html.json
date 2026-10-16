@@ -1,0 +1,11 @@
+[
+  {
+    "path": "/groupe/comex/",
+    "endpoint": "https://author-p199354-e2062419.adobeaemcloud.com/api/assets/servier-aem/comex/{{id}}.json",
+    "regex": "/(?<=\\/groupe\\/comex\\/)([^/]+)$/",
+    "template": "/cf-templates/comex-member.html",
+    "relativeURLPrefix": "https://publish-p199354-e2062419.adobeaemcloud.com",
+    "headers": { "Accept": "application/json" },
+    "forwardHeaders": ["Authorization"]
+  }
+]

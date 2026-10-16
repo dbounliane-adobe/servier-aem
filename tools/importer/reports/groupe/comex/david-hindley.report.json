@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/groupe/comex/comite-executif-david-hindley/",
+  "path": "groupe/comex/david-hindley",
+  "timestamp": "2026-10-16T10:17:26.773Z",
+  "title": "Comité Exécutif - David Hindley - Servier",
+  "template": "comex-member",
+  "blocks": [
+    "hero-page-banner",
+    "comex-profile"
+  ]
+}

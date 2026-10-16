@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/groupe/comex/comite-executif-virginie-dominguez/",
+  "path": "groupe/comex/virginie-dominguez",
+  "timestamp": "2026-10-16T10:17:09.027Z",
+  "title": "Comité Exécutif - Virginie Dominguez - Servier",
+  "template": "comex-member",
+  "blocks": [
+    "hero-page-banner",
+    "comex-profile"
+  ]
+}

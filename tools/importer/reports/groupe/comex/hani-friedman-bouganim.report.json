@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/groupe/comex/hani-friedman-bouganim/",
+  "path": "groupe/comex/hani-friedman-bouganim",
+  "timestamp": "2026-10-16T10:17:14.423Z",
+  "title": "Comité Exécutif - Hani Friedman Bouganim - Servier",
+  "template": "comex-member",
+  "blocks": [
+    "hero-page-banner",
+    "comex-profile"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/groupe/comex/comite-executif-olivier-laureau/",
+  "path": "groupe/comex/olivier-laureau",
+  "timestamp": "2026-10-16T10:16:53.981Z",
+  "title": "Comité Exécutif - Olivier Laureau - Servier",
+  "template": "comex-member",
+  "blocks": [
+    "hero-page-banner",
+    "comex-profile"
+  ]
+}

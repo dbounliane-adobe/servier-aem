@@ -1,0 +1,27 @@
+{
+  "definitions": [
+    {
+      "title": "Servier COMEX Profile",
+      "id": "comex-profile",
+      "plugins": { "xwalk": { "page": {
+        "resourceType": "core/franklin/components/block/v1/block",
+        "template": { "name": "COMEX Profile", "model": "comex-profile", "key-value": true }
+      } } }
+    }
+  ],
+  "models": [
+    {
+      "id": "comex-profile",
+      "fields": [
+        { "component": "reference", "valueType": "string", "name": "photo", "label": "Photo", "multi": false },
+        { "component": "text", "valueType": "string", "name": "photoAlt", "label": "Photo description (leave empty: the name is shown next to it)", "value": "" },
+        { "component": "text", "valueType": "string", "name": "firstname", "label": "First name (with title, e.g. Dr Claude)", "value": "" },
+        { "component": "text", "valueType": "string", "name": "lastname", "label": "Last name", "value": "" },
+        { "component": "text", "valueType": "string", "name": "position", "label": "Position", "value": "" },
+        { "component": "aem-content", "valueType": "string", "name": "linkedin", "label": "LinkedIn profile URL (optional)" },
+        { "component": "richtext", "valueType": "string", "name": "biography", "label": "Biography (first paragraph is shown next to the photo)", "value": "" }
+      ]
+    }
+  ],
+  "filters": []
+}

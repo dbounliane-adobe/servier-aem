@@ -1,0 +1,33 @@
+{
+  "variantName": "comex-members",
+  "baseBlock": "comex-members",
+  "canonicalModel": "key-value",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "imagePattern": "portrait-cards",
+    "purpose": "team-grid",
+    "structure": "grid of member cards (1 column below 782px, 3 columns from 782px): portrait photo 520x600 crop, bold name, small position, then a row with an outline 'En savoir plus' button and a LinkedIn icon link",
+    "position": "middle",
+    "isFullWidth": false,
+    "hasGrid": true
+  },
+  "contentPattern": {
+    "structure": "key-value config: members (ordered multi reference to COMEX CF pages or CF paths in the DAM comex folder), readMore label, linkedinLabel; card data fetched at runtime from each member page .plain.html comex-profile block",
+    "buttonCount": 1,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://servier.com/groupe/comex/",
+        "instanceId": null,
+        "screenshot": null
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-16T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

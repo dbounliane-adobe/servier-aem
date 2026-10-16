@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/groupe/comex/comite-executif-dr-philippe-gonnard/",
+  "path": "groupe/comex/dr-philippe-gonnard",
+  "timestamp": "2026-10-16T10:17:20.254Z",
+  "title": "Comité Exécutif - Dr Philippe Gonnard - Servier",
+  "template": "comex-member",
+  "blocks": [
+    "hero-page-banner",
+    "comex-profile"
+  ]
+}

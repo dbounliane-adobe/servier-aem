@@ -1,0 +1,6 @@
+{
+  "overlay": {
+    "url": "https://json2html.adobeaem.workers.dev/dbounliane-adobe/servier-aem/main",
+    "type": "markup"
+  }
+}

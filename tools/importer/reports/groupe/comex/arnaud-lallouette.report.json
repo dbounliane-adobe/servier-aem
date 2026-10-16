@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/groupe/comex/comite-executif-arnaud-lallouette/",
+  "path": "groupe/comex/arnaud-lallouette",
+  "timestamp": "2026-10-16T10:17:32.660Z",
+  "title": "Comité Exécutif - Arnaud Lallouette - Servier",
+  "template": "comex-member",
+  "blocks": [
+    "hero-page-banner",
+    "comex-profile"
+  ]
+}

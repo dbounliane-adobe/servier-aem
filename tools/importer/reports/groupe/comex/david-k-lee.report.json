@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/groupe/comex/david-k-lee/",
+  "path": "groupe/comex/david-k-lee",
+  "timestamp": "2026-10-16T10:17:38.382Z",
+  "title": "Comité Exécutif - David K. Lee - Servier",
+  "template": "comex-member",
+  "blocks": [
+    "hero-page-banner",
+    "comex-profile"
+  ]
+}

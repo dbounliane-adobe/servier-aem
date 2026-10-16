@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "url": "https://servier.com/groupe/comex/comite-executif-pascal-lemaire/",
+  "path": "groupe/comex/pascal-lemaire",
+  "timestamp": "2026-10-16T10:17:43.722Z",
+  "title": "Comité Exécutif - Pascal Lemaire - Servier",
+  "template": "comex-member",
+  "blocks": [
+    "hero-page-banner",
+    "comex-profile"
+  ]
+}

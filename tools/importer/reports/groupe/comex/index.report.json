@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "url": "https://servier.com/groupe/comex/",
+  "path": "groupe/comex/index",
+  "timestamp": "2026-10-16T10:16:44.486Z",
+  "title": "Servier – Découvrez les membres du Comité Exécutif",
+  "template": "comex",
+  "blocks": [
+    "hero-page-banner",
+    "columns",
+    "comex-members"
+  ]
+}

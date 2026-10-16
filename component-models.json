@@ -605,6 +605,85 @@
     ]
   },
   {
+    "id": "comex-members",
+    "fields": [
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "members",
+        "label": "Members, in display order (COMEX Content Fragments or their /groupe/comex/ pages)",
+        "multi": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "readMore",
+        "label": "Read-more label (default: En savoir plus)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkedinLabel",
+        "label": "LinkedIn link label (default: Logo de LinkedIn)",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "comex-profile",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "photo",
+        "label": "Photo",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "photoAlt",
+        "label": "Photo description (leave empty: the name is shown next to it)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "firstname",
+        "label": "First name (with title, e.g. Dr Claude)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "lastname",
+        "label": "Last name",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "position",
+        "label": "Position",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "linkedin",
+        "label": "LinkedIn profile URL (optional)"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "biography",
+        "label": "Biography (first paragraph is shown next to the photo)",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "editorial-feature",
     "fields": [
       {
