@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Merge this context into the existing AEM translation rules; do not replace
+  the whole rules file. Append it after broader /content rules.
+  Target: /conf/global/settings/translation/rules/translation_rules.xml
+  Activate through Tools > General > Translation Configuration or an AEM
+  content package. EDS Code Sync does not install this configuration.
+  Change the context path when reusing these rules for another site.
+-->
+<nodelist>
+  <node path="/content/servier-aem">
+    <property name="jcr:title" translate="true"/>
+    <property name="jcr:description" translate="true"/>
+    <property name="category" translate="true"/>
+    <property name="keywords" translate="true"/>
+    <property name="language" translate="false" updateDestinationLanguage="true"/>
+    <property name="theme" translate="false"/>
+    <property name="template" translate="false"/>
+    <property name="publication-date" translate="false"/>
+    <property name="image" translate="false"/>
+    <node resourceType="core/franklin/components/block/v1/block">
+      <property name="content_heading" translate="true"/>
+      <property name="content_description" translate="true"/>
+      <property name="content_eyebrow" translate="true"/>
+      <property name="content_category" translate="true"/>
+      <property name="content_summary" translate="true"/>
+      <property name="content_linkText" translate="true"/>
+      <property name="meta_reading" translate="true"/>
+      <property name="imageAlt" translate="true"/>
+      <property name="search_placeholder" translate="true"/>
+      <property name="title" translate="true"/>
+      <property name="text" translate="true"/>
+      <property name="label" translate="true"/>
+      <property name="headline" translate="true"/>
+      <property name="summary" translate="true"/>
+      <property name="cta" translate="true"/>
+      <property name="category" translate="true"/>
+      <property name="all" translate="true"/>
+      <property name="empty" translate="true"/>
+      <property name="error" translate="true"/>
+      <property name="filterLabel" translate="true"/>
+      <property name="categoryLabel" translate="true"/>
+      <property name="yearLabel" translate="true"/>
+      <property name="monthLabel" translate="true"/>
+      <property name="tagsLabel" translate="true"/>
+      <property name="submitLabel" translate="true"/>
+      <property name="resetLabel" translate="true"/>
+      <property name="readMore" translate="true"/>
+      <property name="results" translate="true"/>
+      <property name="noResults" translate="true"/>
+      <property name="subscribeLabel" translate="true"/>
+      <property name="name" translate="false"/>
+      <property name="model" translate="false"/>
+      <property name="filter" translate="false"/>
+      <property name="key-value" translate="false"/>
+      <property name="classes" translate="false"/>
+      <property name="content_headingType" translate="false"/>
+      <property name="content_link" translate="false"/>
+      <property name="image" translate="false"/>
+      <property name="video" translate="false"/>
+      <property name="search_action" translate="false"/>
+      <property name="source" translate="false"/>
+      <property name="prefix" translate="false"/>
+      <property name="reference" translate="false"/>
+      <property name="subscribe" translate="false"/>
+      <property name="filters" translate="false"/>
+      <property name="limit" translate="false"/>
+      <property name="pageSize" translate="false"/>
+      <property name="meta_date" translate="false"/>
+      <property name="meta_author" translate="false"/>
+    </node>
+    <node resourceType="core/franklin/components/block/v1/block/item">
+      <property name="content_heading" translate="true"/>
+      <property name="content_description" translate="true"/>
+      <property name="content_linkText" translate="true"/>
+      <property name="content_text" translate="true"/>
+      <property name="imageAlt" translate="true"/>
+      <property name="media_imageAlt" translate="true"/>
+      <property name="text" translate="true"/>
+      <property name="value" translate="true"/>
+      <property name="label" translate="true"/>
+      <property name="column1text" translate="true"/>
+      <property name="column2text" translate="true"/>
+      <property name="column3text" translate="true"/>
+      <property name="column4text" translate="true"/>
+      <property name="name" translate="false"/>
+      <property name="model" translate="false"/>
+      <property name="filter" translate="false"/>
+      <property name="classes" translate="false"/>
+      <property name="content_headingType" translate="false"/>
+      <property name="content_link" translate="false"/>
+      <property name="image" translate="false"/>
+      <property name="media_image" translate="false"/>
+    </node>
+    <node resourceType="core/franklin/components/image/v1/image">
+      <property name="imageAlt" translate="true"/>
+      <property name="image" translate="false"/>
+    </node>
+    <node resourceType="core/franklin/components/title/v1/title">
+      <property name="title" translate="true"/>
+      <property name="titleType" translate="false"/>
+    </node>
+    <node resourceType="core/franklin/components/button/v1/button">
+      <property name="linkText" translate="true"/>
+      <property name="linkTitle" translate="true"/>
+      <property name="link" translate="false"/>
+      <property name="linkType" translate="false"/>
+    </node>
+    <node resourceType="core/franklin/components/section/v1/section">
+      <property name="name" translate="true"/>
+      <property name="style" translate="false"/>
+    </node>
+    <node resourceType="core/franklin/components/columns/v1/columns">
+      <property name="columns" translate="false"/>
+      <property name="rows" translate="false"/>
+    </node>
+  </node>
+</nodelist>

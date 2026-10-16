@@ -8,3 +8,4 @@ test/*
 _*
 drafts/*
 tools/test-mvp.mjs
+tools/translation/*
