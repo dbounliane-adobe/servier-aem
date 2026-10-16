@@ -24,15 +24,18 @@ import io
 import json
 import os
 import re
+import time
 import zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PKG = os.path.join(ROOT, 'tools', 'aem-packages')
 SITE = 'servier-aem'
 TPL = 'servier-site-template'
-VERSION = '1.0.0'
-SOURCE = os.path.join(PKG, 'dist', f'{SITE}-clean-install-{VERSION}.zip')
-PREVIEW = os.path.join(PKG, 'template', 'preview.png')
+VERSION = '1.0.1'  # template version (bump on each change: AEM keeps imported templates by name)
+GROUP = 'com.servier.aem'
+SOURCE = os.path.join(PKG, 'dist', f'{SITE}-clean-install-1.0.0.zip')
+TEMPLATE_DIR = os.path.join(PKG, 'template')
+PREVIEW = os.path.join(TEMPLATE_DIR, 'preview.png')  # 1024px wide, like the Adobe template
 OUT = os.path.join(PKG, 'dist', f'{TPL}-{VERSION}.zip')
 HEAD = '<?xml version="1.0" encoding="UTF-8"?>\n'
 NS = 'xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"'
@@ -65,17 +68,26 @@ def convert(name, data):
 
 
 def write_zip(z, files):
-    """Writes files with an explicit entry for every folder, parents first: the AEM site
-    template import looks for folder entries (previews/, META-INF/, jcr_root/...)."""
+    """Writes files with an explicit entry for every folder, parents first, with the entry
+    attributes of the Adobe template (the AEM site template import looks for folder entries:
+    previews/, META-INF/, jcr_root/...)."""
     folders = set()
     for name in files:
         parts = name.split('/')[:-1]
         folders.update('/'.join(parts[:i]) + '/' for i in range(1, len(parts) + 1))
+    stamp = time.localtime()[:6]
     for entry in sorted(set(files) | folders):
+        info = zipfile.ZipInfo(entry, stamp)
+        info.create_system = 3
+        info.flag_bits = 0x800
         if entry in folders and entry not in files:
-            z.writestr(zipfile.ZipInfo(entry), b'')
+            info.external_attr = (0o40755 << 16) | 0x10
+            z.writestr(info, b'')
         else:
-            z.writestr(entry, files[entry])
+            info.external_attr = 0o100644 << 16
+            info.compress_type = zipfile.ZIP_DEFLATED
+            data = files[entry]
+            z.writestr(info, data.encode('utf-8') if isinstance(data, str) else data)
 
 
 def site_package():
@@ -95,18 +107,35 @@ def site_package():
                f'    <filter root="/content/{TPL}"/>\n'
                f'    <filter root="/content/dam/{TPL}"/>\n'
                '</workspaceFilter>\n')
+    created = time.strftime('%Y-%m-%dT%H:%M:%S.000Z', time.gmtime())
     properties = (f'{HEAD}<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">\n'
                   '<properties>\n'
-                  f'    <entry key="name">{TPL}.site</entry>\n'
-                  f'    <entry key="group">{SITE}</entry>\n'
-                  f'    <entry key="version">{VERSION}</entry>\n'
-                  '    <entry key="description">Site template content package of the Servier Edge Delivery site</entry>\n'
-                  '    <entry key="packageType">content</entry>\n'
-                  '    <entry key="requiresRoot">false</entry>\n'
-                  '    <entry key="allowIndexDefinitions">false</entry>\n'
+                  '<comment>Servier - Site Edge Delivery</comment>\n'
+                  '<entry key="allowIndexDefinitions">false</entry>\n'
+                  '<entry key="acHandling">merge</entry>\n'
+                  f'<entry key="created">{created}</entry>\n'
+                  f'<entry key="groupId">{GROUP}</entry>\n'
+                  '<entry key="description">Site template content package of the Servier Edge Delivery site</entry>\n'
+                  f'<entry key="version">{VERSION}</entry>\n'
+                  '<entry key="packageType">content</entry>\n'
+                  '<entry key="requiresRoot">false</entry>\n'
+                  '<entry key="cloudManagerTarget">none</entry>\n'
+                  f'<entry key="name">{TPL}.site</entry>\n'
+                  f'<entry key="artifactId">{TPL}.site</entry>\n'
+                  f'<entry key="group">{GROUP}</entry>\n'
                   '</properties>\n')
+    manifest = ('Manifest-Version: 1.0\n'
+                'Implementation-Title: Servier - Site Edge Delivery\n'
+                f'Implementation-Version: {VERSION}\n'
+                'Content-Package-Type: content\n'
+                f'Content-Package-Id: {GROUP}:{TPL}.site:{VERSION}\n'
+                'Content-Package-Description: Site template content package of the Servier Edge Delivery site\n'
+                f'Content-Package-Roots: /conf/{TPL},/content/{TPL},/content/dam/{TPL}\n')
     content = dict(files)
-    content['META-INF/MANIFEST.MF'] = 'Manifest-Version: 1.0\nContent-Package-Type: content\n'
+    content['META-INF/MANIFEST.MF'] = manifest
+    # standard FileVault configuration files (Apache Jackrabbit FileVault defaults)
+    content['META-INF/vault/config.xml'] = open(os.path.join(TEMPLATE_DIR, 'vault-config.xml'), 'rb').read()
+    content['META-INF/vault/settings.xml'] = open(os.path.join(TEMPLATE_DIR, 'vault-settings.xml'), 'rb').read()
     content['META-INF/vault/filter.xml'] = filters
     content['META-INF/vault/properties.xml'] = properties
     buf = io.BytesIO()
@@ -121,9 +150,10 @@ def main():
         'name': TPL,
         'version': VERSION,
         'description': 'Servier site for AEM authoring with Edge Delivery Services: CF model comex, '
-                       'DAM, metadata + redirects sheets and the /master/fr language master',
+                       'DAM, metadata and redirects sheets, /master/fr language master',
+        'license': 'Proprietary, Servier',
         'siteTemplate': {
-            'title': 'Servier – Site Edge Delivery',
+            'title': 'Servier - Site Edge Delivery',
             'createdBy': 'Servier',
             'useCases': ['AEM Sites delivered with Edge Delivery Services', 'Servier multilingual site (master/fr)'],
             'docsUrl': '',
@@ -132,9 +162,11 @@ def main():
             'openItem': '{Path}/master/fr/index',
         },
     }
+    package_text = json.dumps(package_json, indent=4) + '\n'
+    assert package_text.isascii()
     with zipfile.ZipFile(OUT, 'w', zipfile.ZIP_DEFLATED) as z:
         write_zip(z, {
-            'package.json': json.dumps(package_json, indent=4, ensure_ascii=False) + '\n',
+            'package.json': package_text,
             'previews/servier.png': open(PREVIEW, 'rb').read(),
             'site.zip': site_zip,
         })
