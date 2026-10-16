@@ -64,6 +64,20 @@ def convert(name, data):
     return name, xml.encode('utf-8')
 
 
+def write_zip(z, files):
+    """Writes files with an explicit entry for every folder, parents first: the AEM site
+    template import looks for folder entries (previews/, META-INF/, jcr_root/...)."""
+    folders = set()
+    for name in files:
+        parts = name.split('/')[:-1]
+        folders.update('/'.join(parts[:i]) + '/' for i in range(1, len(parts) + 1))
+    for entry in sorted(set(files) | folders):
+        if entry in folders and entry not in files:
+            z.writestr(zipfile.ZipInfo(entry), b'')
+        else:
+            z.writestr(entry, files[entry])
+
+
 def site_package():
     files = {}
     with zipfile.ZipFile(SOURCE) as src:
@@ -91,12 +105,13 @@ def site_package():
                   '    <entry key="requiresRoot">false</entry>\n'
                   '    <entry key="allowIndexDefinitions">false</entry>\n'
                   '</properties>\n')
+    content = dict(files)
+    content['META-INF/MANIFEST.MF'] = 'Manifest-Version: 1.0\nContent-Package-Type: content\n'
+    content['META-INF/vault/filter.xml'] = filters
+    content['META-INF/vault/properties.xml'] = properties
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, 'w', zipfile.ZIP_DEFLATED) as z:
-        z.writestr('META-INF/vault/filter.xml', filters)
-        z.writestr('META-INF/vault/properties.xml', properties)
-        for n in sorted(files):
-            z.writestr(n, files[n])
+        write_zip(z, content)
     return buf.getvalue(), files
 
 
@@ -118,9 +133,11 @@ def main():
         },
     }
     with zipfile.ZipFile(OUT, 'w', zipfile.ZIP_DEFLATED) as z:
-        z.writestr('package.json', json.dumps(package_json, indent=4, ensure_ascii=False) + '\n')
-        z.write(PREVIEW, 'previews/servier.png')
-        z.writestr('site.zip', site_zip)
+        write_zip(z, {
+            'package.json': json.dumps(package_json, indent=4, ensure_ascii=False) + '\n',
+            'previews/servier.png': open(PREVIEW, 'rb').read(),
+            'site.zip': site_zip,
+        })
     pages = [n for n in files if n.startswith(f'jcr_root/content/{TPL}/master/') and n.endswith('.content.xml')]
     print(OUT, f'{len(files)} files, {len(pages)} master nodes')
 
