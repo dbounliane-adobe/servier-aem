@@ -22,7 +22,10 @@ Ordre (comme la source) : Olivier Laureau, puis ordre alphabétique des noms.
 Paquets (`tools/aem-packages/dist/`) :
 
 1. `servier-aem-comex-cfs-1.0.0.zip` — 12 CF + 12 photos + photo du bandeau
-   (le modèle `comex` n'est **pas** inclus ni modifié).
+   (le modèle `comex` n'est **pas** inclus ni modifié). Les nœuds CF viennent de l'export du DAM
+   réparé `tools/aem-packages/import/cf-comex.zip` (mixin `cq:contentFragment`, `_strucVersion` 2,
+   variation `master`, `indexedData`), sans l'état de publication ; leurs valeurs sont contrôlées
+   par rapport aux données sources au build.
 2. `servier-aem-comex-page-1.0.0.zip` — page liste (+ pages conteneurs `groupe`,
    `groupe/comex` créées seulement si absentes).
 

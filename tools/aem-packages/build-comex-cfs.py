@@ -9,10 +9,13 @@ Builds the AEM content package with one Content Fragment per COMEX member
 
 Source data: migration-work/comex/comex-members.json (extracted verbatim from
 https://servier.com/groupe/comex/ and each member page), photos in
-migration-work/aem-assets/comex/photos/. Also writes migration-work/comex/cf-data.json
+migration-work/aem-assets/comex/photos/. CF nodes: tools/aem-packages/import/cf-comex.zip
+(package exported from the DAM after the CFs were repaired against the model; values are
+checked against the source data). Also writes migration-work/comex/cf-data.json
 (the exact field values) for review. Usage:
   python3 tools/aem-packages/build-comex-cfs.py
 """
+import html
 import json
 import os
 import re
@@ -30,6 +33,7 @@ PHOTO_FOLDER = f'{CF_FOLDER}/photos'
 SRC = os.path.join(ROOT, 'migration-work', 'comex', 'comex-members.json')
 PHOTOS_DIR = os.path.join(ROOT, 'migration-work', 'aem-assets', 'comex', 'photos')
 OUT = os.path.join(ROOT, 'tools', 'aem-packages', 'dist', f'{NAME}-{VERSION}.zip')
+REPAIRED = os.path.join(ROOT, 'tools', 'aem-packages', 'import', 'cf-comex.zip')
 BANNER = 'servier-banniere-officielle-logo.jpg'
 BANNER_FILE = os.path.join(ROOT, 'migration-work', 'aem-assets', 'comex', BANNER)
 MIME = {'.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp'}
@@ -86,24 +90,17 @@ def original_dir(mime):
             '</jcr:root>\n')
 
 
-def content_fragment(cf):
-    master = (f'                <master jcr:primaryType="nt:unstructured"'
-              f' firstname={attr(cf["firstname"])}'
-              f' lastname={attr(cf["lastname"])}'
-              f' position={attr(cf["position"])}'
-              f' biography={attr(cf["biography"])}'
-              f' biography_x0040_ContentType="text/html"'
-              f' linkedin={attr(cf["linkedin"])}'
-              f' photo={attr(cf["photo"])}/>\n')
-    return (f'{HEAD}<jcr:root {NS} jcr:primaryType="dam:Asset">\n'
-            f'    <jcr:content jcr:primaryType="dam:AssetContent" contentFragment="{{Boolean}}true"'
-            f' jcr:title={attr(cf["title"])}>\n'
-            f'        <data jcr:primaryType="nt:unstructured" cq:model="{MODEL}">\n'
-            f'{master}'
-            '        </data>\n'
-            f'        <metadata jcr:primaryType="nt:unstructured" dc:title={attr(cf["title"])}/>\n'
-            '    </jcr:content>\n'
-            '</jcr:root>\n')
+def repaired_fragment(cf, z):
+    """CF node as repaired in the DAM (cf-comex.zip export: cq:contentFragment mixin, _strucVersion 2,
+    dam:cfVariationNode master, indexedData), minus this instance's replication status.
+    Fails if a field value differs from the source data (content is never rewritten)."""
+    xml = z.read(f'jcr_root{CF_FOLDER}/{cf["name"]}/.content.xml').decode('utf-8')
+    master = re.search(r'<data\b.*?<master\b(.*?)/>', xml, re.S).group(1)
+    values = {k: html.unescape(v) for k, v in re.findall(r'\s([\w:]+)="([^"]*)"', master)}
+    for field in ('firstname', 'lastname', 'position', 'biography', 'linkedin', 'photo'):
+        assert values.get(field) == cf[field], f'{cf["name"]}: {field} differs from the source data'
+    xml = re.sub(r'\s+cq:(?:lastReplicated|lastReplicatedBy|lastReplicationAction)(?:_\w+)?="[^"]*"', '', xml)
+    return xml.replace('jcr:mixinTypes="[cq:ReplicationStatus,cq:ReplicationStatus2]"', '')
 
 
 def main():
@@ -156,7 +153,7 @@ def main():
                   '</properties>\n')
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    with zipfile.ZipFile(OUT, 'w', zipfile.ZIP_DEFLATED) as z:
+    with zipfile.ZipFile(OUT, 'w', zipfile.ZIP_DEFLATED) as z, zipfile.ZipFile(REPAIRED) as repaired:
         z.writestr('META-INF/vault/filter.xml', filters)
         z.writestr('META-INF/vault/properties.xml', properties)
         z.writestr(f'jcr_root/content/dam/{SITE}/.content.xml', folder(SITE))
@@ -164,7 +161,7 @@ def main():
         z.writestr(f'jcr_root{CF_FOLDER}/.content.xml', folder('COMEX', conf=f'/conf/{SITE}'))
         z.writestr(f'jcr_root{PHOTO_FOLDER}/.content.xml', folder('Photos'))
         for c in cfs:
-            z.writestr(f'jcr_root{CF_FOLDER}/{c["name"]}/.content.xml', content_fragment(c))
+            z.writestr(f'jcr_root{CF_FOLDER}/{c["name"]}/.content.xml', repaired_fragment(c, repaired))
             mime = MIME[os.path.splitext(c['photoFile'])[1].lower()]
             base = f'jcr_root{PHOTO_FOLDER}/{c["photoFile"]}'
             z.writestr(f'{base}/.content.xml', image_asset(c['title'], mime))
