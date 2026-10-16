@@ -3,10 +3,21 @@
     "id": "page-metadata",
     "fields": [
       {
-        "component": "text",
+        "component": "select",
         "valueType": "string",
         "name": "theme",
-        "label": "Theme (servier to enable the demo design)"
+        "label": "Theme",
+        "value": "servier",
+        "options": [
+          {
+            "name": "Servier (global)",
+            "value": "servier"
+          },
+          {
+            "name": "Servier Belgique",
+            "value": "servier-be"
+          }
+        ]
       },
       {
         "component": "text",

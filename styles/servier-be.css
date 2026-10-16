@@ -1,0 +1,230 @@
+/*
+ * Servier Belgium — regional layer loaded AFTER styles/servier.css on pages with
+ * `theme = servier-be` metadata (body gets both .servier and .servier-be).
+ * It only overrides a few visual codes measured on https://servier.be/fr/:
+ * Roboto (thin uppercase titles), coral accent #f55b41, square-ish filled
+ * buttons, coral utility strip, left-bar nav links, centred hero box,
+ * uppercase footer links. Structure, content and blocks stay those of servier.css.
+ */
+
+@font-face {
+  font-family: roboto-be;
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: swap;
+  src: url('../fonts/roboto-variable-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: roboto-be-fallback;
+  size-adjust: 99.5%;
+  src: local('Arial');
+}
+
+body.servier-be {
+  /* colors */
+  --link-hover-color: #f55b41;
+  --brand-accent: #f55b41;
+  --brand-accent-dark: #e0442a;
+  --brand-copy: #212529;
+
+  /* fonts */
+  --body-font-family: roboto-be, roboto-be-fallback, sans-serif;
+  --heading-font-family: var(--body-font-family);
+  --heading-font-size-xxl: 34.8px;
+  --be-title-size: 34.8px;
+}
+
+@media (width >= 1024px) {
+  body.servier-be {
+    --heading-font-size-xxl: 45px;
+    --be-title-size: 45px;
+  }
+}
+
+/* ---------- buttons: coral fill, 3px radius, no arrow ---------- */
+
+.servier-be main a.button:not(.editorial-feature a, .carousel-stories a):any-link,
+.servier-be main button.button {
+  gap: 0;
+  border: 1px solid var(--brand-accent);
+  border-radius: 3px;
+  padding: 12.8px 32px;
+  background-color: var(--brand-accent);
+  color: #fff;
+  font-size: 17.28px;
+  font-weight: 400;
+  line-height: 25.92px;
+  text-align: center;
+}
+
+.servier-be main a.button:not(.editorial-feature a, .carousel-stories a)::after {
+  content: none;
+}
+
+.servier-be main a.button:not(.editorial-feature a, .carousel-stories a):hover,
+.servier-be main a.button:not(.editorial-feature a, .carousel-stories a):focus-visible,
+.servier-be main button.button:hover {
+  border-color: var(--brand-accent-dark);
+  background-color: var(--brand-accent-dark);
+  color: #fff;
+}
+
+/* ---------- header: uppercase 14px links with a 3px left bar ---------- */
+
+.servier-be .header .nav-wrapper .nav-link,
+.servier-be .header .nav-wrapper .nav-utility-link,
+.servier-be .header .nav-wrapper .nav-lang-link {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-transform: uppercase;
+}
+
+.servier-be .header .nav-wrapper .nav-link,
+.servier-be .header .nav-wrapper .nav-utility-link {
+  border-left: 3px solid currentcolor;
+  padding-left: 8px;
+}
+
+@media (width >= 900px) {
+  /* links keep their full-height hit area; the bar is drawn at text height */
+  .servier-be .header .nav-wrapper .nav-link,
+  .servier-be .header .nav-wrapper .nav-utility-link {
+    border-left: 0;
+    padding-left: 16px;
+  }
+
+  .servier-be .header .nav-link::before,
+  .servier-be .header .nav-utility-link::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 3px;
+    height: 21px;
+    background-color: currentcolor;
+    transform: translateY(-50%);
+  }
+
+  /* the left bar replaces the underline hover marker */
+  .servier-be .header .nav-link::after,
+  .servier-be .header .nav-utility-link::after {
+    content: none;
+  }
+
+  /* coral utility strip with white links (over the hero and on solid headers) */
+  .servier-be .header .nav-wrapper .nav-secondary,
+  .servier-be .header .nav-wrapper:not(.is-overlay) .nav-secondary {
+    background-color: var(--brand-accent);
+  }
+
+  .servier-be .header .nav-wrapper .nav-secondary :is(.nav-lang-link, .nav-utility-link),
+  .servier-be .header .nav-wrapper .nav-secondary :is(.nav-lang-link, .nav-utility-link):hover,
+  .servier-be .header .nav-wrapper .nav-secondary :is(.nav-lang-link, .nav-utility-link):focus-visible {
+    color: #fff;
+  }
+
+  .servier-be .header .nav-wrapper .nav-utility-links > li::before {
+    content: none;
+  }
+
+  .servier-be .header .nav-wrapper .nav-utility-links > li {
+    margin-left: 24px;
+  }
+
+  .servier-be .header .nav-lang .is-current > .nav-lang-link::after {
+    background-color: #fff;
+  }
+}
+
+/* ---------- campaign hero: centred translucent indigo box ---------- */
+
+.servier-be .campaign-hero {
+  align-items: center;
+  justify-content: center;
+}
+
+.servier-be .campaign-hero .campaign-hero-content {
+  max-width: 883px;
+  margin: var(--nav-height) 0 0;
+  padding: 30px;
+  background-color: rgb(36 34 106 / 64%);
+  text-align: center;
+}
+
+.servier-be .campaign-hero .campaign-hero-content h1 {
+  font-weight: 100;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.servier-be .campaign-hero .campaign-hero-content p {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.servier-be .campaign-hero .campaign-hero-search {
+  margin-inline: auto;
+}
+
+.servier-be .campaign-hero .campaign-hero-search input[type="search"] {
+  border-radius: 3px;
+  font-weight: 300;
+}
+
+@media (width >= 1024px) {
+  .servier-be .campaign-hero .campaign-hero-content {
+    padding: 50px;
+  }
+
+  .servier-be .campaign-hero .campaign-hero-search input[type="search"] {
+    height: 60px;
+    font-size: 22px;
+  }
+}
+
+/* body copy: neutral dark grey; headings keep the Servier indigo */
+.servier-be main > .section:not(.dark, .highlight) > .default-content-wrapper p {
+  color: var(--brand-copy);
+}
+
+/* ---------- section titles: thin uppercase, centred ---------- */
+
+.servier-be .section-intro .section-intro-content {
+  align-items: center;
+  text-align: center;
+}
+
+.servier-be .section-intro .section-intro-title {
+  font-size: var(--be-title-size);
+  font-weight: 100;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.servier-be .section-intro .section-intro-title strong {
+  font-weight: 700;
+}
+
+.servier-be .section-intro.section-intro-has-description {
+  margin-inline: auto;
+}
+
+/* ---------- footer: uppercase 12px links, coral back-to-top ---------- */
+
+.servier-be footer .footer .footer-links a:any-link {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.servier-be footer .footer .footer-back-to-top {
+  border-color: var(--brand-accent);
+  color: var(--brand-accent);
+}
+
+.servier-be footer .footer .footer-back-to-top:hover {
+  background-color: var(--brand-accent);
+  color: #fff;
+}

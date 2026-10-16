@@ -124,15 +124,48 @@ export function decorateMain(main) {
 }
 
 /**
+ * Theme stylesheets, layered: the global Servier theme first, then an optional
+ * regional variant that only overrides some visual codes (e.g. servier-be for
+ * Servier Belgium). Driven by the page "theme" metadata: "servier" or "servier-be".
+ */
+const THEME_LAYERS = {
+  servier: ['servier'],
+  'servier-be': ['servier', 'servier-be'],
+};
+
+/**
+ * Preview-only theme switch for demos: ?theme=servier-be (or ?theme=servier).
+ * Ignored on the live site (*.aem.live) so published pages always follow their metadata.
+ */
+function applyPreviewTheme() {
+  const requested = new URLSearchParams(window.location.search).get('theme');
+  if (!requested || !THEME_LAYERS[requested] || window.location.hostname.endsWith('.aem.live')) return;
+  Object.keys(THEME_LAYERS).forEach((theme) => document.body.classList.remove(theme));
+  document.body.classList.add(requested);
+}
+
+/**
+ * Adds the classes and loads the stylesheets of every layer of the page theme.
+ */
+async function loadThemeStyles() {
+  applyPreviewTheme();
+  const theme = Object.keys(THEME_LAYERS).reverse()
+    .find((name) => document.body.classList.contains(name));
+  if (!theme) return;
+  const layers = THEME_LAYERS[theme];
+  layers.forEach((layer) => document.body.classList.add(layer));
+  // parallel download; the cascade order is the <link> order (base first, variant last)
+  await Promise.all(layers.map((layer) => loadCSS(`${window.hlx.codeBasePath}/styles/${layer}.css`)));
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
   document.documentElement.lang = getMetadata('language') || document.documentElement.lang || 'en';
   decorateTemplateAndTheme();
-  if (document.body.classList.contains('servier')) {
-    await loadCSS(`${window.hlx.codeBasePath}/styles/servier.css`);
-  }
+  await loadThemeStyles();
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
