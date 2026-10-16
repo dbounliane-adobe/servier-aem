@@ -1,177 +1,140 @@
 #!/usr/bin/env python3
 """
-Builds an AEM site template ("Sites > Create > Site from template > Import") from the
-clean-install package, with the same layout as the Adobe xwalk site template
-(adobe-rnd/aem-boilerplate-xwalk releases):
+Builds the Servier AEM site template ("Sites > Create > Site from template > Import") on top of
+the Adobe "AEM Site with Edge Delivery Services Template" 0.2.0
+(tools/aem-packages/template/aem-sites-with-edge-delivery-services-template-0.2.0.zip, from the
+adobe-rnd/aem-boilerplate-xwalk releases), so that the wizard treats it as an Edge Delivery
+template (project URL field):
 
-  servier-site-template-1.0.0.zip
-  ├── package.json          template metadata (title, page opened after creation)
-  ├── previews/servier.png  wizard preview (tools/aem-packages/template/preview.png)
-  └── site.zip              content package: /conf/<tpl>, /content/<tpl>, /content/dam/<tpl>
-
-AEM copies the three roots under the new site name when a site is created. Compared with
-the clean-install package:
-  - servier-aem paths (/conf, /content, /content/dam) renamed to the template name, in node
-    paths and in references (cq:conf, cq:model, images, /content links, CF data);
-  - no jcr:uuid and no CF indexedData (instance data; several sites from one template);
-  - metadata sheet: /** -> theme servier (global theme by default);
-  - empty wcm folders (templates, policies, template-types) as in the Adobe template.
-The Edge Delivery configuration keeps owner/repo of this project (the code repository);
-the wizard's project URL sets the site. Usage:
+  - every file of the Adobe template is kept as is (package.json keys, site.zip META-INF,
+    filter, /conf/<tpl> incl. the Edge Delivery cloud configuration, DAM root folder with its
+    ACL and processing profile, site root page), with the same internal template name
+    (aem-sites-with-edge-delivery-services-template): AEM renames it to the new site anyway;
+  - removed: its demo pages (index, nav, footer at the root) and demo images;
+  - added, from servier-aem-clean-install-1.0.0.zip with servier-aem renamed to the template
+    name: the comex CF model, metadata (/** -> servier) and redirects sheets, the /master/fr
+    language master, the DAM folders index/header/footer/newsroom/comex (12 COMEX CFs) —
+    without jcr:uuid nor CF indexedData;
+  - package.json: Servier title, description, preview and page opened after creation.
+Usage:
   python3 tools/aem-packages/build-site-template.py
 """
 import io
 import json
 import os
 import re
-import time
 import zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PKG = os.path.join(ROOT, 'tools', 'aem-packages')
-SITE = 'servier-aem'
-TPL = 'servier-site-template'
-VERSION = '1.0.1'  # template version (bump on each change: AEM keeps imported templates by name)
-GROUP = 'com.servier.aem'
-SOURCE = os.path.join(PKG, 'dist', f'{SITE}-clean-install-1.0.0.zip')
 TEMPLATE_DIR = os.path.join(PKG, 'template')
-PREVIEW = os.path.join(TEMPLATE_DIR, 'preview.png')  # 1024px wide, like the Adobe template
-OUT = os.path.join(PKG, 'dist', f'{TPL}-{VERSION}.zip')
-HEAD = '<?xml version="1.0" encoding="UTF-8"?>\n'
-NS = 'xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"'
+BASE = os.path.join(TEMPLATE_DIR, 'aem-sites-with-edge-delivery-services-template-0.2.0.zip')
+SOURCE = os.path.join(PKG, 'dist', 'servier-aem-clean-install-1.0.0.zip')
+PREVIEW = os.path.join(TEMPLATE_DIR, 'preview.png')  # 1024 x 2247, like the Adobe template
+SITE = 'servier-aem'
+TPL = 'aem-sites-with-edge-delivery-services-template'  # internal name of the Adobe template
+VERSION = '1.0.2'  # template version (bump on each change: AEM keeps imported templates by name)
+OUT = os.path.join(PKG, 'dist', f'servier-site-template-{VERSION}.zip')
 
 PATHS = re.compile(rf'(/content/dam|/content|/conf)/{SITE}(?=[/"\]&,;\s]|$)')
 UUID = re.compile(r'\s+jcr:uuid="[^"]*"')
 INDEXED = re.compile(r'\s*<indexedData\b.*?</indexedData>', re.S)
-
-WCM = {
-    'settings/wcm': '<jcr:root {ns} jcr:primaryType="cq:Page">\n    <templates/>\n    <policies/>\n    <template-types/>\n</jcr:root>\n',
-    'settings/wcm/templates': '<jcr:root {ns} jcr:primaryType="cq:Page"/>\n',
-    'settings/wcm/policies': '<jcr:root {ns} jcr:primaryType="cq:Page"/>\n',
-    'settings/wcm/template-types': ('<jcr:root {ns} jcr:primaryType="cq:Page">\n'
-                                    '    <jcr:content jcr:primaryType="cq:PageContent" mergeList="{{Boolean}}true"/>\n'
-                                    '</jcr:root>\n'),
-}
+# Servier content taken from the clean-install package (renamed to the template name)
+OURS = [f'jcr_root/conf/{TPL}/settings/dam/', f'jcr_root/content/{TPL}/metadata/',
+        f'jcr_root/content/{TPL}/redirects/', f'jcr_root/content/{TPL}/master/'] + \
+       [f'jcr_root/content/dam/{TPL}/{f}/' for f in ('index', 'header', 'footer', 'newsroom', 'comex')]
+# Adobe demo content left out
+DEMO = re.compile(rf'^jcr_root/content/{TPL}/(index|nav|footer)/|^jcr_root/content/dam/{TPL}/[^/_]+\.png/')
 
 
 def convert(name, data):
     name = PATHS.sub(lambda m: f'{m.group(1)}/{TPL}', name)
-    if not name.endswith('.xml'):
-        return name, data
-    xml = data.decode('utf-8')
-    xml = PATHS.sub(lambda m: f'{m.group(1)}/{TPL}', xml)
-    xml = UUID.sub('', INDEXED.sub('', xml))
-    xml = xml.replace(f'jcr:title="{SITE}"', 'jcr:title="Servier"')
-    if name.endswith(f'/content/{TPL}/metadata/.content.xml'):
-        xml = re.sub(r'theme="[^"]*"', 'theme="servier"', xml)
-    return name, xml.encode('utf-8')
+    if name.endswith('.xml'):
+        xml = PATHS.sub(lambda m: f'{m.group(1)}/{TPL}', data.decode('utf-8'))
+        xml = UUID.sub('', INDEXED.sub('', xml))
+        if name.endswith(f'/content/{TPL}/metadata/.content.xml'):
+            xml = re.sub(r'theme="[^"]*"', 'theme="servier"', xml)
+        data = xml.encode('utf-8')
+    return name, data
 
 
-def write_zip(z, files):
-    """Writes files with an explicit entry for every folder, parents first, with the entry
-    attributes of the Adobe template (the AEM site template import looks for folder entries:
-    previews/, META-INF/, jcr_root/...)."""
-    folders = set()
-    for name in files:
-        parts = name.split('/')[:-1]
-        folders.update('/'.join(parts[:i]) + '/' for i in range(1, len(parts) + 1))
-    stamp = time.localtime()[:6]
-    for entry in sorted(set(files) | folders):
-        info = zipfile.ZipInfo(entry, stamp)
-        info.create_system = 3
-        info.flag_bits = 0x800
-        if entry in folders and entry not in files:
-            info.external_attr = (0o40755 << 16) | 0x10
-            z.writestr(info, b'')
-        else:
-            info.external_attr = 0o100644 << 16
-            info.compress_type = zipfile.ZIP_DEFLATED
-            data = files[entry]
-            z.writestr(info, data.encode('utf-8') if isinstance(data, str) else data)
-
-
-def site_package():
+def servier_files():
     files = {}
     with zipfile.ZipFile(SOURCE) as src:
         for n in src.namelist():
-            if n.startswith('jcr_root/'):
-                name, data = convert(n, src.read(n))
+            name, data = convert(n, src.read(n))
+            if any(name.startswith(p) for p in OURS):
                 files[name] = data
-    for path, xml in WCM.items():
-        files[f'jcr_root/conf/{TPL}/{path}/.content.xml'] = (HEAD + xml.format(ns=NS)).encode('utf-8')
-    left = [n for n, d in files.items() if n.endswith('.xml') and SITE.encode() in d and b'repo=' not in d]
+    left = [n for n, d in files.items() if n.endswith('.xml') and SITE.encode() in d]
     assert not left, f'{SITE} references left: {left[:5]}'
+    return files
 
-    filters = (f'{HEAD}<workspaceFilter version="1.0">\n'
-               f'    <filter root="/conf/{TPL}"/>\n'
-               f'    <filter root="/content/{TPL}"/>\n'
-               f'    <filter root="/content/dam/{TPL}"/>\n'
-               '</workspaceFilter>\n')
-    created = time.strftime('%Y-%m-%dT%H:%M:%S.000Z', time.gmtime())
-    properties = (f'{HEAD}<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">\n'
-                  '<properties>\n'
-                  '<comment>Servier - Site Edge Delivery</comment>\n'
-                  '<entry key="allowIndexDefinitions">false</entry>\n'
-                  '<entry key="acHandling">merge</entry>\n'
-                  f'<entry key="created">{created}</entry>\n'
-                  f'<entry key="groupId">{GROUP}</entry>\n'
-                  '<entry key="description">Site template content package of the Servier Edge Delivery site</entry>\n'
-                  f'<entry key="version">{VERSION}</entry>\n'
-                  '<entry key="packageType">content</entry>\n'
-                  '<entry key="requiresRoot">false</entry>\n'
-                  '<entry key="cloudManagerTarget">none</entry>\n'
-                  f'<entry key="name">{TPL}.site</entry>\n'
-                  f'<entry key="artifactId">{TPL}.site</entry>\n'
-                  f'<entry key="group">{GROUP}</entry>\n'
-                  '</properties>\n')
-    manifest = ('Manifest-Version: 1.0\n'
-                'Implementation-Title: Servier - Site Edge Delivery\n'
-                f'Implementation-Version: {VERSION}\n'
-                'Content-Package-Type: content\n'
-                f'Content-Package-Id: {GROUP}:{TPL}.site:{VERSION}\n'
-                'Content-Package-Description: Site template content package of the Servier Edge Delivery site\n'
-                f'Content-Package-Roots: /conf/{TPL},/content/{TPL},/content/dam/{TPL}\n')
-    content = dict(files)
-    content['META-INF/MANIFEST.MF'] = manifest
-    # standard FileVault configuration files (Apache Jackrabbit FileVault defaults)
-    content['META-INF/vault/config.xml'] = open(os.path.join(TEMPLATE_DIR, 'vault-config.xml'), 'rb').read()
-    content['META-INF/vault/settings.xml'] = open(os.path.join(TEMPLATE_DIR, 'vault-settings.xml'), 'rb').read()
-    content['META-INF/vault/filter.xml'] = filters
-    content['META-INF/vault/properties.xml'] = properties
+
+def folder_entries(names):
+    folders = set()
+    for name in names:
+        parts = name.split('/')[:-1]
+        folders.update('/'.join(parts[:i]) + '/' for i in range(1, len(parts) + 1))
+    return folders
+
+
+def file_info(name, like=None):
+    info = zipfile.ZipInfo(name, like.date_time if like else (2026, 10, 17, 0, 0, 0))
+    info.create_system = 3
+    if name.endswith('/'):
+        info.external_attr = (0o40755 << 16) | 0x10
+    else:
+        info.external_attr = 0o100644 << 16
+        info.compress_type = zipfile.ZIP_DEFLATED
+    return info
+
+
+def site_zip(base_site):
+    """Adobe site.zip (entries and order kept) without its demo content, plus the Servier content."""
+    ours = servier_files()
     buf = io.BytesIO()
-    with zipfile.ZipFile(buf, 'w', zipfile.ZIP_DEFLATED) as z:
-        write_zip(z, content)
-    return buf.getvalue(), files
+    with zipfile.ZipFile(io.BytesIO(base_site)) as base, zipfile.ZipFile(buf, 'w') as z:
+        kept = [i for i in base.infolist() if not DEMO.search(i.filename)]
+        written = set()
+        for info in kept:
+            z.writestr(info, base.read(info.filename))
+            written.add(info.filename)
+        for name in sorted((folder_entries(ours) | set(ours)) - written):
+            z.writestr(file_info(name), b'' if name.endswith('/') else ours[name])
+    return buf.getvalue(), ours
 
 
 def main():
-    site_zip, files = site_package()
-    package_json = {
-        'name': TPL,
+    with zipfile.ZipFile(BASE) as base:
+        package_json = json.loads(base.read('package.json'))
+        site, ours = site_zip(base.read('site.zip'))
+        infos = {i.filename: i for i in base.infolist()}
+
+    package_json.update({
         'version': VERSION,
         'description': 'Servier site for AEM authoring with Edge Delivery Services: CF model comex, '
-                       'DAM, metadata and redirects sheets, /master/fr language master',
-        'license': 'Proprietary, Servier',
-        'siteTemplate': {
-            'title': 'Servier - Site Edge Delivery',
-            'createdBy': 'Servier',
-            'useCases': ['AEM Sites delivered with Edge Delivery Services', 'Servier multilingual site (master/fr)'],
-            'docsUrl': '',
-            'showcaseUrl': 'https://main--servier-aem--dbounliane-adobe.aem.page/master/fr/',
-            'sourceRepositoryUrl': 'https://github.com/dbounliane-adobe/servier-aem',
-            'openItem': '{Path}/master/fr/index',
-        },
-    }
+                       'DAM, metadata and redirects sheets, /master/fr language master. Based on the '
+                       'AEM Site with Edge Delivery Services Template 0.2.0',
+        'license': 'Proprietary, Servier (base template: MIT License, Copyright 2020 Adobe Systems Incorporated)',
+    })
+    package_json['siteTemplate'].update({
+        'title': 'Servier - Site Edge Delivery',
+        'createdBy': 'Servier',
+        'useCases': package_json['siteTemplate']['useCases'] + ['Servier multilingual site (master/fr)'],
+        'showcaseUrl': 'https://main--servier-aem--dbounliane-adobe.aem.page/master/fr/',
+        'sourceRepositoryUrl': 'https://github.com/dbounliane-adobe/servier-aem',
+        'openItem': '{Path}/master/fr/index',
+    })
     package_text = json.dumps(package_json, indent=4) + '\n'
     assert package_text.isascii()
-    with zipfile.ZipFile(OUT, 'w', zipfile.ZIP_DEFLATED) as z:
-        write_zip(z, {
-            'package.json': package_text,
-            'previews/servier.png': open(PREVIEW, 'rb').read(),
-            'site.zip': site_zip,
-        })
-    pages = [n for n in files if n.startswith(f'jcr_root/content/{TPL}/master/') and n.endswith('.content.xml')]
-    print(OUT, f'{len(files)} files, {len(pages)} master nodes')
+
+    with zipfile.ZipFile(OUT, 'w') as z:
+        z.writestr(file_info('package.json', infos['package.json']), package_text)
+        z.writestr(file_info('previews/', infos['previews/']), b'')
+        z.writestr(file_info('previews/servier.png', infos['previews/starter.png']), open(PREVIEW, 'rb').read())
+        z.writestr(file_info('site.zip', infos['site.zip']), site)
+    pages = [n for n in ours if n.startswith(f'jcr_root/content/{TPL}/master/') and n.endswith('.content.xml')]
+    print(OUT, f'{len(ours)} Servier files, {len(pages)} master nodes')
 
 
 if __name__ == '__main__':
