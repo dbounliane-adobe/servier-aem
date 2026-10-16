@@ -19,7 +19,7 @@ de métadonnées en masse (bulk metadata) :
 3. **Prévisualiser puis publier** le tableau `metadata`.
 4. Seulement ensuite, vider le champ **Theme** de la page index
    (Propriétés de page → Theme → « Hériter du site »), puis re-prévisualiser / publier la page.
-   Le paquet `servier-aem-index` / `servier-aem-site` ne pose plus de thème sur la page.
+   Les paquets (`servier-aem-master-fr`, `servier-aem-clean-install`) ne posent aucun thème sur les pages.
 
 Le thème d'une page (champ **Theme** renseigné) passe toujours avant le tableau :
 « Hériter du site » (valeur vide) laisse le tableau décider.

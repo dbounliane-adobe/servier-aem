@@ -13,7 +13,7 @@ everything servier-aem was removed (pages, DAM, CF model):
 
 Nothing else is created at the root of the site. Sources: the packages built by
 build-master.py and build-comex-cfs.py (dist/), the DAM export import/cf-comex.zip (model)
-and the AEM export import/sheets.zip (metadata + redirects sheets as authored, root page
+and the AEM export "import/export servier-aem.zip" (metadata + redirects sheets as authored, root page
 properties, optionally the cloudconfigs).
 The replication status of exported nodes is dropped. Usage:
   python3 tools/aem-packages/build-clean.py
@@ -31,7 +31,7 @@ PKG = os.path.join(ROOT, 'tools', 'aem-packages')
 DIST = os.path.join(PKG, 'dist')
 OUT = os.path.join(DIST, f'{NAME}-{VERSION}.zip')
 CF_EXPORT = os.path.join(PKG, 'import', 'cf-comex.zip')
-SHEETS_EXPORT = os.path.join(PKG, 'import', 'sheets.zip')
+SHEETS_EXPORT = os.path.join(PKG, 'import', 'export servier-aem.zip')
 MODEL = f'/conf/{SITE}/settings/dam/cfm/models/comex'
 SITE_PATH = f'/content/{SITE}'
 DAM = f'/content/dam/{SITE}'
@@ -47,12 +47,15 @@ INSTANCE_PROPS = re.compile(r'\s+cq:(?:lastReplicated|lastReplicatedBy|lastRepli
 
 
 def clean(data, name):
-    """Drops the replication status from exported .content.xml files."""
+    """Drops the replication status (properties + mixins) from exported .content.xml files."""
     if not name.endswith('.xml'):
         return data
     xml = INSTANCE_PROPS.sub('', data.decode('utf-8'))
-    xml = re.sub(r'jcr:mixinTypes="\[(?:cq:ReplicationStatus,?|cq:ReplicationStatus2,?)+\]"', '', xml)
-    xml = re.sub(r'\s(?=jcr:mixinTypes)', ' ', xml)
+
+    def mixins(match):
+        kept = [t for t in match.group(1).split(',') if t and not t.startswith('cq:ReplicationStatus')]
+        return f'jcr:mixinTypes="[{",".join(kept)}]"' if kept else ''
+    xml = re.sub(r'jcr:mixinTypes="\[([^\]]*)\]"', mixins, xml)
     return xml.encode('utf-8')
 
 

@@ -65,3 +65,21 @@ le tableau `redirects` d'Edge Delivery n'accepte pas de jokers).
   (repli des fragments), `/metadata.json`, `/query-index.json`.
 - Toute nouvelle page racine publiée plus tard = une ligne à ajouter. À terme, rediriger vers la copie publique
   (`/fr/fr/…`) plutôt que vers le master.
+
+## Installation propre (instance vidée de servier-aem)
+
+Paquet unique : `tools/aem-packages/dist/servier-aem-clean-install-1.0.0.zip`
+(`python3 tools/aem-packages/build-clean.py` ; sources : paquets `master-fr` et `comex-cfs`, exports
+`import/cf-comex.zip` et `import/export servier-aem.zip`, sans état de publication).
+
+| Chemin | Contenu | Mode |
+|---|---|---|
+| `/conf/servier-aem/settings/dam/cfm/models/comex` | modèle CF `comex` | remplacé (dossiers parents fusionnés) |
+| `/conf/servier-aem/settings/cloudconfigs` | configuration Edge Delivery (owner `dbounliane-adobe`, repo `servier-aem`) | remplacé |
+| `/content/dam/servier-aem/{index,header,footer,newsroom,comex}` | images, 12 CF COMEX, photos | chaque dossier remplacé |
+| `/content/servier-aem` | page racine (`cq:conf`, langue fr) | créée si absente |
+| `/content/servier-aem/metadata`, `/redirects` | tableaux (thème ; 50 redirections) | remplacés |
+| `/content/servier-aem/master` | master français (48 pages) | remplacé |
+
+Après installation : publier `metadata` et `redirects` (Edge Delivery), les CF COMEX, puis l'arborescence `/master/fr`.
+Le paquet ne supprime pas d'éventuelles anciennes pages racine (`index`, `nav`…) : les supprimer avant si besoin.

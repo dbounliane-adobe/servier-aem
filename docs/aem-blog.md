@@ -1,5 +1,9 @@
 # Blog Servier (newsroom / dossiers) dans AEM Sites / Universal Editor
 
+> **Installation : paquet unique `servier-aem-clean-install-1.0.0.zip`** (voir `docs/multilingue.md`).
+> Les pages sont désormais sous `/content/servier-aem/master/fr/…` ; les anciens paquets du site
+> racine ont été supprimés.
+
 ## Pages
 
 | Page AEM | URL | Contenu |
@@ -11,17 +15,13 @@
 Chaque article porte dans ses propriétés de page : titre, description, **image**
 (carte / og:image), `category` (Décryptages), `publication-date` (AAAA-MM-JJ),
 `keywords` (étiquette : Comprendre les pathologies / la recherche / nos engagements),
-`template = article`, `theme = servier`, `language = fr`.
+`template = article`, `language = fr` (le thème vient du tableau `metadata`).
 
 ## Installer
 
-Paquet : `tools/aem-packages/dist/servier-aem-newsroom-dossiers-1.0.0.zip` (44 pages, 46 images).
-Il ne touche ni l'accueil, ni la nav, ni le footer. Les pages conteneurs `newsroom` et
-`newsroom/dossiers` ne sont créées que si elles n'existent pas.
-
-1. Author → **CRX Package Manager** (`/crx/packmgr`) → *Upload* → *Install*.
-2. Assets → `servier-aem/newsroom` : vérifier les images (*Reprocess Assets* si besoin).
-3. Publier les images, puis les 43 articles, puis `newsroom/dossiers/index`.
+Inclus dans `servier-aem-clean-install-1.0.0.zip` (pages sous
+`/content/servier-aem/master/fr/newsroom/dossiers/`, images `/content/dam/servier-aem/newsroom/`).
+Publier les images, puis les 43 articles, puis `master/fr/newsroom/dossiers/index`.
 
 ## Index
 
@@ -37,4 +37,4 @@ remplit au fur et à mesure de la publication des pages.
    (articles carte, `urls-article-card.txt`), `import-dossiers-listing.js` (liste).
 2. Conversion AEM : `node tools/aem-packages/convert-blog.mjs` (voir l'en-tête du script),
    images dans `migration-work/aem-assets/newsroom/`.
-3. Paquet : `python3 tools/aem-packages/build-blog.py`.
+3. Paquets : `python3 tools/aem-packages/build-master.py` puis `build-clean.py`.

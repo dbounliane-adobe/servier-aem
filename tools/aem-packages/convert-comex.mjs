@@ -1,6 +1,6 @@
 /* eslint-disable */
 // Converts content/groupe/comex/index.plain.html to AEM JCR XML (html2md + md2jcr) for
-// tools/aem-packages/build-comex-page.py. Run from a folder where @adobe/helix-html2md and
+// tools/aem-packages/build-master.py. Run from a folder where @adobe/helix-html2md and
 // @adobe/helix-md2jcr are installed (e.g. /tmp/md2jcr): node tools/aem-packages/convert-comex.mjs
 
 import fs from 'fs';

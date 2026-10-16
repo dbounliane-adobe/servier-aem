@@ -1,6 +1,6 @@
 /* eslint-disable */
 // Converts content/newsroom/dossiers/*.plain.html to AEM JCR XML (html2md + md2jcr)
-// for tools/aem-packages/build-blog.py. Run from a folder where @adobe/helix-html2md and
+// for tools/aem-packages/build-master.py. Run from a folder where @adobe/helix-html2md and
 // @adobe/helix-md2jcr are installed (e.g. npm i @adobe/helix-html2md @adobe/helix-md2jcr in /tmp/md2jcr):
 //   node tools/aem-packages/convert-blog.mjs
 

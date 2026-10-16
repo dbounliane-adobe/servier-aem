@@ -12,14 +12,14 @@ Builds the French language master package (FileVault): the whole migrated site u
   /content/dam/servier-aem/...                    the images they use (shared by all languages;
                                                   each asset replaced alone, folders merged)
 
-Page XML comes from migration-work/jcr-content/ (same sources as the root packages) with:
+Page XML comes from migration-work/jcr-content/ (html2md + md2jcr of the imported pages) with:
   - no page-level theme: the theme comes from the metadata sheet (page values would win);
   - internal links (rich text hrefs, *link / prefix fields) rewritten from /<path> to
     /content/servier-aem/master/fr/<path>: Edge Delivery maps them to /master/fr/<path>
     (paths.json) and MSM / translation rewrite them for each language copy and live copy.
     Kept as is: external URLs, /content/... paths, *.json, #anchors, other language
     trees (/en/...). The comex Content Fragments are shared and not part of this package.
-Images are taken from the root packages in dist/. Usage:
+Images: migration-work/aem-assets/ and content/images/ (header/footer). Usage:
   python3 tools/aem-packages/build-master.py
 """
 import os
@@ -37,7 +37,40 @@ LANG_ROOT = f'{MASTERS}/fr'
 SRC = os.path.join(ROOT, 'migration-work', 'jcr-content')
 DIST = os.path.join(ROOT, 'tools', 'aem-packages', 'dist')
 OUT = os.path.join(DIST, f'{NAME}-{VERSION}.zip')
-IMAGE_PACKAGES = ['index', 'header-nav', 'footer', 'newsroom-dossiers', 'comex-page']
+ASSETS = os.path.join(ROOT, 'migration-work', 'aem-assets')
+CONTENT_IMAGES = os.path.join(ROOT, 'content', 'images')
+MIME = {'.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
+        '.webp': 'image/webp', '.gif': 'image/gif'}
+# DAM folder -> (folder title, source directory, [(file, title)]; None = every image of the directory)
+DAM_IMAGES = {
+    'index': ('Index', os.path.join(ASSETS, 'index'), [
+        ('servier-carrieres-ambassadeurs_h.png', 'Rejoignez une aventure humaine'),
+        ('image-aires-scaled.webp', 'Aires thérapeutiques (fond)'),
+        ('servier-decryptage-cancer-colorectal.jpg', 'Cancer colorectal'),
+        ('servier-decryptage-cholangiocarcinome-tumeur-patient-cancer.jpg', 'Cholangiocarcinome'),
+        ('servier-decryptage-gliome-tumeur-cerebrale.png', 'Gliome'),
+        ('banner-contact-scaled.webp', 'Nous rejoindre (fond)'),
+    ]),
+    'header': ('Header', CONTENT_IMAGES, [
+        ('header-logo-servier.svg', 'Servier logo (white, over hero)'),
+        ('header-logo-servier-dark.svg', 'Servier logo (indigo, sticky bar)'),
+        ('header-icon-search.svg', 'Search icon'),
+    ]),
+    'footer': ('Footer', CONTENT_IMAGES, [
+        ('footer-logo-servier.svg', 'Servier logo (footer)'),
+        ('footer-social-facebook.svg', 'Facebook'),
+        ('footer-social-twitter.svg', 'X (Twitter)'),
+        ('footer-social-instagram.svg', 'Instagram'),
+        ('footer-social-linkedin.svg', 'LinkedIn'),
+        ('footer-kastor-ecodesign-score.svg', 'Kastor eco-design score badge'),
+    ]),
+    'newsroom': ('Newsroom', os.path.join(ASSETS, 'newsroom'), None),
+    # COMEX page images; the Content Fragments + photos are in the comex-cfs package
+    'comex': ('COMEX', os.path.join(ASSETS, 'comex'), [
+        ('servier-banniere-officielle-logo.jpg', 'Bannière officielle de Servier'),
+        ('servier-logo_n.jpg', 'Servier'),
+    ]),
+}
 
 # container pages (merge: created when missing, never overwritten), parents first
 CONTAINERS = [
@@ -93,19 +126,42 @@ def pages():
     return out
 
 
+def folder(title):
+    return f'{HEAD}<jcr:root {NS} jcr:primaryType="sling:OrderedFolder" jcr:title="{escape(title)}"/>\n'
+
+
+def asset(title, mime):
+    return (f'{HEAD}<jcr:root {NS} jcr:primaryType="dam:Asset">\n'
+            '    <jcr:content jcr:primaryType="dam:AssetContent">\n'
+            f'        <metadata jcr:primaryType="nt:unstructured" dc:format="{mime}" dc:title="{escape(title)}"/>\n'
+            '        <renditions jcr:primaryType="nt:folder"/>\n'
+            '    </jcr:content>\n'
+            '</jcr:root>\n')
+
+
+def original_dir(mime):
+    return (f'{HEAD}<jcr:root {NS} jcr:primaryType="nt:file">\n'
+            f'    <jcr:content jcr:primaryType="nt:resource" jcr:mimeType="{mime}"/>\n'
+            '</jcr:root>\n')
+
+
 def dam_entries():
-    """DAM files of the root packages: assets (path -> files) and their folders (path -> .content.xml)."""
+    """Images used by the pages: assets (path -> files) and their folders (path -> .content.xml)."""
     assets, folders = {}, {}
-    for key in IMAGE_PACKAGES:
-        with zipfile.ZipFile(os.path.join(DIST, f'{SITE}-{key}-{VERSION}.zip')) as z:
-            for name in z.namelist():
-                f = re.match(rf'jcr_root(/content/dam/{SITE}/[^/]+)/\.content\.xml$', name)
-                if f:
-                    folders[f.group(1)] = (name, z.read(name))
-                m = re.match(rf'jcr_root(/content/dam/{SITE}/[^/]+)/([^/]+\.[a-z0-9]+)/', name, re.I)
-                if m:
-                    asset = f'{m.group(1)}/{m.group(2)}'
-                    assets.setdefault(asset, {})[name] = z.read(name)
+    for key, (title, source, images) in DAM_IMAGES.items():
+        path = f'/content/dam/{SITE}/{key}'
+        folders[path] = (f'jcr_root{path}/.content.xml', folder(title).encode('utf-8'))
+        if images is None:
+            images = [(f, os.path.splitext(f)[0]) for f in sorted(os.listdir(source))
+                      if os.path.splitext(f)[1].lower() in MIME]
+        for file, image_title in images:
+            mime = MIME[os.path.splitext(file)[1].lower()]
+            base = f'jcr_root{path}/{file}'
+            assets[f'{path}/{file}'] = {
+                f'{base}/.content.xml': asset(image_title, mime).encode('utf-8'),
+                f'{base}/_jcr_content/renditions/original': open(os.path.join(source, file), 'rb').read(),
+                f'{base}/_jcr_content/renditions/original.dir/.content.xml': original_dir(mime).encode('utf-8'),
+            }
     return assets, folders
 
 

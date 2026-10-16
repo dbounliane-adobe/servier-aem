@@ -8,32 +8,18 @@ En local, `aem up` sert `content/nav.plain.html` et `content/footer.plain.html`.
 
 ## 1. Installer le contenu
 
-**Recommandé : `servier-aem-site-1.0.0.zip`** — page d'accueil + nav + footer et
-toutes leurs images, en une seule installation. Seuls le nœud de chaque page et son
-`jcr:content` sont remplacés ; les pages enfants (par ex. sous `index`) sont conservées.
+> **Installation : paquet unique `servier-aem-clean-install-1.0.0.zip`** (voir `docs/multilingue.md`).
+> Les pages sont désormais sous `/content/servier-aem/master/fr/…` ; les anciens paquets du site
+> racine ont été supprimés.
 
-| Paquet (`tools/aem-packages/dist/`) | Chemins | Contenu |
-|---|---|---|
-| `servier-aem-index-1.0.0.zip` | `/content/servier-aem/index` | page d'accueil (7 sections, `theme = servier`, `language = fr`) — **remplace** l'accueil existant |
-| | `/content/dam/servier-aem/index/` | 6 images (feature, fonds, slides du carrousel) |
-| `servier-aem-header-nav-1.0.0.zip` | `/content/servier-aem/nav` | page de navigation (4 sections) — **remplace** la page `nav` existante |
-| | `/content/dam/servier-aem/header/` | `header-logo-servier.svg`, `header-logo-servier-dark.svg`, `header-icon-search.svg` |
-| `servier-aem-footer-1.0.0.zip` | `/content/servier-aem/footer` | page footer (1 section) — **remplace** la page `footer` existante |
-| | `/content/dam/servier-aem/footer/` | logo, 4 icônes réseaux sociaux, badge Kastor |
-
-1. Author → **CRX Package Manager** (`/crx/packmgr`) → *Upload Package* → *Install*.
-2. Assets → `servier-aem/index`, `header`, `footer` : vérifier les images
-   (si les miniatures manquent : *Reprocess Assets*).
-3. Publier les images, puis les pages `nav`, `footer` et l'accueil
-   (Sites → sélectionner → *Quick Publish*, ou Universal Editor → *Publish*).
-
-La vidéo du hero et les liens externes pointent vers servier.com, comme en preview
-(une vidéo du DAM n'est pas servie par Edge Delivery : `…/content/dam/…mp4` → 404).
+Pages : `/content/servier-aem/master/fr/nav` et `/content/servier-aem/master/fr/footer`
+(servies en `/master/fr/nav.plain.html` et `/master/fr/footer.plain.html` ; le code charge
+les fragments du dossier de langue, sinon ceux de la racine — `scripts/locale-fragments.js`).
+Images : `/content/dam/servier-aem/header/` et `/content/dam/servier-aem/footer/`.
 
 Régénérer après modification de `content/<page>.plain.html` : conversion html2md +
-md2jcr vers `migration-work/jcr-content/<page>.xml` (images de l'accueil dans
-`migration-work/aem-assets/index/`), puis
-`python3 tools/aem-packages/build-fragments.py [index|header|footer|site|all]`.
+md2jcr vers `migration-work/jcr-content/<page>.xml`, puis
+`python3 tools/aem-packages/build-master.py` et `python3 tools/aem-packages/build-clean.py`.
 Les titres des composants UE étant préfixés « Servier », la conversion compare les
 blocs à leur identifiant (`hero-cta` → « Hero Cta »).
 

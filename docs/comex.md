@@ -26,10 +26,10 @@ Paquets (`tools/aem-packages/dist/`) :
    réparé `tools/aem-packages/import/cf-comex.zip` (mixin `cq:contentFragment`, `_strucVersion` 2,
    variation `master`, `indexedData`), sans l'état de publication ; leurs valeurs sont contrôlées
    par rapport aux données sources au build.
-2. `servier-aem-comex-page-1.0.0.zip` — page liste (+ pages conteneurs `groupe`,
-   `groupe/comex` créées seulement si absentes).
+2. Page liste : `/content/servier-aem/master/fr/groupe/comex/index`, dans `servier-aem-master-fr`
+   et `servier-aem-clean-install` (ce dernier contient aussi les CF et le modèle `comex`).
 
-Puis publier le dossier `comex` (CF, photos, bandeau) et la page `groupe/comex/index`.
+Puis publier le dossier `comex` (CF, photos, bandeau) et la page `master/fr/groupe/comex/index`.
 
 ## Configuration du site (une fois) — fichiers dans `tools/aem-packages/config/comex/`
 
