@@ -40,7 +40,9 @@ Accepted forms (same origin only; anything else is skipped with a console warnin
 - **AEM author (`*.adobeaemcloud.*`, Universal Editor)**: the json2html overlay is not rendered on
   author, so the block reads the overlay's own data source, the Assets HTTP API
   `/api/assets/<site>/comex/<slug>.json` (`properties.elements.<field>.value`, same origin, author
-  session). `<site>` comes from the CF path, else from the current page path `/content/<site>/…`.
+  session). The request uses an absolute URL on the current origin so the author resource proxy
+  does not rewrite it to `/content/<site>.resource/api/assets/…`.
+  `<site>` comes from the CF path, else from the current page path `/content/<site>/…`.
   Assumptions: the author can read the CF folder; photo values are DAM paths served by author;
   "En savoir plus" links keep the public `/groupe/comex/<slug>` path (a CF has no Sites page on
   author, so that link only resolves on EDS).

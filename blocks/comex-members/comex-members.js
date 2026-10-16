@@ -124,7 +124,9 @@ async function loadFromPage(member) {
 async function loadFromAssetsApi(member) {
   const site = member.site || window.location.pathname.match(/^\/content\/([^/]+)\//)?.[1];
   if (!site) throw new Error(`Cannot infer the site of ${member.slug}`);
-  const { text } = await fetchText([`/api/assets/${site}/${CF_FOLDER}/${member.slug}.json`]);
+  // Keep the author resource proxy from rewriting this API request to <site>.resource/api/assets/.
+  const url = new URL(`/api/assets/${site}/${CF_FOLDER}/${member.slug}.json`, window.location.origin);
+  const { text } = await fetchText([url.href]);
   const elements = JSON.parse(text)?.properties?.elements || {};
   const value = (field) => String(elements[field]?.value ?? '').trim();
   const firstname = value('firstname');
